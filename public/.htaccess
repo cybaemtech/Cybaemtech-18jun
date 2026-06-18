@@ -1,0 +1,79 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  Options -MultiViews
+
+  # Pass Authorization header to PHP (Apache often strips it)
+  RewriteCond %{HTTP:Authorization} ^(.*)
+  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+  # Force the blog route back into the SPA even if an old /blog directory exists.
+  RewriteRule ^blog/?$ /index.html [L]
+  RewriteRule ^blog/.*$ /index.html [L]
+
+  # Serve existing files and directories directly
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Skip rewrite for PHP files
+  RewriteRule \.php$ - [L]
+
+  # Don't rewrite index.html itself (prevent infinite loop)
+  RewriteRule ^index\.html$ - [L]
+
+  # Route every client-side route back to the SPA entry point.
+  # This is what makes direct refreshes on /blog and /blog/<slug> work in cPanel.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ /index.html [L]
+</IfModule>
+
+# Also set Authorization header via SetEnvIf (belt and suspenders)
+SetEnvIf Authorization "(.+)" HTTP_AUTHORIZATION=$1
+
+# Fallback if mod_rewrite is not available
+FallbackResource /index.html
+
+# Cache-Control headers - NO CACHE for HTML, short cache for JS/CSS
+<IfModule mod_headers.c>
+  # HTML files - NEVER cache (always fetch fresh)
+  <FilesMatch "\.(html|php)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  
+  # JS and CSS files - 1 hour cache (helps with updates)
+  <FilesMatch "\.(js|css)$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+  
+  # Images and fonts - 1 year cache (Vite adds hashes)
+  <FilesMatch "\.(woff2|avif|webp|png|jpg|jpeg|svg)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# Caching for static assets
+<IfModule mod_expires.c>
+  ExpiresActive On
+  
+  # Don't cache HTML (always fetch fresh)
+  ExpiresByType text/html "access plus 0 seconds"
+  
+  # Short cache for JS/CSS (1 hour) - helps with updates
+  ExpiresByType text/css "access plus 1 hour"
+  ExpiresByType application/javascript "access plus 1 hour"
+  ExpiresByType application/x-javascript "access plus 1 hour"
+  
+  # Long cache for assets with hashes
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# Gzip compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
