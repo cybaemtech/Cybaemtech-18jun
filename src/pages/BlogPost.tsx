@@ -248,7 +248,7 @@ const BlogPost = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="flex flex-col justify-center rounded-lg border border-border bg-card p-6 shadow-sm sm:p-8 lg:p-10"
+                className="flex flex-col justify-center rounded-xl border border-border bg-card p-6 shadow-xl sm:p-8 lg:p-10"
               >
                 <div className="mb-5 flex flex-wrap items-center gap-3">
                   {post.category && (
@@ -288,7 +288,7 @@ const BlogPost = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="relative overflow-hidden rounded-lg border border-border bg-muted shadow-sm"
+                className="relative overflow-hidden rounded-xl border border-border bg-muted shadow-xl"
               >
                 {post.cover_image ? (
                   <img
@@ -304,7 +304,7 @@ const BlogPost = () => {
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/35 via-transparent to-transparent" />
-                <div className="absolute bottom-5 left-5 right-5 rounded-lg border border-white/30 bg-background/95 p-4 shadow-lg backdrop-blur">
+                <div className="absolute bottom-5 left-5 right-5 rounded-xl border border-white/30 bg-background/95 p-4 shadow-2xl backdrop-blur">
                   <p className="font-display text-sm font-semibold text-foreground">
                     Cybaem Tech Insight
                   </p>
@@ -320,7 +320,7 @@ const BlogPost = () => {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.15 }}
-                className="rounded-lg border border-border bg-card p-5 shadow-sm lg:sticky lg:top-28"
+                className="rounded-xl border border-border bg-card p-5 shadow-xl lg:sticky lg:top-28"
               >
                 <p className="font-display text-sm font-semibold text-foreground">Article Briefing</p>
                 <div className="mt-4 space-y-4 text-sm text-muted-foreground">

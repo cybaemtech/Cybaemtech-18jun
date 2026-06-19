@@ -116,7 +116,7 @@ const Blog = () => {
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.55 }}
-                    className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 max-w-4xl mx-auto"
+                    className="group relative overflow-hidden rounded-xl border border-gray-100 bg-white shadow-[0_0_15px_rgba(0,0,0,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(0,0,0,0.25)] hover:shadow-primary/5 break-inside-avoid max-w-4xl mx-auto"
                   >
                     <Link to={`/blog/${featuredPost.slug}`} className="grid min-h-[360px] lg:grid-cols-[1.18fr_0.82fr]">
                       <div className="relative min-h-[260px] overflow-hidden bg-muted lg:min-h-full">
@@ -185,7 +185,7 @@ const Blog = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: (index % 10) * 0.08 }}
                         className={cn(
-                          "group overflow-hidden rounded-2xl border border-border bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 break-inside-avoid mb-6 inline-block w-full"
+                          "group overflow-hidden rounded-2xl border border-border bg-background shadow-[0_0_15px_rgba(0,0,0,0.15)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_0_25px_rgba(0,0,0,0.25)] hover:shadow-primary/10 break-inside-avoid mb-6 inline-block w-full"
                         )}
                       >
                         <Link
