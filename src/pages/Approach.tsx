@@ -5,7 +5,7 @@ import {
   Flag, BarChart, Lightbulb, Globe,
   ArrowRight, Mouse,
   Target, Heart, Trophy, BookOpen, User,
-  ChevronLeft, ChevronRight, Calendar, Utensils, Smile, ImageIcon, Sparkles, PartyPopper
+  ChevronLeft, ChevronRight, Calendar, Utensils, Smile, ImageIcon, Sparkles, PartyPopper, Linkedin
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -36,61 +36,66 @@ const HeroSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="relative pt-32 pb-40 lg:pb-48 overflow-hidden bg-[#050b14] text-white">
-      {/* Background graphic */}
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
-      <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-      
+    <section ref={ref} className="relative pt-32 pb-40 lg:pb-48 overflow-hidden" style={{ backgroundColor: "hsl(var(--primary))" }}>
+      {/* Background graphic & Subtle Lighting */}
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
+      <div className="absolute -top-40 -right-40 w-[30rem] h-[30rem] bg-blue-500 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob"></div>
+      <div className="absolute top-1/2 -left-40 w-[30rem] h-[30rem] bg-indigo-500 rounded-full mix-blend-screen filter blur-[100px] opacity-10 animate-blob animation-delay-2000"></div>
+
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        <div className="grid lg:grid-cols-[1fr_1fr] gap-12 items-center">
+        <div className="grid lg:grid-cols-[5fr_7fr] gap-8 lg:gap-12 items-center">
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             className="max-w-2xl"
           >
-            <motion.div variants={itemVariants} className="inline-flex items-center rounded-full border border-white/20 bg-white/5 px-4 py-1.5 mb-8">
-              <span className="text-xs font-bold tracking-widest uppercase text-white/90">Life At Cybaem Tech</span>
+            <motion.div variants={itemVariants} className="inline-flex items-center mb-6">
+              <span className="inline-block text-xs font-medium tracking-[0.2em] uppercase text-white/60">
+                Life At Cybaem Tech
+              </span>
             </motion.div>
-            <motion.h1 variants={itemVariants} className="font-display text-5xl lg:text-7xl font-bold leading-[1.1] mb-6">
+            <motion.h1 variants={itemVariants} className="font-display text-5xl lg:text-7xl font-bold text-white leading-[1.1] mb-6">
               Build. Innovate. <br />
-              <span className="text-[#8b5cf6]">Grow Together.</span>
+              <span className="italic font-light">Grow Together.</span>
             </motion.h1>
-            <motion.p variants={itemVariants} className="text-lg text-white/70 leading-relaxed mb-10 max-w-lg">
+            <motion.p variants={itemVariants} className="text-lg lg:text-xl text-white/70 max-w-xl leading-relaxed mb-10">
               We are problem solvers, innovators and dreamers. Together, we build technology that creates impact and shapes the future.
             </motion.p>
             <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4">
-              <Link to="/about" className="px-6 py-3.5 rounded-full bg-[#8b5cf6] hover:bg-[#7c3aed] transition-colors text-white font-medium flex items-center gap-2 text-sm">
-                Explore Our Culture <ArrowRight size={16} />
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium border border-white/30 text-white rounded-full hover:bg-white/10 transition-colors"
+              >
+                Explore Our Culture <ArrowRight size={14} />
               </Link>
-              <Link to="/contact" className="px-6 py-3.5 rounded-full border border-white/30 hover:bg-white/10 transition-colors text-white font-medium flex items-center gap-2 text-sm">
-                Join Our Team <ArrowRight size={16} />
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium bg-white text-[#071A3D] rounded-full hover:opacity-90 transition-opacity"
+              >
+                Join Our Team <ArrowRight size={14} />
               </Link>
-            </motion.div>
-            <motion.div variants={itemVariants} className="mt-16 flex items-center gap-2 text-white/50 text-sm font-medium">
-              <Mouse size={18} /> Scroll Down
             </motion.div>
           </motion.div>
 
-          {/* Hero Images Grid */}
-          <motion.div 
+          {/* Hero Video */}
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative hidden lg:block"
+            className="relative hidden lg:flex justify-end w-full"
           >
-            <div className="grid grid-cols-2 gap-4 relative">
-              <img src="/lifeatcybaemtech/Team.jpg" alt="Team" className="rounded-2xl w-full h-56 object-cover col-span-2 border border-white/10" />
-              <img src="/lifeatcybaemtech/Foundationday.JPG" alt="Foundation Day" className="rounded-2xl w-full h-48 object-cover border border-white/10" />
-              <img src="/lifeatcybaemtech/TeamLunch.jpeg" alt="Team Lunch" className="rounded-2xl w-full h-48 object-cover border border-white/10" />
-              
-              {/* Floating Badge */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#1e3a8a]/90 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/20 text-center min-w-[200px]">
-                <Users size={32} className="mx-auto text-white mb-2" />
-                <h3 className="text-3xl font-bold text-white mb-1">200+</h3>
-                <p className="text-xs text-white/80 font-medium">Cybaemites<br/>Growing Together</p>
-              </div>
+            <div className="relative w-full max-w-3xl aspect-[16/9] rounded-[2rem] overflow-hidden border-[6px] border-white/10 shadow-[0_20px_50px_rgba(37,99,235,0.2)]">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                className="absolute inset-0 w-full h-full object-cover pointer-events-auto"
+              >
+                <source src="/video/video.mp4" type="video/mp4" />
+              </video>
             </div>
           </motion.div>
         </div>
@@ -141,9 +146,9 @@ const JourneySection = () => {
   ];
 
   return (
-    <section ref={ref} className="py-16">
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-[300px_1fr] gap-16 items-start">
+    <section ref={ref} className="py-1">
+      {/*  <div className="container mx-auto px-6 lg:px-12">
+         <div className="grid lg:grid-cols-[300px_1fr] gap-16 items-start">
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -153,7 +158,7 @@ const JourneySection = () => {
               Our Journey
             </motion.span>
             <motion.h2 variants={itemVariants} className="font-display text-4xl lg:text-5xl font-bold leading-tight mb-6 text-foreground">
-              From a Vision <br/> to <span className="text-[#2563eb]">Real Impact</span>
+              From a Vision <br /> to <span className="text-[#2563eb]">Real Impact</span>
             </motion.h2>
             <motion.p variants={itemVariants} className="text-muted-foreground mb-8 text-sm leading-relaxed">
               Our journey is built on passion, innovation and the people who make it possible.
@@ -181,7 +186,7 @@ const JourneySection = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div>*/}
     </section>
   );
 };
@@ -192,71 +197,131 @@ const PeopleSection = () => {
     {
       name: "Rohan Bhosale",
       role: "Founder & CEO",
-      quote: "Cybaem Tech has helped me grow technically and professionally. The learning never stops here!",
-      years: "3 Years Journey",
-      team: "Development Team",
-      image: "https://ui-avatars.com/api/?name=Rohan+Bhosale&background=0D8ABC&color=fff"
+      quote: "Leading digital marketing initiatives across Fortune 500 companies.",
+      years: "18+ Years Experience",
+      team: "Global IT Strategy & Digital Marketing",
+      image: "/people/rohan.png",
+      linkedin: "https://www.linkedin.com/in/rohanbhosale15/"
     },
     {
-      name: "Richa Nawale",
-      role: "Sr. UI/UX Designer",
-      quote: "I love the collaborative culture and the freedom to create meaningful designs.",
-      years: "2 Years Journey",
-      team: "Design Team",
-      image: "https://ui-avatars.com/api/?name=Richa+Nawale&background=E04A7B&color=fff"
+      name: "Akshay Nawale",
+      role: "Chief Technology Officer",
+      quote: "Architecting next-generation technology solutions & leading innovation teams.",
+      years: "15+ Years Experience",
+      team: "AI Strategy & Product Leadership",
+      image: "/people/akshay.png",
+      linkedin: "https://www.linkedin.com/in/akshay-navle-2929a245/"
     },
     {
       name: "Yash Bhalekar",
-      role: "DevOps Engineer",
-      quote: "Great work-life balance, supportive leadership and amazing opportunities!",
-      years: "4 Years Journey",
-      team: "DevOps Team",
-      image: "https://ui-avatars.com/api/?name=Yash+Bhalekar&background=42B57B&color=fff"
+      role: "Director",
+      quote: "Driving financial excellence and strategic growth across global operations.",
+      years: "12+ Years Experience",
+      team: "Business Development",
+      image: "/people/yash.png",
+      linkedin: "https://www.linkedin.com/in/yash-bhalekar-imoexo/"
     }
   ];
 
   return (
-    <section className="py-24 bg-[#f8fafc]">
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
+    <section className="py-24 bg-[#f8fafc] relative overflow-hidden">
+      {/* Subtle radial background glow to match the reference */}
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-50/60 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
+
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+        <div className="flex flex-col md:flex-row md:items-start justify-between mb-16 gap-8">
           <div>
-            <span className="text-xs font-bold tracking-widest text-[#2563eb] uppercase mb-3 block">
-              People of Cybaem
+            <span className="text-sm font-bold tracking-widest text-[#2563eb] uppercase mb-4 block">
+              PEOPLE OF CYBAEM
             </span>
-            <h2 className="font-display text-4xl font-bold text-foreground">
-              Real People. Real Stories.
+            <h2 className="font-display text-4xl lg:text-[2.75rem] font-bold text-[#0f172a] mb-4">
+              Real People. Real Stories<span className="text-[#2563eb]">.</span>
             </h2>
+            <p className="text-[#64748b] text-lg max-w-lg">
+              Meet the visionaries driving innovation, building solutions, and shaping the future at Cybaem Tech.
+            </p>
           </div>
-          <div className="mt-6 md:mt-0 flex items-center gap-6">
-            <Link to="#" className="px-6 py-2.5 rounded-full border border-border text-sm font-semibold hover:bg-muted transition-colors flex items-center gap-2">
+          <div className="flex items-center gap-4 shrink-0 mt-2">
+            <Link to="#" className="px-6 py-2.5 rounded-full border border-[#2563eb] text-[#2563eb] text-sm font-bold hover:bg-blue-50 transition-colors flex items-center gap-2 mr-4">
               View All Stories <ArrowRight size={16} />
             </Link>
-            <div className="flex gap-2">
-              <button className="w-10 h-10 rounded-full border border-border bg-white flex items-center justify-center hover:bg-muted transition-colors text-muted-foreground"><ArrowRight size={18} className="rotate-180" /></button>
-              <button className="w-10 h-10 rounded-full border border-border bg-white flex items-center justify-center hover:bg-muted transition-colors text-muted-foreground"><ArrowRight size={18} /></button>
+            <div className="flex gap-3">
+              <button className="w-11 h-11 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:border-[#2563eb] hover:text-[#2563eb] transition-colors text-gray-400 shadow-sm"><ArrowRight size={18} className="rotate-180" /></button>
+              <button className="w-11 h-11 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:border-[#2563eb] hover:text-[#2563eb] transition-colors text-gray-400 shadow-sm"><ArrowRight size={18} /></button>
             </div>
           </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {people.map((p, i) => (
-            <div key={i} className="bg-white rounded-3xl p-8 shadow-sm border border-border">
-              <div className="flex items-center gap-5 mb-8">
-                <img src={p.image} alt={p.name} className="w-16 h-16 rounded-full object-cover border border-border" />
-                <div>
-                  <h4 className="font-bold text-lg text-foreground mb-1">{p.name}</h4>
-                  <p className="text-[#2563eb] text-sm font-semibold">{p.role}</p>
-                </div>
+            <div key={i} className="bg-white rounded-[2rem] shadow-[0_15px_50px_-12px_rgba(37,99,235,0.15)] flex flex-col group hover:-translate-y-2 transition-all duration-300 border border-blue-50 overflow-hidden">
+              <div className="w-full h-72 relative overflow-hidden flex items-end justify-center bg-[url('/people/bg-pattern.png')] bg-cover bg-center bg-no-repeat">
+                <img src={p.image} alt={p.name} className="relative z-0 w-full h-full object-contain object-bottom group-hover:scale-105 transition-transform duration-500" />
+                <a href={p.linkedin} target="_blank" rel="noopener noreferrer" className="absolute top-5 right-5 w-8 h-8 bg-[#0a66c2] text-white rounded-lg flex items-center justify-center shadow-md hover:bg-[#004182] transition-colors z-10">
+                  <Linkedin size={16} />
+                </a>
               </div>
-              <blockquote className="text-muted-foreground mb-10 text-sm leading-relaxed min-h-[4rem] font-medium">
-                "{p.quote}"
-              </blockquote>
-              <div className="flex items-center justify-between text-xs font-semibold text-muted-foreground border-t border-border pt-6">
-                <span className="flex items-center gap-2 bg-muted px-3 py-1.5 rounded-full"><User size={14} /> {p.years}</span>
-                <span className="flex items-center gap-2 bg-muted px-3 py-1.5 rounded-full"><Users size={14} /> {p.team}</span>
+              <div className="px-8 pb-8 pt-8 flex flex-col grow bg-white">
+                <div className="mb-5 text-center">
+                  <h4 className="font-display font-bold text-[22px] text-[#0f172a] mb-1.5">{p.name}</h4>
+                  <p className="text-primary font-bold text-sm uppercase tracking-wider">{p.role}</p>
+                  <div className="w-8 h-[2px] bg-[#2563eb] mx-auto mt-4 rounded-full"></div>
+                </div>
+                <p className="text-[#64748b] text-[13px] italic mb-8 grow text-center leading-relaxed px-2">
+                  "{p.quote}"
+                </p>
+                <div className="space-y-4 pt-6 border-t border-gray-100">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-[#eff6ff] flex items-center justify-center shrink-0">
+                      <Star size={18} className="text-[#2563eb]" />
+                    </div>
+                    <span className="text-sm font-bold text-[#0f172a]">{p.years}</span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-[#eff6ff] flex items-center justify-center shrink-0">
+                      <Users size={18} className="text-[#2563eb]" />
+                    </div>
+                    <span className="text-sm font-bold text-[#0f172a]">{p.team}</span>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Bottom Banner */}
+        <div className="mt-12 bg-white rounded-[2rem] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-100">
+            <div className="flex items-center gap-5 pt-4 md:pt-0 pl-0 md:pl-4 lg:pl-8">
+              <div className="w-14 h-14 bg-[#eff6ff] rounded-full flex items-center justify-center shrink-0">
+                <Users size={24} className="text-[#2563eb]" />
+              </div>
+              <div>
+                <h4 className="font-bold text-[#0f172a] text-[17px] mb-0.5">Experienced Leaders</h4>
+                <p className="text-xs text-[#64748b] font-medium">Industry experts with proven track record</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-5 pt-4 md:pt-0 pl-0 md:pl-8 lg:pl-12">
+              <div className="w-14 h-14 bg-[#eff6ff] rounded-full flex items-center justify-center shrink-0">
+                <Rocket size={24} className="text-[#2563eb]" />
+              </div>
+              <div>
+                <h4 className="font-bold text-[#0f172a] text-[17px] mb-0.5">Innovation Driven</h4>
+                <p className="text-xs text-[#64748b] font-medium">Building the future with cutting-edge solutions</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-5 pt-4 md:pt-0 pl-0 md:pl-8 lg:pl-12">
+              <div className="w-14 h-14 bg-[#eff6ff] rounded-full flex items-center justify-center shrink-0">
+                <Target size={24} className="text-[#2563eb]" />
+              </div>
+              <div>
+                <h4 className="font-bold text-[#0f172a] text-[17px] mb-0.5">Results That Matter</h4>
+                <p className="text-xs text-[#64748b] font-medium">Delivering impact across the globe</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -348,8 +413,8 @@ const CelebrationsSection = () => {
             <PartyPopper size={20} className="text-[#2563eb]" />
           </div>
           <h2 className="font-display text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-            We celebrate every milestone <br/>
-            <span className="font-serif italic text-[#8b5cf6] text-5xl lg:text-6xl lowercase">together</span>
+            We celebrate every milestone <br />
+            <span className="font-serif italic text-primary text-5xl lg:text-6xl lowercase">together</span>
           </h2>
           <p className="text-muted-foreground mt-4 text-sm max-w-2xl mx-auto">
             From festivals to achievements, our vibrant culture brings us closer as one team.
@@ -358,71 +423,77 @@ const CelebrationsSection = () => {
 
         <div className="relative max-w-6xl mx-auto">
           {/* Slider Controls */}
-          <button onClick={prev} className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 md:-translate-x-6 z-20 w-14 h-14 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex items-center justify-center text-[#2563eb] hover:bg-gray-50 transition-colors">
+          <button onClick={prev} className="absolute -left-4 md:-left-8 lg:-left-16 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex items-center justify-center text-[#2563eb] hover:bg-gray-50 transition-colors border border-gray-100">
             <ChevronLeft size={28} />
           </button>
-          <button onClick={next} className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 md:translate-x-6 z-20 w-14 h-14 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex items-center justify-center text-[#2563eb] hover:bg-gray-50 transition-colors">
+          <button onClick={next} className="absolute -right-4 md:-right-8 lg:-right-16 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex items-center justify-center text-[#2563eb] hover:bg-gray-50 transition-colors border border-gray-100">
             <ChevronRight size={28} />
           </button>
 
           {/* Slide Card */}
-          <div className="bg-[#0f172a] rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row relative min-h-[500px] shadow-2xl">
-            {/* Left Content */}
-            <div className="md:w-1/2 p-10 lg:p-16 flex flex-col justify-center relative z-10 text-white">
-              <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 w-max mb-8 border border-white/10">
-                <Calendar size={16} className="text-white/80" />
-                <span className="text-sm font-medium">{slide.date}</span>
+          <div className="bg-[#041633] rounded-[32px] overflow-hidden flex flex-col relative shadow-[0_20px_50px_rgba(4,22,51,0.4)]">
+            {/* Top Image */}
+            <div className="w-full relative h-[350px] md:h-[480px]">
+              {/* Subtle vignette effect */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent z-10"></div>
+
+              {/* Seamless blend gradient at the bottom */}
+              <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#041633] via-[#041633]/80 to-transparent z-20"></div>
+
+              <img
+                key={slide.image}
+                src={slide.image}
+                alt={slide.title}
+                className="absolute inset-0 w-full h-full object-cover object-center animate-fade-in transition-opacity duration-500"
+              />
+            </div>
+
+            {/* Bottom Content */}
+            <div className="w-full px-8 pb-10 lg:px-12 lg:pb-12 pt-0 flex flex-col lg:flex-row lg:items-end justify-between relative z-30 text-white gap-8 -mt-20">
+              <div>
+                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-full px-5 py-2.5 w-max mb-6 border border-white/10 shadow-sm">
+                  <Calendar size={16} className="text-white/80" />
+                  <span className="text-sm font-medium">{slide.date}</span>
+                </div>
+
+                <h3 className="font-display text-3xl lg:text-5xl font-bold mb-4 relative w-max text-white tracking-tight">
+                  {slide.title}
+                  <div className="absolute -bottom-3 left-0 w-1/3 h-1 bg-[#eab308] rounded-full"></div>
+                </h3>
+
+                <p className="text-base lg:text-lg text-white/80 max-w-xl mt-6">
+                  {slide.desc}
+                </p>
               </div>
-              
-              <h3 className="font-display text-4xl lg:text-5xl font-bold mb-4 relative w-max">
-                {slide.title}
-                <div className="absolute -bottom-2 left-0 w-1/3 h-1 bg-[#eab308] rounded-full"></div>
-              </h3>
-              
-              <p className="text-lg text-white/80 mb-12 max-w-md">
-                {slide.desc}
-              </p>
-              
-              <div className="flex flex-wrap items-center gap-6 lg:gap-8 divide-x divide-white/10">
+
+              <div className="flex flex-wrap items-center gap-6 lg:gap-8 lg:divide-x divide-white/10 shrink-0">
                 {slide.stats.map((s, i) => (
-                  <div key={i} className={`flex items-center gap-3 ${i > 0 ? 'pl-6 lg:pl-8' : ''}`}>
-                    <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0 border border-white/5">
-                      <s.icon size={20} className="text-white" />
+                  <div key={i} className={`flex items-center gap-4 ${i > 0 ? 'lg:pl-8' : ''}`}>
+                    <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/5 backdrop-blur-sm flex items-center justify-center shrink-0 border border-white/10 shadow-sm transition-transform hover:scale-105">
+                      <s.icon size={22} className="text-white/90" />
                     </div>
                     <div>
-                      <div className="font-bold text-lg lg:text-xl">{s.value}</div>
-                      <div className="text-[10px] lg:text-xs text-white/60 font-medium">{s.label}</div>
+                      <div className="font-bold text-xl lg:text-2xl tracking-tight text-white">{s.value}</div>
+                      <div className="text-xs lg:text-sm text-white/60 font-medium mt-0.5">{s.label}</div>
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* Right Image */}
-            <div className="md:w-1/2 relative min-h-[300px] md:min-h-full">
-              {/* Removed gradient overlays completely so image is 100% visible */}
-              
-              <img 
-                key={slide.image}
-                src={slide.image} 
-                alt={slide.title} 
-                className="absolute inset-0 w-full h-full object-cover object-left animate-fade-in transition-opacity duration-500"
-              />
             </div>
           </div>
 
           {/* Dots */}
           <div className="flex items-center justify-center gap-3 mt-8">
             {celebrations.map((_, i) => (
-              <button 
-                key={i} 
+              <button
+                key={i}
                 onClick={() => setCurrent(i)}
                 className={`h-2.5 rounded-full transition-all duration-300 ${current === i ? 'w-8 bg-[#2563eb]' : 'w-2.5 bg-gray-200 hover:bg-gray-300'}`}
                 aria-label={`Go to slide ${i + 1}`}
               />
             ))}
           </div>
-          
+
           {/* Bottom Banner */}
           <div className="mt-12 bg-[#f8fafc] rounded-2xl border border-border p-6 flex flex-col md:flex-row items-center justify-between max-w-4xl mx-auto">
             <div className="flex items-center gap-5 mb-4 md:mb-0">

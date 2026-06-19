@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import SEOHead from "@/components/SEOHead";
 import { contactSeoData } from "@/data/seo/contactSeo";
-import { MapPin, Phone, Mail, ArrowRight, Send } from "lucide-react";
+import { MapPin, Phone, Mail, ArrowRight, Send, User, MessageSquare, Building2, Globe2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
@@ -14,6 +14,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { containerVariants, itemVariants } from "@/lib/animations";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
+
+// IMPORTANT: Paste the Web App URL you generated from Google Apps Script below!
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzSkROovSFd8xyJ-_TydH_Y8zMHmB7KgMmc98lhxnisPqGjm34IvEoOc4_C-EX4lprlMw/exec";
 
 const serviceCategories = [
   "Enterprise Software",
@@ -40,8 +43,8 @@ const contactSchema = z.object({
     .min(1, "Mobile number is required")
     .regex(/^\+?[0-9\s\-()]{7,20}$/, "Invalid mobile number format")
     .refine(val => /[0-9]/.test(val), "Mobile number must contain at least one digit"),
-  category: z.string()
-    .min(1, "Please select a service category"),
+  city: z.string().optional(),
+  category: z.string().min(1, "Please select a service category"),
   message: z.string()
     .trim()
     .optional()
@@ -107,7 +110,7 @@ const contactCards = [
 
 const Contact = () => {
   const { toast } = useToast();
-  const [form, setForm] = useState({ name: "", email: "", mobile: "", category: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", mobile: "", city: "", category: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sending, setSending] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -139,24 +142,23 @@ const Contact = () => {
     }
     setSending(true);
     try {
-      const payload = {
-        name: form.name,
-        email: form.email,
-        phone: form.mobile,
-        category: form.category,
-        message: form.message,
-        sourcePage: window.location.href,
-      };
-      const res = await fetch("/contact.php", {
+      const formData = new URLSearchParams();
+      formData.append("name", form.name);
+      formData.append("email", form.email);
+      formData.append("phone", form.mobile);
+      formData.append("city", form.city);
+      formData.append("category", form.category);
+      formData.append("message", form.message);
+      formData.append("sourcePage", window.location.href);
+
+      await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        mode: "no-cors",
+        body: formData,
       });
-      const data = await res.json();
-      if (!res.ok || data.error) {
-        throw new Error(data.error || "Something went wrong");
-      }
-      setForm({ name: "", email: "", mobile: "", category: "", message: "" });
+
+      // With no-cors, the response is opaque, so we assume success if no network error occurred.
+      setForm({ name: "", email: "", mobile: "", city: "", category: "", message: "" });
       setShowSuccess(true);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Failed to send message. Please try again.";
@@ -186,116 +188,119 @@ const Contact = () => {
       <Navbar />
 
       {/* Hero */}
-      <section ref={heroRef} className="relative pt-32 pb-20 lg:pt-44 lg:pb-28 bg-primary overflow-hidden">
+      <section ref={heroRef} className="relative pt-32 pb-20 lg:pt-44 lg:pb-28 overflow-hidden" style={{ backgroundColor: "hsl(var(--primary))" }}>
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary-foreground blur-[120px]" />
           <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-primary-foreground blur-[100px]" />
         </div>
 
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={heroInView ? "visible" : "hidden"}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <motion.span
-              variants={itemVariants}
-              className="text-xs font-medium tracking-[0.2em] uppercase text-primary-foreground/60 mb-4 block"
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate={heroInView ? "visible" : "hidden"}
+              className="max-w-2xl"
             >
-              Contact
-            </motion.span>
-            <motion.h1
-              variants={itemVariants}
-              className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-6"
+              <motion.span
+                variants={itemVariants}
+                className="text-xs font-bold tracking-[0.2em] uppercase text-[#60A5FA] mb-6 block"
+              >
+                GET IN TOUCH
+              </motion.span>
+              <motion.h1
+                variants={itemVariants}
+                className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8"
+              >
+                Connect with our<br />IT Service technical<br />leadership
+              </motion.h1>
+              <motion.div variants={itemVariants} className="pl-4 border-l-2 border-[#60A5FA]">
+                <p className="text-lg text-white/90 leading-relaxed max-w-lg">
+                  Submit your inquiry, download case studies or send us a quote — we promise to respond within 24 hours.
+                </p>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={heroInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="hidden lg:flex justify-end"
             >
-              Connect with our
-              <br />
-              IT Service technical leadership
-            </motion.h1>
-            <motion.p variants={itemVariants} className="text-lg text-primary-foreground/70 leading-relaxed">
-              Submit your inquiry. Our senior team responds within 24 hours—no intermediaries, no delays.
-            </motion.p>
-          </motion.div>
+              <img
+                src="/images/contact-hero.avif"
+                alt="Cybaem Tech IT Team"
+                className="w-full max-w-[550px] rounded-2xl shadow-[0_20px_50px_rgba(37,99,235,0.2)] border-[6px] border-white/10 object-cover"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Form + Image */}
-      <section ref={formRef} className="py-20 lg:py-28">
+      {/* Form + Cards Section */}
+      <section ref={formRef} className="py-20 bg-[#f8fafc]">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate={formInView ? "visible" : "hidden"}
-            className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start"
+            className="grid lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-16 items-start"
           >
             {/* Form */}
-            <motion.form variants={itemVariants} onSubmit={handleSubmit} className="space-y-6">
+            <motion.form variants={itemVariants} onSubmit={handleSubmit} className="space-y-6 bg-white rounded-2xl border-2 border-blue-100 shadow-lg p-8">
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-xs font-medium tracking-[0.15em] uppercase text-muted-foreground">
-                  Full Name
+                <Label htmlFor="name" className="text-sm font-semibold flex items-center gap-2 text-gray-700">
+                  <User size={16} className="text-[#004E98]" /> Full Name
                 </Label>
                 <Input
-                  id="name"
-                  name="name"
-                  placeholder="Your name"
-                  value={form.name}
-                  onChange={handleChange}
-                  className="h-14 bg-muted/50 border-border text-base placeholder:text-muted-foreground/50 focus:border-primary"
+                  id="name" name="name" placeholder="Enter your name"
+                  value={form.name} onChange={handleChange}
+                  className="h-12 bg-white border-gray-200"
                 />
                 {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
               </div>
 
               <div className="space-y-2">
-                <Label
-                  htmlFor="email"
-                  className="text-xs font-medium tracking-[0.15em] uppercase text-muted-foreground"
-                >
-                  Business Email
+                <Label htmlFor="email" className="text-sm font-semibold flex items-center gap-2 text-gray-700">
+                  <Mail size={16} className="text-[#004E98]" /> Work Email ID
                 </Label>
                 <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="company@example.com"
-                  value={form.email}
-                  onChange={handleChange}
-                  className="h-14 bg-muted/50 border-border text-base placeholder:text-muted-foreground/50 focus:border-primary"
+                  id="email" name="email" type="email" placeholder="Enter your email here"
+                  value={form.email} onChange={handleChange}
+                  className="h-12 bg-white border-gray-200"
                 />
                 {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
               </div>
 
               <div className="space-y-2">
-                <Label
-                  htmlFor="mobile"
-                  className="text-xs font-medium tracking-[0.15em] uppercase text-muted-foreground"
-                >
-                  Mobile Number
+                <Label htmlFor="mobile" className="text-sm font-semibold flex items-center gap-2 text-gray-700">
+                  <Phone size={16} className="text-[#004E98]" /> Contact Number
                 </Label>
                 <Input
-                  id="mobile"
-                  name="mobile"
-                  type="tel"
-                  placeholder="+91 98765 43210"
-                  value={form.mobile}
-                  onChange={handleChange}
-                  className="h-14 bg-muted/50 border-border text-base placeholder:text-muted-foreground/50 focus:border-primary"
+                  id="mobile" name="mobile" type="tel" placeholder="Enter Mobile No."
+                  value={form.mobile} onChange={handleChange}
+                  className="h-12 bg-white border-gray-200"
                 />
                 {errors.mobile && <p className="text-sm text-destructive">{errors.mobile}</p>}
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs font-medium tracking-[0.15em] uppercase text-muted-foreground">
-                  Service Category
+                <Label htmlFor="city" className="text-sm font-semibold flex items-center gap-2 text-gray-700">
+                  <MapPin size={16} className="text-[#004E98]" /> City or Location
                 </Label>
-                <Select
-                  value={form.category}
-                  onValueChange={(value) => {
-                    setForm({ ...form, category: value });
-                    if (errors.category) setErrors({ ...errors, category: "" });
-                  }}
-                >
-                  <SelectTrigger className="h-14 bg-muted/50 border-border text-base focus:border-primary">
+                <Input
+                  id="city" name="city" placeholder="Enter City Name"
+                  value={form.city} onChange={handleChange}
+                  className="h-12 bg-white border-gray-200"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label className="text-xs font-medium tracking-[0.15em] uppercase text-gray-500 mb-1 block">
+                  SERVICE CATEGORY
+                </Label>
+                <Select value={form.category} onValueChange={(value) => setForm({ ...form, category: value })}>
+                  <SelectTrigger className="h-12 bg-white border-gray-200">
                     <SelectValue placeholder="Select a service" />
                   </SelectTrigger>
                   <SelectContent>
@@ -310,100 +315,175 @@ const Contact = () => {
               </div>
 
               <div className="space-y-2">
-                <Label
-                  htmlFor="message"
-                  className="text-xs font-medium tracking-[0.15em] uppercase text-muted-foreground"
-                >
-                  Your Message (Optional)
+                <Label htmlFor="message" className="text-sm font-semibold flex items-center gap-2 text-gray-700">
+                  <MessageSquare size={16} className="text-[#004E98]" /> How can we help you?
                 </Label>
                 <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="Tell us about your project..."
-                  value={form.message}
-                  onChange={handleChange}
-                  className="min-h-[160px] bg-muted/50 border-border text-base placeholder:text-muted-foreground/50 focus:border-primary resize-none"
+                  id="message" name="message" placeholder="Let us know your concerns..."
+                  value={form.message} onChange={handleChange}
+                  className="min-h-[120px] bg-white border-gray-200 resize-none"
                 />
                 {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
               </div>
 
-              <motion.button
-                type="submit"
-                disabled={sending}
-                className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+              <button
+                type="submit" disabled={sending}
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold bg-[#004E98] text-white rounded-md hover:bg-[#00387B] transition-colors disabled:opacity-50"
               >
-                {sending ? "Sending..." : "Send message"}
+                {sending ? "Sending..." : "Send Message"}
                 <Send size={16} />
-              </motion.button>
+              </button>
             </motion.form>
 
-            {/* Image + Contact cards */}
-            <motion.div variants={itemVariants} className="space-y-8">
-              <div className="rounded-2xl overflow-hidden">
-                <img
-                  src="/images/contact-hero.avif"
-                  alt="Cybaem Tech team meeting"
-                  className="w-full h-[360px] object-cover"
-                  loading="lazy"
-                />
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-6">
-                {contactCards.map((card) => (
-                  <div key={card.title} className="glass-panel rounded-xl p-6 space-y-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <card.icon size={18} className="text-primary" />
+            {/* Right Side Cards */}
+            <motion.div variants={itemVariants} className="space-y-6">
+              {/* Card 1 */}
+              <div className="bg-white rounded-2xl border-2 border-blue-100 shadow-sm overflow-hidden relative">
+                <div className="p-8">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100">
+                      <Building2 size={28} className="text-[#004E98]" />
                     </div>
-                    <h3 className="font-display font-semibold text-sm">{card.title}</h3>
-                    <div className="space-y-1">
-                      {card.lines.map((line, i) =>
-                        card.href ? (
-                          <a
-                            key={i}
-                            href={card.href}
-                            className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
-                          >
-                            {line}
-                          </a>
-                        ) : (
-                          <p key={i} className="text-sm text-muted-foreground">
-                            {line}
-                          </p>
-                        ),
-                      )}
+                    <div>
+                      <h3 className="text-2xl font-bold text-[#004E98] mb-2">Head Office Address</h3>
+                      <div className="flex items-start gap-2 text-sm text-gray-700">
+                        <MapPin size={16} className="text-[#004E98] mt-0.5 shrink-0" />
+                        <p>Suratwala Mark Plazzo, Hinjawadi,<br />Pune, Maharashtra 411057</p>
+                      </div>
                     </div>
                   </div>
-                ))}
+
+                  <div className="grid grid-cols-2 gap-6 pt-6 border-t border-gray-100">
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 text-[#004E98] font-semibold text-sm">
+                        <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center border border-blue-100"><Phone size={14} /></div>
+                        Call Us
+                      </div>
+                      <ul className="space-y-2 text-sm text-gray-700 pl-2">
+                        <li className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[10px]">✓</div> Business: +91 9028541383</li>
+                        <li className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[10px]">✓</div> Business: 020 2069010200</li>
+                        <li className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[10px]">✓</div> Career & Support: +91 8484815905</li>
+                      </ul>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 text-[#004E98] font-semibold text-sm">
+                        <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center border border-blue-100"><Mail size={14} /></div>
+                        Email Us
+                      </div>
+                      <ul className="space-y-2 text-sm text-gray-700 pl-2">
+                        <li className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[10px]">✓</div> sales@cybaemtech.com</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2 */}
+              <div className="bg-white rounded-2xl border-2 border-blue-100 shadow-sm overflow-hidden relative">
+                <div className="p-8">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100">
+                      <Globe2 size={28} className="text-[#004E98]" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-[#004E98] mb-2">North America Office</h3>
+                      <div className="text-sm text-gray-700">
+                        <p>In Association with</p>
+                        <p className="font-semibold text-gray-900 my-1">RMDG Technology Consultants LLC</p>
+                        <p>16107 Kensington Drive, Suite 227<br />Sugar Land, TX 77479, United States</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-6 pt-6 border-t border-gray-100">
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 text-[#004E98] font-semibold text-sm">
+                        <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center border border-blue-100"><Phone size={14} /></div>
+                        Call Us
+                      </div>
+                      <ul className="space-y-2 text-sm text-gray-700 pl-2">
+                        <li className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[10px]">✓</div> Tel: +1 (713) 234-7916</li>
+                      </ul>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 text-[#004E98] font-semibold text-sm">
+                        <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center border border-blue-100"><Mail size={14} /></div>
+                        Email Us
+                      </div>
+                      <ul className="space-y-2 text-sm text-gray-700 pl-2">
+                        <li className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[10px]">✓</div> ralph@cybaemtech.com</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Map */}
-      <section className="py-16 lg:py-20 bg-muted/20">
+      {/* Map Section */}
+      <section className="py-16 bg-[#f8fafc]">
         <div className="container mx-auto px-6 lg:px-12">
-          <div className="text-center mb-10">
-            <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">Our Location</span>
-            <h2 className="font-display text-3xl lg:text-4xl font-bold leading-tight">Find Us Here</h2>
+          <div className="text-center mb-12 flex items-center justify-center gap-4">
+            <div className="h-px bg-blue-200 w-16"></div>
+            <div className="w-2 h-2 rounded-full bg-[#004E98]"></div>
+            <h2 className="font-display text-3xl font-bold text-gray-900">Find Us Here</h2>
+            <div className="w-2 h-2 rounded-full bg-[#004E98]"></div>
+            <div className="h-px bg-blue-200 w-16"></div>
           </div>
-          <div className="rounded-2xl overflow-hidden shadow-lg">
-            <div className="w-full h-96 md:h-[500px] relative">
-              <iframe
-                title="Cybaem Tech Office Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.635261367137!2d73.74575887496471!3d18.59047548251667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b71e64b665df%3A0xf2de2df843c281ce!2sCybaem%20Tech!5e0!3m2!1sen!2sin!4v1758686264653!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{
-                  border: 0,
-                  filter: 'invert(90%) hue-rotate(180deg) saturate(1.2) brightness(0.9) contrast(1.1)'
-                }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Map 1 */}
+            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+              {/* <div className="bg-white border text-blue` py-3 px-6 flex items-center gap-2 font-semibold">
+                <MapPin size={18} /> Head Office – Pune, India
+              </div> */}
+              <div className="h-64 relative">
+                <iframe
+                  title="Pune Office"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.635261367137!2d73.74575887496471!3d18.59047548251667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b71e64b665df%3A0xf2de2df843c281ce!2sCybaem%20Tech!5e0!3m2!1sen!2sin!4v1758686264653!5m2!1sen!2sin"
+                  width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"
+                ></iframe>
+              </div>
+              <div className="p-4 flex items-center justify-between border-t border-gray-100 bg-gray-50/50">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center shrink-0 border border-gray-100 overflow-hidden">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg" alt="India" className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm text-gray-900">CYBAEM TECH PRIVATE LIMITED</h4>
+                    <p className="text-xs text-gray-500 mt-1">Suratwala Mark Plazzo, Hinjawadi, Pune, Maharashtra 411057</p>
+                  </div>
+                </div>
+                <Building2 size={28} className="text-blue-200 shrink-0" />
+              </div>
+            </div>
+
+            {/* Map 2 */}
+            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+              {/* <div className="bg-[#004E98] text-white py-3 px-6 flex items-center gap-2 font-semibold">
+                <MapPin size={18} /> North America Office – Sugar Land, TX
+              </div> */}
+              <div className="h-64 relative">
+                <iframe
+                  title="US Office"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3466.862378873724!2d-95.6146244244253!3d29.665725275116744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640e6761dbb0a03%3A0x6b801a6104bc1ec9!2s16107%20Kensington%20Dr%20%23227%2C%20Sugar%20Land%2C%20TX%2077479%2C%20USA!5e0!3m2!1sen!2sin!4v1718854497645!5m2!1sen!2sin"
+                  width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"
+                ></iframe>
+              </div>
+              <div className="p-4 flex items-center justify-between border-t border-gray-100 bg-gray-50/50">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center shrink-0 border border-gray-100 overflow-hidden">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="USA" className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm text-gray-900">CYBAEM TECH PRIVATE LIMITED</h4>
+                    <p className="text-xs text-gray-500 mt-1">16107 Kensington Drive, Suite 227, Sugar Land, TX 77479, United States</p>
+                  </div>
+                </div>
+                <Globe2 size={28} className="text-blue-200 shrink-0" />
+              </div>
             </div>
           </div>
         </div>

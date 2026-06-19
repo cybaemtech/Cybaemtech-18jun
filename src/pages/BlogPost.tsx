@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, User, ArrowLeft, Tag } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Clock, Tag, User } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -74,7 +74,7 @@ const BlogPost = () => {
                 excerpt: row.excerpt,
                 content: row.excerpt
                   ? row.excerpt
-                      .replace(/\{hashtag\|\\\#\|([^}]+)\}/g, "#$1")
+                      .replace(/\{hashtag\|\\#\|([^}]+)\}/g, "#$1")
                       .replace(/\n/g, "<br/><br/>")
                       .trim()
                   : "",
@@ -110,17 +110,29 @@ const BlogPost = () => {
     });
   };
 
+  const getReadingTime = (content: string) => {
+    const text = content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+    const words = text ? text.split(" ").length : 0;
+    return Math.max(1, Math.ceil(words / 180));
+  };
+
   if (loading) {
     return (
       <>
         <Navbar />
         <main className="min-h-screen bg-background pt-32 pb-24">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-4xl">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-12">
             <Skeleton className="h-8 w-32 mb-8" />
-            <Skeleton className="h-12 w-full mb-4" />
-            <Skeleton className="h-6 w-64 mb-8" />
-            <Skeleton className="h-80 w-full rounded-xl mb-8" />
-            <div className="space-y-4">
+            <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr]">
+              <div className="space-y-5">
+                <Skeleton className="h-10 w-40" />
+                <Skeleton className="h-16 w-full" />
+                <Skeleton className="h-6 w-72" />
+                <Skeleton className="h-36 w-full rounded-lg" />
+              </div>
+              <Skeleton className="min-h-[420px] w-full rounded-lg" />
+            </div>
+            <div className="mx-auto mt-12 max-w-3xl space-y-4">
               <Skeleton className="h-4 w-full" />
               <Skeleton className="h-4 w-full" />
               <Skeleton className="h-4 w-3/4" />
@@ -162,6 +174,9 @@ const BlogPost = () => {
       </>
     );
   }
+
+  const readingTime = getReadingTime(post.content);
+  const displayDate = formatDate(post.published_at);
 
   return (
     <>
@@ -211,93 +226,164 @@ const BlogPost = () => {
       <Navbar />
 
       <main className="min-h-screen bg-background">
-        <article className="pt-32 pb-24">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-4xl">
-            {/* Back Link */}
+        <article className="pt-28 pb-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-12">
             <motion.div
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4 }}
+              className="mb-8"
             >
               <Link
                 to="/blog"
-                className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
+                className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
               >
                 <ArrowLeft size={16} />
                 Back to Blog
               </Link>
             </motion.div>
 
-            {/* Header */}
-            <motion.header
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-8"
-            >
-              {post.category && (
-                <Badge variant="outline" className="mb-4 text-primary border-primary/30">
-                  {post.category}
-                </Badge>
-              )}
-              <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-                {post.title}
-              </h1>
-              <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1.5">
-                  <User size={16} />
-                  {post.author}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Calendar size={16} />
-                  {formatDate(post.published_at)}
-                </span>
-              </div>
-            </motion.header>
+            <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-stretch">
+              <motion.header
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="flex flex-col justify-center rounded-lg border border-border bg-card p-6 shadow-sm sm:p-8 lg:p-10"
+              >
+                <div className="mb-5 flex flex-wrap items-center gap-3">
+                  {post.category && (
+                    <Badge className="rounded-md bg-primary text-primary-foreground hover:bg-primary/90">
+                      {post.category}
+                    </Badge>
+                  )}
+                  <span className="inline-flex items-center gap-1.5 rounded-md bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground">
+                    <Clock size={13} />
+                    {readingTime} min read
+                  </span>
+                </div>
 
-            {/* Cover Image */}
-            {post.cover_image && (
+                <h1 className="font-display text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
+                  {post.title}
+                </h1>
+
+                {post.excerpt && (
+                  <p className="mt-5 text-base leading-7 text-muted-foreground">
+                    {post.excerpt}
+                  </p>
+                )}
+
+                <div className="mt-7 grid gap-3 border-t border-border pt-6 text-sm text-muted-foreground sm:grid-cols-2">
+                  <span className="flex items-center gap-2">
+                    <User size={16} className="text-primary" />
+                    {post.author}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <Calendar size={16} className="text-primary" />
+                    {displayDate}
+                  </span>
+                </div>
+              </motion.header>
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="mb-10"
+                className="relative overflow-hidden rounded-lg border border-border bg-muted shadow-sm"
               >
-                <img
-                  src={post.cover_image}
-                  alt={post.title}
-                  className="w-full h-auto rounded-xl object-cover aspect-[16/9]"
-                />
+                {post.cover_image ? (
+                  <img
+                    src={post.cover_image}
+                    alt={post.title}
+                    className="h-full min-h-[320px] w-full object-cover lg:min-h-[520px]"
+                  />
+                ) : (
+                  <div className="flex h-full min-h-[320px] w-full items-center justify-center bg-gradient-to-br from-primary/20 via-secondary to-background lg:min-h-[520px]">
+                    <span className="font-display text-7xl font-bold text-primary/30">
+                      {post.title.charAt(0)}
+                    </span>
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/35 via-transparent to-transparent" />
+                <div className="absolute bottom-5 left-5 right-5 rounded-lg border border-white/30 bg-background/95 p-4 shadow-lg backdrop-blur">
+                  <p className="font-display text-sm font-semibold text-foreground">
+                    Cybaem Tech Insight
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                    Practical IT thinking for security, infrastructure, cloud, web systems, and digital growth.
+                  </p>
+                </div>
               </motion.div>
-            )}
+            </div>
 
-            {/* Content */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="prose prose-lg max-w-none prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
+            <div className="mt-12 grid gap-8 lg:grid-cols-[260px_minmax(0,760px)] lg:items-start lg:justify-center">
+              <motion.aside
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.15 }}
+                className="rounded-lg border border-border bg-card p-5 shadow-sm lg:sticky lg:top-28"
+              >
+                <p className="font-display text-sm font-semibold text-foreground">Article Briefing</p>
+                <div className="mt-4 space-y-4 text-sm text-muted-foreground">
+                  <div>
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">Focus</p>
+                    <p>{post.category || "IT Services"}</p>
+                  </div>
+                  <div>
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">Published</p>
+                    <p>{displayDate || "Recently"}</p>
+                  </div>
+                  <div>
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">Read Time</p>
+                    <p>{readingTime} minutes</p>
+                  </div>
+                </div>
+              </motion.aside>
 
-            {/* Tags */}
-            {post.tags && post.tags.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="mt-12 pt-8 border-t border-border"
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="rounded-lg border border-border bg-background p-6 shadow-sm sm:p-8"
               >
-                <div className="flex items-center gap-2 flex-wrap">
-                  <Tag size={16} className="text-muted-foreground" />
-                  {post.tags.map((tag) => (
-                    <Badge key={tag} variant="secondary" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
+                <div
+                  className="prose prose-lg max-w-none prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-8 prose-a:text-primary prose-strong:text-foreground"
+                  dangerouslySetInnerHTML={{ __html: post.content }}
+                />
+
+                {post.tags && post.tags.length > 0 && (
+                  <div className="mt-10 border-t border-border pt-6">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Tag size={16} className="text-muted-foreground" />
+                      {post.tags.map((tag) => (
+                        <Badge key={tag} variant="secondary" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="mt-10 rounded-lg border border-border bg-card p-5">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <p className="font-display text-lg font-semibold text-foreground">
+                        Want more IT insights?
+                      </p>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        Explore more practical guidance from the Cybaem Tech team.
+                      </p>
+                    </div>
+                    <Link
+                      to="/blog"
+                      className="inline-flex w-fit items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:gap-3 hover:bg-primary/90"
+                    >
+                      View Blog <ArrowRight size={16} />
+                    </Link>
+                  </div>
                 </div>
               </motion.div>
-            )}
+            </div>
+
           </div>
         </article>
       </main>

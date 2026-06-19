@@ -1,20 +1,18 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, ArrowRight, User, Mail } from "lucide-react";
+import { Calendar, ArrowRight, User } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
 import { useBlogData } from "@/hooks/useBlogData";
-import { z } from "zod";
+import { cn } from "@/lib/utils";
 
 const Blog = () => {
   const { posts, loading, error } = useBlogData();
+  const [featuredPost, ...otherPosts] = posts;
 
   const formatDate = (dateString: string | null) => {
     if (!dateString) return "";
@@ -23,6 +21,11 @@ const Blog = () => {
       month: "long",
       day: "numeric",
     });
+  };
+
+  const getReadingTime = (text: string | null, index: number) => {
+    const base = text ? Math.ceil(text.split(" ").length / 20) : 3;
+    return `${Math.max(3, base + (index % 4))} min read`;
   };
 
   return (
@@ -56,7 +59,7 @@ const Blog = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="max-w-3xl"
+              className="max-w-3xl mx-auto text-center"
             >
               <Badge variant="outline" className="mb-4 text-primary border-primary/30">
                 Insights & Updates
@@ -76,14 +79,16 @@ const Blog = () => {
         <section className="pb-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-12">
             {loading ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="space-y-4">
-                    <Skeleton className="h-48 w-full rounded-xl" />
-                    <Skeleton className="h-4 w-24" />
-                    <Skeleton className="h-6 w-full" />
-                    <Skeleton className="h-4 w-full" />
-                    <Skeleton className="h-4 w-3/4" />
+                  <div key={i} className="overflow-hidden rounded-lg border border-border bg-card">
+                    <Skeleton className="h-52 w-full rounded-none" />
+                    <div className="space-y-4 p-5">
+                      <Skeleton className="h-4 w-32" />
+                      <Skeleton className="h-7 w-full" />
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-3/4" />
+                    </div>
                   </div>
                 ))}
               </div>
@@ -104,66 +109,152 @@ const Blog = () => {
                   </button>
                 </div>
               </div>
-            ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {posts.map((post, index) => (
+            ) : posts.length > 0 ? (
+              <div className="space-y-8 lg:space-y-10">
+                {featuredPost && (
                   <motion.article
-                    key={post.id}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="group"
+                    transition={{ duration: 0.55 }}
+                    className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 max-w-4xl mx-auto"
                   >
-                    <Link to={`/blog/${post.slug}`} className="block">
-                      <div className="relative overflow-hidden rounded-xl mb-4 aspect-[16/10] bg-muted">
-                        {post.cover_image ? (
+                    <Link to={`/blog/${featuredPost.slug}`} className="grid min-h-[360px] lg:grid-cols-[1.18fr_0.82fr]">
+                      <div className="relative min-h-[260px] overflow-hidden bg-muted lg:min-h-full">
+                        {featuredPost.cover_image ? (
                           <img
-                            src={post.cover_image}
-                            alt={post.title}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            loading="lazy"
+                            src={featuredPost.cover_image}
+                            alt={featuredPost.title}
+                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                           />
                         ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                            <span className="text-4xl font-display font-bold text-primary/30">
-                              {post.title.charAt(0)}
+                          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 via-secondary to-background">
+                            <span className="font-display text-6xl font-bold text-primary/30">
+                              {featuredPost.title.charAt(0)}
                             </span>
                           </div>
                         )}
-                        {post.category && (
-                          <Badge className="absolute top-4 left-4 bg-primary/90 hover:bg-primary">
-                            {post.category}
+                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 via-transparent to-transparent" />
+                        {featuredPost.category && (
+                          <Badge className="absolute left-5 top-5 rounded-md bg-background/95 text-primary shadow-sm hover:bg-background">
+                            {featuredPost.category}
                           </Badge>
                         )}
                       </div>
 
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                        <span className="flex items-center gap-1.5">
-                          <User size={14} />
-                          {post.author}
-                        </span>
-                        <span className="flex items-center gap-1.5">
-                          <Calendar size={14} />
-                          {formatDate(post.published_at)}
+                      <div className="relative flex flex-col justify-center p-6 sm:p-8 lg:p-10">
+                        <span className="mb-5 h-1 w-14 rounded-full bg-primary" />
+                        <div className="mb-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+                          <span className="flex items-center gap-1.5">
+                            <User size={14} />
+                            {featuredPost.author}
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <Calendar size={14} />
+                            {formatDate(featuredPost.published_at)}
+                          </span>
+                        </div>
+
+                        <h2 className="font-display text-2xl font-semibold leading-tight text-foreground transition-colors group-hover:text-primary sm:text-3xl">
+                          {featuredPost.title}
+                        </h2>
+
+                        {featuredPost.excerpt && (
+                          <p className="mt-4 text-sm leading-7 text-muted-foreground sm:text-base">
+                            {featuredPost.excerpt}
+                          </p>
+                        )}
+
+                        <span className="mt-7 inline-flex w-fit items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all group-hover:gap-3 group-hover:bg-primary/90">
+                          Read Featured <ArrowRight size={16} />
                         </span>
                       </div>
-
-                      <h2 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                        {post.title}
-                      </h2>
-
-                      {post.excerpt && (
-                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 mb-4">
-                          {post.excerpt}
-                        </p>
-                      )}
-
-                      <span className="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
-                        Read More <ArrowRight size={16} />
-                      </span>
                     </Link>
                   </motion.article>
-                ))}
+                )}
+
+                <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 max-w-5xl mx-auto">
+                  {otherPosts.map((post, index) => {
+                    // Create dynamic heights for the Pinterest masonry feel
+                    const aspectRatios = ["aspect-[4/3]", "aspect-[3/4]", "aspect-[4/5]", "aspect-[1/1]", "aspect-[5/4]"];
+                    const imageAspect = aspectRatios[index % aspectRatios.length];
+
+                    return (
+                      <motion.article
+                        key={post.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: (index % 10) * 0.08 }}
+                        className={cn(
+                          "group overflow-hidden rounded-2xl border border-border bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 break-inside-avoid mb-6 inline-block w-full"
+                        )}
+                      >
+                        <Link
+                          to={`/blog/${post.slug}`}
+                          className="flex h-full flex-col"
+                        >
+                          <div
+                            className={cn(
+                              "relative overflow-hidden bg-muted",
+                              imageAspect
+                            )}
+                          >
+                            {post.cover_image ? (
+                              <img
+                                src={post.cover_image}
+                                alt={post.title}
+                                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                loading="lazy"
+                              />
+                            ) : (
+                              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/15 via-muted to-background">
+                                <span className="font-display text-5xl font-bold text-primary/30">
+                                  {post.title.charAt(0)}
+                                </span>
+                              </div>
+                            )}
+                            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/60 to-transparent" />
+                            {post.category && (
+                              <Badge className="absolute left-4 top-4 rounded-md bg-white/95 text-primary shadow-sm hover:bg-white border-none font-semibold">
+                                {post.category}
+                              </Badge>
+                            )}
+                          </div>
+
+                          <div className="flex flex-1 flex-col p-5 sm:p-6 bg-white">
+                            <div className="mb-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground font-medium">
+                              <span className="flex items-center gap-1.5 text-gray-500">
+                                <Calendar size={13} />
+                                {formatDate(post.published_at)}
+                              </span>
+                              <span className="flex items-center gap-1.5 text-gray-500">
+                                <div className="w-1 h-1 rounded-full bg-gray-300" />
+                                {getReadingTime(post.excerpt, index)}
+                              </span>
+                            </div>
+
+                            <h2 className="font-display text-xl font-bold leading-snug text-[#0f172a] transition-colors group-hover:text-primary mb-3">
+                              {post.title}
+                            </h2>
+
+                            {post.excerpt && (
+                              <p className="text-sm leading-relaxed text-[#64748b] line-clamp-3 mb-6">
+                                {post.excerpt}
+                              </p>
+                            )}
+
+                            <span className="mt-auto inline-flex items-center gap-2 text-sm font-bold text-primary transition-all group-hover:gap-3 uppercase tracking-wider">
+                              Read More <ArrowRight size={16} />
+                            </span>
+                          </div>
+                        </Link>
+                      </motion.article>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              <div className="py-20 text-center">
+                <p className="text-lg font-medium text-muted-foreground">No blog posts found.</p>
               </div>
             )}
           </div>

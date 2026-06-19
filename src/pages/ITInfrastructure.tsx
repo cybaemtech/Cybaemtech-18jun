@@ -13,6 +13,8 @@ import Navbar from "@/components/Navbar";
 import { MagneticButton } from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import SEOHead from "@/components/SEOHead";
+import { itInfrastructureSeoData } from "@/data/seo/itInfrastructureSeo";
 
 import partnerAws from "@/assets/partners/aws.svg";
 import partnerMicrosoft from "@/assets/partners/microsoft.svg";
@@ -850,6 +852,17 @@ const ITInfrastructure = () => {
   }, [hash]);
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEOHead
+        title={itInfrastructureSeoData.title}
+        description={itInfrastructureSeoData.description}
+        canonical={itInfrastructureSeoData.canonical}
+        keywords={itInfrastructureSeoData.keywords}
+        ogDescription={itInfrastructureSeoData.ogDescription}
+        ogImageAlt={itInfrastructureSeoData.ogImageAlt}
+        twitterDescription={itInfrastructureSeoData.twitterDescription}
+        twitterImageAlt={itInfrastructureSeoData.twitterImageAlt}
+        jsonLd={itInfrastructureSeoData.jsonLd}
+      />
       <Navbar />
       <main id="main-content">
         <Hero />
