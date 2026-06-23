@@ -1,0 +1,277 @@
+<!-- =======================================================
+CYBAEM TECH – CONTACT PAGE
+COMPLETE 2026 SEO + AEO + GEO + AI SEARCH OPTIMIZATION
+URL: https://www.cybaemtech.com/contact
+======================================================= -->
+
+<!-- Basic Meta -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="theme-color" content="#ffffff" />
+
+<!-- =======================================================
+PRIMARY SEO
+======================================================= -->
+
+<title>Contact Cybaem Tech | IT Services, Cybersecurity & Cloud Solutions Pune</title>
+
+<meta
+  name="description"
+  content="Contact Cybaem Tech for cybersecurity, cloud solutions, managed IT services, Microsoft 365, AMC, software development, digital marketing and IT consulting. Get a free consultation today."
+/>
+
+<meta
+  name="keywords"
+  content="Contact Cybaem Tech, IT support Pune, cybersecurity consultation Pune, managed IT services enquiry, cloud solutions consultation, Microsoft 365 support, IT AMC services Pune, software development enquiry, digital marketing consultation Pune, IT company contact Pune, remote IT support, cloud migration support, IT helpdesk services, IT infrastructure support, technology consulting company"
+/>
+
+<link rel="canonical" href="https://www.cybaemtech.com/contact" />
+
+<!-- =======================================================
+AUTHOR & BRANDING
+======================================================= -->
+
+<meta name="author" content="Cybaem Tech" />
+<meta name="publisher" content="Cybaem Tech" />
+<meta name="application-name" content="Cybaem Tech" />
+<meta name="classification" content="IT Services Company" />
+<meta name="subject" content="Contact Cybaem Tech for IT, Cloud, Cybersecurity and Digital Solutions" />
+
+<meta name="coverage" content="Worldwide" />
+<meta name="distribution" content="Global" />
+<meta name="rating" content="General" />
+
+<!-- =======================================================
+GEO SEO (Updated to align with Hinjewadi Location)
+======================================================= -->
+
+<meta name="geo.region" content="IN-MH" />
+<meta name="geo.placename" content="Pune, Hinjewadi" />
+<meta name="geo.position" content="18.5900;73.7360" />
+<meta name="ICBM" content="18.5900, 73.7360" />
+
+<!-- =======================================================
+OPEN GRAPH
+======================================================= -->
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.cybaemtech.com/contact" />
+<meta property="og:title" content="Contact Cybaem Tech | Talk to IT Experts Today" />
+
+<meta
+  property="og:description"
+  content="Get in touch with Cybaem Tech for cybersecurity, cloud solutions, IT infrastructure, managed IT services, software development and digital marketing."
+/>
+
+<meta
+  property="og:image"
+  content="https://www.cybaemtech.com/lovable-uploads/77cb2418-56bd-44ad-8bfd-3651e3cdb2c0.png"
+/>
+
+<meta property="og:site_name" content="Cybaem Tech" />
+<meta property="og:locale" content="en_IN" />
+
+<!-- =======================================================
+TWITTER CARD
+======================================================= -->
+
+<meta name="twitter:card" content="summary_large_image" />
+
+<meta
+  name="twitter:title"
+  content="Contact Cybaem Tech | IT Services & Technology Experts"
+/>
+
+<meta
+  name="twitter:description"
+  content="Reach Cybaem Tech for cybersecurity, cloud, managed IT services, software development and digital transformation consulting."
+/>
+
+<meta
+  name="twitter:image"
+  content="https://www.cybaemtech.com/lovable-uploads/77cb2418-56bd-44ad-8bfd-3651e3cdb2c0.png"
+/>
+
+<!-- =======================================================
+ORGANIZATION SCHEMA
+======================================================= -->
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"Cybaem Tech",
+  "url":"https://www.cybaemtech.com/",
+  "logo":"https://www.cybaemtech.com/lovable-uploads/77cb2418-56bd-44ad-8bfd-3651e3cdb2c0.png",
+  "sameAs":[
+    "https://www.linkedin.com/company/cybaemtech",
+    "https://www.instagram.com/cybaemtech",
+    "https://www.facebook.com/cybaemtech",
+    "https://x.com/Cybaem_Tech",
+    "https://www.youtube.com/@cybaemtech"
+  ],
+  "contactPoint":[
+    {
+      "@type":"ContactPoint",
+      "telephone":"+91-9028541383",
+      "contactType":"Customer Support",
+      "areaServed":"Worldwide",
+      "availableLanguage":[
+        "English"
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- =======================================================
+WEBSITE SCHEMA
+======================================================= -->
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"Cybaem Tech",
+  "url":"https://www.cybaemtech.com/",
+  "potentialAction":{
+    "@type":"SearchAction",
+    "target":"https://www.cybaemtech.com/?s={search_term_string}",
+    "query-input":"required name=search_term_string"
+  }
+}
+</script>
+
+<!-- =======================================================
+LOCAL BUSINESS SCHEMA
+======================================================= -->
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"ProfessionalService",
+  "name":"Cybaem Tech",
+  "image":"https://www.cybaemtech.com/lovable-uploads/77cb2418-56bd-44ad-8bfd-3651e3cdb2c0.png",
+  "url":"https://www.cybaemtech.com/",
+  "telephone":"+91-9028541383",
+  "email":"sales@cybaemtech.com",
+  "priceRange":"$$",
+  "address":{
+    "@type":"PostalAddress",
+    "streetAddress":"304, Suratwala Mark Plazzo, Hinjewadi",
+    "addressLocality":"Pune",
+    "addressRegion":"Maharashtra",
+    "postalCode":"411057",
+    "addressCountry":"IN"
+  },
+  "geo":{
+    "@type":"GeoCoordinates",
+    "latitude":"18.5900",
+    "longitude":"73.7360"
+  }
+}
+</script>
+
+<!-- =======================================================
+CONTACT PAGE SCHEMA
+======================================================= -->
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"ContactPage",
+ "name":"Contact Cybaem Tech",
+ "url":"https://www.cybaemtech.com/contact",
+ "description":"Contact Cybaem Tech for cybersecurity, cloud solutions, managed IT services, software development and digital marketing."
+}
+</script>
+
+<!-- =======================================================
+BREADCRUMB SCHEMA
+====================================================== -->
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"BreadcrumbList",
+ "itemListElement":[
+   {
+     "@type":"ListItem",
+     "position":1,
+     "name":"Home",
+     "item":"https://www.cybaemtech.com/"
+   },
+   {
+     "@type":"ListItem",
+     "position":2,
+     "name":"Contact",
+     "item":"https://www.cybaemtech.com/contact"
+   }
+ ]
+}
+</script>
+
+<!-- =======================================================
+FAQ SCHEMA
+======================================================= -->
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+
+ {
+  "@type":"Question",
+  "name":"How can I contact Cybaem Tech?",
+  "acceptedAnswer":{
+   "@type":"Answer",
+   "text":"You can contact Cybaem Tech by calling +91 9028541383, emailing sales@cybaemtech.com or submitting the enquiry form."
+  }
+ },
+
+ {
+  "@type":"Question",
+  "name":"Can I request a free consultation?",
+  "acceptedAnswer":{
+   "@type":"Answer",
+   "text":"Yes. Cybaem Tech offers consultation for cybersecurity, cloud services, managed IT services and digital transformation projects."
+  }
+ },
+
+ {
+  "@type":"Question",
+  "name":"Does Cybaem Tech provide remote IT support?",
+  "acceptedAnswer":{
+   "@type":"Answer",
+   "text":"Yes. We provide remote support for desktops, laptops, servers, Microsoft 365, cloud infrastructure and enterprise applications."
+  }
+ },
+
+ {
+  "@type":"Question",
+  "name":"Which locations does Cybaem Tech serve?",
+  "acceptedAnswer":{
+   "@type":"Answer",
+   "text":"Cybaem Tech serves businesses across Pune, Maharashtra, India and international clients through onsite and remote engagement models."
+  }
+ },
+
+ {
+  "@type":"Question",
+  "name":"What services can I enquire about?",
+  "acceptedAnswer":{
+   "@type":"Answer",
+   "text":"You can enquire about cybersecurity, cloud solutions, Microsoft 365, managed IT services, software development, web development, AMC services and digital marketing."
+  }
+ }
+
+ ]
+}
+</script>
+
+<!-- =======================================================
+END CONTACT PAGE SEO + GEO + AEO + AI SEARCH OPTIMIZATION
+======================================================= -->

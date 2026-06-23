@@ -108,18 +108,6 @@ const TrustAnchorSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
-  const uptimeCount = useCounter(999, 2000, 900, isInView);
-  const deploymentCount = useCounter(48, 1500, 0, isInView);
-  const talentCount = useCounter(100, 1800, 0, isInView);
-  const projectsCount = useCounter(500, 2200, 0, isInView);
-
-  const metrics = [
-    { icon: Activity, value: `${(uptimeCount / 10).toFixed(1)}%`, label: "Uptime SLA", sublabel: "Last 12 months", color: "text-primary" },
-    { icon: Clock, value: `${deploymentCount}h`, label: "Resource Deployment", sublabel: "Average turnaround", color: "text-primary" },
-    { icon: Users, value: `${talentCount}%`, label: "Certified Talent Pool", sublabel: "ISO & cloud certified", color: "text-primary" },
-    { icon: Award, value: `${projectsCount}+`, label: "Projects Delivered", sublabel: "Enterprise grade", color: "text-primary" },
-  ];
-
   return (
     <section ref={ref} className="section-border py-16 lg:py-20 bg-card/30 relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.03]" style={{
@@ -159,30 +147,6 @@ const TrustAnchorSection = () => {
 
           {/* Client Logos Marquee */}
           <ClientLogosMarquee />
-
-          <motion.div variants={itemVariants} className="flex items-center gap-4 mb-14">
-            <div className="flex-1 h-px bg-border" />
-            <span className="text-xs text-muted-foreground uppercase tracking-[0.2em] flex items-center gap-2">
-              <CheckCircle size={12} className="text-primary" />
-              Real-Time Metrics
-            </span>
-            <div className="flex-1 h-px bg-border" />
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {metrics.map((metric) => (
-              <div key={metric.label} className="text-center lg:text-left group">
-                <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <metric.icon size={16} className="text-primary" />
-                  </div>
-                </div>
-                <span className={`block text-3xl lg:text-4xl font-display font-bold ${metric.color} mb-1`}>{metric.value}</span>
-                <span className="block text-sm font-medium text-foreground mb-0.5">{metric.label}</span>
-                <span className="block text-xs text-muted-foreground">{metric.sublabel}</span>
-              </div>
-            ))}
-          </motion.div>
         </motion.div>
       </div>
     </section>

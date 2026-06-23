@@ -338,22 +338,30 @@ const Contact = () => {
             {/* Right Side Cards */}
             <motion.div variants={itemVariants} className="space-y-6">
               {/* Card 1 */}
-              <div className="bg-white rounded-2xl border-2 border-blue-100 shadow-sm overflow-hidden relative">
-                <div className="p-8">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100">
-                      <Building2 size={28} className="text-[#004E98]" />
+              <div className="bg-white rounded-2xl md:rounded-3xl border-2 border-blue-100 shadow-sm overflow-hidden relative">
+                <div className="p-6 md:p-8">
+                  {/* Header */}
+                  <div className="flex items-center md:items-start gap-4 mb-4 md:mb-6">
+                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#f0f5fa] flex items-center justify-center shrink-0 border border-blue-50">
+                      <Building2 className="w-7 h-7 md:w-8 md:h-8 text-[#004E98]" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-[#004E98] mb-2">Head Office Address</h3>
-                      <div className="flex items-start gap-2 text-sm text-gray-700">
+                      <h3 className="text-[22px] md:text-2xl font-bold text-[#004E98] leading-tight md:mb-2">Head Office<br className="md:hidden" /> Address</h3>
+                      <div className="hidden md:flex items-start gap-2 text-sm text-gray-700">
                         <MapPin size={16} className="text-[#004E98] mt-0.5 shrink-0" />
                         <p>Suratwala Mark Plazzo, Hinjawadi,<br />Pune, Maharashtra 411057</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-6 pt-6 border-t border-gray-100">
+                  {/* Mobile Address */}
+                  <div className="md:hidden flex items-start gap-2 text-[13.5px] text-gray-700 mb-6 px-1">
+                    <MapPin size={18} className="text-[#004E98] shrink-0" />
+                    <p className="leading-snug font-medium">Suratwala Mark Plazzo,<br />Hinjawadi, Pune,<br />Maharashtra 411057</p>
+                  </div>
+
+                  {/* Desktop Grid Layout */}
+                  <div className="hidden md:grid grid-cols-2 gap-6 pt-6 border-t border-gray-100">
                     <div className="space-y-3">
                       <div className="flex items-center gap-2 text-[#004E98] font-semibold text-sm">
                         <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center border border-blue-100"><Phone size={14} /></div>
@@ -375,27 +383,76 @@ const Contact = () => {
                       </ul>
                     </div>
                   </div>
+
+                  {/* Mobile List Layout */}
+                  <div className="md:hidden space-y-3">
+                    {/* Call Us */}
+                    <div className="flex items-center gap-4 p-4 rounded-2xl border border-gray-100 bg-[#fbfdff]">
+                      <div className="w-11 h-11 rounded-full bg-[#f0f5fa] flex items-center justify-center shrink-0">
+                        <Phone size={18} className="text-[#004E98]" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-[#004E98] font-bold text-[15px] mb-1">Call Us</h4>
+                        <div className="text-[13px] text-gray-800 font-medium space-y-0.5">
+                          <p>Business: +91 9028541383</p>
+                          <p>Business: 020 2069010200</p>
+                          <p>Career & Support: +91 8484815905</p>
+                        </div>
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-[#f0f5fa] flex items-center justify-center shrink-0 text-[#004E98]">
+                        <ArrowRight size={14} />
+                      </div>
+                    </div>
+
+                    {/* Email Us */}
+                    <div className="flex items-center gap-4 p-4 rounded-2xl border border-gray-100 bg-[#fbfdff]">
+                      <div className="w-11 h-11 rounded-full bg-[#f0f5fa] flex items-center justify-center shrink-0">
+                        <Mail size={18} className="text-[#004E98]" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-[#004E98] font-bold text-[15px] mb-1">Email Us</h4>
+                        <div className="text-[13px] text-gray-800 font-medium">
+                          <p>sales@cybaemtech.com</p>
+                        </div>
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-[#f0f5fa] flex items-center justify-center shrink-0 text-[#004E98]">
+                        <ArrowRight size={14} />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               {/* Card 2 */}
-              <div className="bg-white rounded-2xl border-2 border-blue-100 shadow-sm overflow-hidden relative">
-                <div className="p-8">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100">
-                      <Globe2 size={28} className="text-[#004E98]" />
+              <div className="bg-white rounded-2xl md:rounded-3xl border-2 border-blue-100 shadow-sm overflow-hidden relative">
+                <div className="p-6 md:p-8">
+                  {/* Header */}
+                  <div className="flex items-center md:items-start gap-4 mb-4 md:mb-6">
+                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#f0f5fa] flex items-center justify-center shrink-0 border border-blue-50">
+                      <Globe2 className="w-7 h-7 md:w-8 md:h-8 text-[#004E98]" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-[#004E98] mb-2">North America Office</h3>
-                      <div className="text-sm text-gray-700">
+                      <h3 className="text-[22px] md:text-2xl font-bold text-[#004E98] leading-tight md:mb-2">North America<br className="md:hidden" /> Office</h3>
+                      <div className="hidden md:block text-sm text-gray-700">
                         <p>In Association with</p>
                         <p className="font-semibold text-gray-900 my-1">RMDG Technology Consultants LLC</p>
-                        <p>16107 Kensington Drive, Suite 227<br />Sugar Land, TX 77479, United States</p>
+                        <p>16107 Kensington Drive, Suite 227,<br />Sugar Land, TX 77479, USA</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-6 pt-6 border-t border-gray-100">
+                  {/* Mobile Address */}
+                  <div className="md:hidden flex flex-col gap-1 text-[13.5px] text-gray-700 mb-6 px-1">
+                    <p className="font-medium">In Association with</p>
+                    <p className="font-bold text-gray-900">RMDG Technology Consultants LLC</p>
+                    <div className="flex items-start gap-2 mt-2">
+                      <MapPin size={18} className="text-[#004E98] shrink-0" />
+                      <p className="leading-snug font-medium">16107 Kensington Drive, Suite 227,<br />Sugar Land, TX 77479, USA</p>
+                    </div>
+                  </div>
+
+                  {/* Desktop Grid Layout */}
+                  <div className="hidden md:grid grid-cols-2 gap-6 pt-6 border-t border-gray-100">
                     <div className="space-y-3">
                       <div className="flex items-center gap-2 text-[#004E98] font-semibold text-sm">
                         <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center border border-blue-100"><Phone size={14} /></div>
@@ -413,6 +470,41 @@ const Contact = () => {
                       <ul className="space-y-2 text-sm text-gray-700 pl-2">
                         <li className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[10px]">✓</div> ralph@cybaemtech.com</li>
                       </ul>
+                    </div>
+                  </div>
+
+                  {/* Mobile List Layout */}
+                  <div className="md:hidden space-y-3">
+                    {/* Call Us */}
+                    <div className="flex items-center gap-4 p-4 rounded-2xl border border-gray-100 bg-[#fbfdff]">
+                      <div className="w-11 h-11 rounded-full bg-[#f0f5fa] flex items-center justify-center shrink-0">
+                        <Phone size={18} className="text-[#004E98]" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-[#004E98] font-bold text-[15px] mb-1">Call Us</h4>
+                        <div className="text-[13px] text-gray-800 font-medium space-y-0.5">
+                          <p>+1 (713) 234-7916</p>
+                        </div>
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-[#f0f5fa] flex items-center justify-center shrink-0 text-[#004E98]">
+                        <ArrowRight size={14} />
+                      </div>
+                    </div>
+
+                    {/* Email Us */}
+                    <div className="flex items-center gap-4 p-4 rounded-2xl border border-gray-100 bg-[#fbfdff]">
+                      <div className="w-11 h-11 rounded-full bg-[#f0f5fa] flex items-center justify-center shrink-0">
+                        <Mail size={18} className="text-[#004E98]" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-[#004E98] font-bold text-[15px] mb-1">Email Us</h4>
+                        <div className="text-[13px] text-gray-800 font-medium">
+                          <p>ralph@cybaemtech.com</p>
+                        </div>
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-[#f0f5fa] flex items-center justify-center shrink-0 text-[#004E98]">
+                        <ArrowRight size={14} />
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -15,6 +15,7 @@ import { MagneticButton } from "@/components/Navbar";
 import { containerVariants, itemVariants } from "@/lib/animations";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { solutionsData } from "@/data/solutionsData";
+import TACImage from "@/assets/TAC.png";
 
 const data = solutionsData["it-staff-augmentation"];
 
@@ -125,11 +126,11 @@ const whyCybaem = [
 ];
 
 const globalDelivery = [
-  { region: "USA", focus: "SaaS, Healthcare IT, Managed Services" },
-  { region: "UK", focus: "Fintech, eCommerce, Cloud Startups" },
-  { region: "UAE", focus: "Government, Oil & Gas, Construction Tech" },
-  { region: "Australia", focus: "EdTech, Agencies, Remote Infrastructure" },
-  { region: "Canada & Europe", focus: "AI, Cybersecurity, Logistics" },
+  { region: "USA", focus: "SaaS, Healthcare IT, Managed Services", flagUrl: "https://flagcdn.com/us.svg" },
+  { region: "UK", focus: "Fintech, eCommerce, Cloud Startups", flagUrl: "https://flagcdn.com/gb.svg" },
+  { region: "UAE", focus: "Government, Oil & Gas, Construction Tech", flagUrl: "https://flagcdn.com/ae.svg" },
+  { region: "Australia", focus: "EdTech, Agencies, Remote Infrastructure", flagUrl: "https://flagcdn.com/au.svg" },
+  { region: "Canada & Europe", focus: "AI, Cybersecurity, Logistics", flagUrl: "https://flagcdn.com/ca.svg" },
 ];
 
 const testimonials = [
@@ -402,26 +403,75 @@ const WhyCybaemSection = () => {
 const GlobalDeliverySection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+  
+  const deliveryColors = ["#2563eb", "#10b981", "#8b5cf6", "#f97316", "#ec4899"];
+
   return (
-    <section ref={ref} className="py-24 lg:py-32 section-border">
+    <section ref={ref} className="py-24 lg:py-32 section-border relative overflow-hidden">
       <div className="container mx-auto px-6 lg:px-12">
         <motion.div variants={containerVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
-          <motion.span variants={itemVariants} className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4 block">
-            Proven Global Delivery
-          </motion.span>
-          <motion.h2 variants={itemVariants} className="font-display text-3xl lg:text-5xl font-bold leading-tight mb-16 max-w-lg">
-            Trusted Across <span className="text-primary italic">Continents</span>
-          </motion.h2>
+          
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left Content */}
+            <div>
+              <motion.span variants={itemVariants} className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4 block flex items-center gap-4">
+                <span className="w-8 h-[2px] bg-primary"></span>
+                Proven Global Delivery
+              </motion.span>
+              <motion.h2 variants={itemVariants} className="font-display text-4xl lg:text-5xl font-bold leading-tight mb-6 text-slate-900">
+                Trusted Across <br />
+                <span className="text-primary italic">Continents</span>
+              </motion.h2>
+              <motion.p variants={itemVariants} className="text-base text-muted-foreground max-w-md mb-12">
+                Delivering innovative IT solutions and driving business success for clients across the globe.
+              </motion.p>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {globalDelivery.map((g) => (
-              <motion.div key={g.region} variants={itemVariants} className="glass-panel rounded-2xl p-6 text-center hover:border-primary/30 transition-all">
-                <Globe size={20} className="text-primary mx-auto mb-3" />
-                <h3 className="font-display text-base font-bold text-foreground mb-1">{g.region}</h3>
-                <p className="text-xs text-muted-foreground">{g.focus}</p>
-              </motion.div>
-            ))}
+              <div className="space-y-6">
+                {globalDelivery.map((g, index) => {
+                  const color = deliveryColors[index % deliveryColors.length];
+                  return (
+                    <motion.div key={g.region} variants={itemVariants} className="flex items-center gap-6 group">
+                      {/* Icon */}
+                      <div 
+                        className="w-16 h-16 rounded-full flex items-center justify-center shrink-0 shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-transform duration-300 group-hover:scale-110 overflow-hidden border-2"
+                        style={{ borderColor: color }}
+                      >
+                        <img src={g.flagUrl} alt={`${g.region} flag`} className="w-full h-full object-cover" />
+                      </div>
+                      
+                      {/* Text content */}
+                      <div className="min-w-[180px]">
+                        <h3 className="font-display text-lg font-bold mb-1" style={{ color }}>{g.region}</h3>
+                        <p className="text-sm text-slate-500 leading-snug max-w-[200px]">{g.focus}</p>
+                      </div>
+                      
+                      {/* Extending Line & Dot */}
+                      <div className="hidden sm:flex flex-1 items-center pr-4">
+                        <div className="flex-1 h-[2px] opacity-20 transition-opacity duration-300 group-hover:opacity-60" style={{ backgroundColor: color }}></div>
+                        <div className="w-2.5 h-2.5 rounded-full ml-1" style={{ backgroundColor: color }}></div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right Image */}
+            <motion.div variants={itemVariants} className="relative hidden lg:flex justify-center items-center">
+              {/* <div className="relative aspect-square w-full max-w-[800px] lg:scale-110 xl:scale-125 mx-auto rounded-full shadow-2xl flex items-center justify-center overflow-hidden border-8 border-white bg-white"> */}
+                <img 
+                  src={TACImage} 
+                  alt="Global Presence" 
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    // Fallback if image doesn't exist yet
+                    (e.target as HTMLImageElement).src = 'https://placehold.co/800x800/f1f5f9/94a3b8?text=Add+1st+Image+Here';
+                  }}
+                />
+              {/* </div> */}
+            </motion.div>
           </div>
+          
         </motion.div>
       </div>
     </section>

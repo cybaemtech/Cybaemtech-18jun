@@ -112,13 +112,15 @@ export const solutionsSeoData: Record<string, SolutionSeo> = {
   },
 
   "web-systems": {
-    metaTitle: "Website Development Company in Pune | Web Systems & Platforms",
-    metaDescription: "Cybaem Tech builds secure, conversion-focused websites, eCommerce stores, landing pages, SaaS platforms and custom web systems for scalable business growth.",
-    keywords: "website development company Pune, web development company Pune, custom website development, ecommerce website development, landing page design company, SaaS development company, web application development, business website development, conversion focused websites, enterprise web systems India",
-    ogDescription: "Build high-converting websites, eCommerce stores, landing pages, SaaS platforms and custom web systems with Cybaem Tech.",
-    ogImageAlt: "Cybaem Tech web systems and website development solutions",
-    twitterDescription: "Secure, fast and conversion-optimized web systems including websites, eCommerce stores, landing pages and SaaS applications.",
-    twitterImageAlt: "Cybaem Tech web systems and website development solutions",
+    metaTitle: "Web Systems Development Services | Cybaem Tech",
+    metaDescription: "Build scalable, secure, and high-performance web systems with Cybaem Tech. We develop custom web applications, business websites, portals, and enterprise solutions designed for growth and digital transformation.",
+    keywords: "web systems development, custom web applications, business website development, enterprise web solutions, web portal development, responsive web design, SaaS development, digital transformation, web application services, Cybaem Tech",
+    ogTitle: "Web Systems Development Services | Cybaem Tech",
+    ogDescription: "Custom web applications, business websites, portals, and enterprise web systems built for performance, scalability, and business growth.",
+    ogImageAlt: "Web Systems Development Services | Cybaem Tech",
+    twitterTitle: "Web Systems Development Services | Cybaem Tech",
+    twitterDescription: "Custom web applications, business websites, and scalable enterprise web systems designed to accelerate business growth.",
+    twitterImageAlt: "Web Systems Development Services",
     jsonLdSchemas: [
       organizationSchema("Cybaem Tech Pvt. Ltd. is a technology solutions company delivering website development, custom web systems, eCommerce development, SaaS platforms, managed IT services and digital growth solutions."),
       professionalServiceSchema(),
@@ -271,14 +273,15 @@ export const solutionsSeoData: Record<string, SolutionSeo> = {
   },
 
   "digital-revenue-growth": {
-    metaTitle: "Digital Revenue Growth Services | B2B & D2C Performance Marketing Agency",
-    metaDescription: "Scale predictable revenue with Cybaem Tech's digital growth engineering. SEO, Google Ads, CRO, LinkedIn marketing, and automation systems built for B2B & D2C brands.",
-    keywords: "digital marketing agency Pune, performance marketing agency India, B2B lead generation services, SEO services India, Google Ads agency, conversion rate optimization services, LinkedIn marketing B2B, marketing automation services, revenue growth strategy, growth marketing agency",
-    ogTitle: "Digital Revenue Growth Services | Performance Marketing Experts",
-    ogDescription: "We don't just run ads — we build revenue systems. SEO, paid ads, CRO, and automation to generate predictable growth for B2B & D2C brands.",
-    ogImageAlt: "Digital revenue growth services by Cybaem Tech",
-    twitterTitle: "Digital Revenue Growth Engineering | Cybaem Tech",
-    twitterDescription: "SEO, Ads, CRO & automation systems designed for predictable revenue growth.",
+    metaTitle: "Digital Revenue Growth Solutions | Cybaem Tech",
+    metaDescription: "Accelerate business growth with data-driven digital marketing, SEO, CRO, lead generation, and revenue optimization solutions from Cybaem Tech.",
+    keywords: "digital revenue growth, revenue optimization, lead generation services, conversion rate optimization, SEO services, performance marketing, business growth solutions, digital marketing agency, customer acquisition, Cybaem Tech",
+    ogTitle: "Digital Revenue Growth Solutions | Cybaem Tech",
+    ogDescription: "Drive more leads, improve conversions, and maximize revenue with strategic digital growth solutions from Cybaem Tech.",
+    ogImageAlt: "Digital Revenue Growth Solutions | Cybaem Tech",
+    twitterTitle: "Digital Revenue Growth Solutions | Cybaem Tech",
+    twitterDescription: "Increase traffic, generate quality leads, improve conversions, and grow revenue with Cybaem Tech's digital growth strategies.",
+    twitterImageAlt: "Digital Revenue Growth Solutions",
     jsonLdSchemas: [
       { "@context": "https://schema.org", "@type": "Organization", "@id": "https://cybaemtech.com/#organization", name: "Cybaem Tech Pvt. Ltd.", url: "https://cybaemtech.com/", logo: "https://cybaemtech.com/assets/cybaem-logo-C5lgmAgK.png", email: "sales@cybaemtech.com", telephone: "+91-9028541383", description: "Cybaem Tech is a performance-driven digital growth partner offering SEO, paid ads, CRO, LinkedIn marketing, and marketing automation solutions." },
       {

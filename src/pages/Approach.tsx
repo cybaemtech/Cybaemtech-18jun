@@ -34,16 +34,19 @@ const useSEO = () => {
 const HeroSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [isPlayingMobile, setIsPlayingMobile] = useState(false);
 
   return (
-    <section ref={ref} className="relative pt-32 pb-40 lg:pb-48 overflow-hidden" style={{ backgroundColor: "hsl(var(--primary))" }}>
+    <section ref={ref} className="relative pt-28 pb-32 lg:pt-32 lg:pb-48 overflow-hidden bg-[#051433] lg:bg-[hsl(var(--primary))]">
       {/* Background graphic & Subtle Lighting */}
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
-      <div className="absolute -top-40 -right-40 w-[30rem] h-[30rem] bg-blue-500 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob"></div>
-      <div className="absolute top-1/2 -left-40 w-[30rem] h-[30rem] bg-indigo-500 rounded-full mix-blend-screen filter blur-[100px] opacity-10 animate-blob animation-delay-2000"></div>
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 pointer-events-none"></div>
+      <div className="absolute -top-40 -right-40 w-[30rem] h-[30rem] bg-blue-500 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob pointer-events-none"></div>
+      <div className="absolute top-1/2 -left-40 w-[30rem] h-[30rem] bg-indigo-500 rounded-full mix-blend-screen filter blur-[100px] opacity-10 animate-blob animation-delay-2000 pointer-events-none"></div>
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        <div className="grid lg:grid-cols-[5fr_7fr] gap-8 lg:gap-12 items-center">
+        
+        {/* === DESKTOP LAYOUT (Hidden on mobile) === */}
+        <div className="hidden lg:grid lg:grid-cols-[5fr_7fr] gap-8 lg:gap-12 items-center">
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -99,10 +102,145 @@ const HeroSection = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* === MOBILE LAYOUT (Hidden on desktop) === */}
+        <div className="lg:hidden flex flex-col pt-4 pb-2">
+          
+          {/* Header Text */}
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.5 }}
+            className="mb-8"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-8 h-[2px] bg-[#38bdf8]"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]"></div>
+            </div>
+            <span className="inline-block text-xs font-bold tracking-[0.1em] uppercase text-[#38bdf8] mb-5">
+              Life At Cybaem Tech
+            </span>
+            <h1 className="font-display text-[2.75rem] leading-[1.1] font-bold text-white tracking-tight">
+              Build.<br />
+              Innovate.<br />
+              <div className="relative inline-block mt-0.5">
+                <span className="italic text-[#38bdf8] font-semibold pr-4">Grow Together.</span>
+                
+                {/* Underline Swoosh */}
+                <svg className="absolute -bottom-1.5 left-0 w-[90%] h-[6px]" viewBox="0 0 200 10" preserveAspectRatio="none">
+                  <path d="M0,5 Q100,10 200,2" stroke="#1d4ed8" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                  <path d="M10,8 Q100,12 180,4" stroke="#2563eb" strokeWidth="1" fill="none" opacity="0.6" />
+                </svg>
+                
+                {/* Paper plane graphics */}
+                <svg className="absolute -top-6 -right-6 w-[56px] h-[56px] text-[#38bdf8]/60" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M80,20 L35,45 L45,55 Z" strokeLinejoin="round" />
+                  <path d="M45,55 L48,65 L55,48" strokeLinejoin="round" />
+                  <path d="M40,65 Q25,85 5,95" strokeDasharray="3 3" />
+                </svg>
+              </div>
+            </h1>
+          </motion.div>
+
+          {/* Video / Image Container */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }} 
+            animate={{ opacity: 1, scale: 1 }} 
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mb-8 relative"
+          >
+            <div className="relative w-full aspect-[4/2.5] rounded-[1.25rem] overflow-hidden border border-white/10 shadow-xl bg-black">
+              {isPlayingMobile ? (
+                <video
+                  autoPlay
+                  controls
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                >
+                  <source src="/video/video.mp4" type="video/mp4" />
+                </video>
+              ) : (
+                <>
+                  <img src="/lifeatcybaemtech/Foundationday.JPG" alt="Foundation Day Celebration" className="absolute inset-0 w-full h-full object-cover object-center" />
+                  <div className="absolute inset-0 bg-black/10"></div>
+                  
+                  {/* Play Button */}
+                  <div 
+                    onClick={() => setIsPlayingMobile(true)}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-105 transition-transform z-10"
+                  >
+                    <div className="w-0 h-0 border-t-[7px] border-t-transparent border-l-[12px] border-l-[#1d4ed8] border-b-[7px] border-b-transparent ml-1"></div>
+                  </div>
+
+                  {/* Overlay Text */}
+                  <div className="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md rounded-lg px-3 py-2 flex items-center gap-3 z-10 pointer-events-none">
+                    <div className="flex items-center gap-1.5 text-white/90">
+                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                      <span className="text-[11px] font-semibold tracking-wide">02:15</span>
+                    </div>
+                    <div className="w-px h-3 bg-white/30"></div>
+                    <span className="text-[11px] font-medium text-white/90">Foundation Day Celebration</span>
+                  </div>
+                </>
+              )}
+            </div>
+            
+            {/* Soft glow behind the video container */}
+            <div className="absolute -inset-2 bg-blue-500/20 blur-xl -z-10 rounded-full opacity-50"></div>
+          </motion.div>
+
+          {/* Text Description */}
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-8"
+          >
+            <p className="text-[#cbd5e1] text-[15px] leading-relaxed">
+              We are problem solvers, innovators and dreamers.
+              Together, we build technology that creates
+              impact and shapes the future.
+            </p>
+          </motion.div>
+
+          {/* Buttons */}
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col gap-3.5"
+          >
+            <Link to="/about" className="flex items-center justify-between w-full p-1.5 bg-[#1d4ed8] text-white rounded-[2rem] hover:bg-blue-700 transition-colors shadow-lg group">
+              <div className="flex items-center gap-4 pl-1">
+                <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                  <Users size={18} className="text-white" />
+                </div>
+                <span className="font-semibold text-[15px]">Explore Our Culture</span>
+              </div>
+              <div className="w-10 h-10 flex items-center justify-center pr-1">
+                <ArrowRight size={20} className="text-white group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+
+            <Link to="/contact" className="flex items-center justify-between w-full p-1.5 bg-white text-[#0f172a] rounded-[2rem] hover:bg-gray-50 transition-colors shadow-md group">
+              <div className="flex items-center gap-4 pl-1">
+                <div className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center shrink-0 bg-white">
+                  <Briefcase size={18} className="text-[#1d4ed8]" />
+                </div>
+                <span className="font-semibold text-[15px]">Join Our Team</span>
+              </div>
+              <div className="w-10 h-10 flex items-center justify-center pr-1">
+                <ArrowRight size={20} className="text-[#0f172a] group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+          </motion.div>
+          
+        </div>
       </div>
     </section>
   );
 };
+
 
 /* --- STATS --- */
 const StatsSection = () => {
@@ -116,15 +254,15 @@ const StatsSection = () => {
 
   return (
     <div className="container mx-auto px-6 lg:px-12 relative z-20 -mt-20 mb-24">
-      <div className="bg-white rounded-3xl shadow-xl border border-border p-8 lg:p-10">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 divide-x divide-border">
+      <div className="bg-white rounded-[1.5rem] lg:rounded-3xl shadow-xl border border-border p-6 lg:p-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-6 gap-x-4 lg:gap-8 lg:divide-x divide-border">
           {stats.map((stat, i) => (
-            <div key={i} className={`flex flex-col items-center text-center ${i === 0 ? '' : 'pl-8'}`}>
-              <div className={`w-12 h-12 rounded-full ${stat.bg} flex items-center justify-center mb-4`}>
-                <stat.icon size={24} className={stat.color} />
+            <div key={i} className={`flex flex-col items-center text-center ${i === 0 ? '' : 'lg:pl-8'}`}>
+              <div className={`w-10 h-10 lg:w-12 lg:h-12 rounded-full ${stat.bg} flex items-center justify-center mb-3 lg:mb-4`}>
+                <stat.icon className={`w-5 h-5 lg:w-6 lg:h-6 ${stat.color}`} />
               </div>
-              <h3 className="text-2xl font-bold text-foreground mb-1">{stat.value}</h3>
-              <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
+              <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-0.5 lg:mb-1">{stat.value}</h3>
+              <p className="text-xs lg:text-sm font-medium text-muted-foreground">{stat.label}</p>
             </div>
           ))}
         </div>

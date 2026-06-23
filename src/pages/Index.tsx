@@ -13,6 +13,7 @@ const SolutionsSection = lazy(() => import("@/components/SolutionsSection"));
 const GlobalReachSection = lazy(() => import("@/components/GlobalReachSection"));
 const OrbitSection = lazy(() => import("@/components/OrbitSection"));
 const CTASection = lazy(() => import("@/components/CTASection"));
+const MetricsSection = lazy(() => import("@/components/MetricsSection"));
 
 const Index = () => {
   return (
@@ -34,6 +35,9 @@ const Index = () => {
       <HeroSection />
       <Suspense fallback={<TrustSkeleton />}>
         <TrustAnchorSection />
+      </Suspense>
+      <Suspense fallback={<ContentSkeleton />}>
+        <MetricsSection />
       </Suspense>
       <Suspense fallback={<ContentSkeleton />}>
         <DifferenceSection />
