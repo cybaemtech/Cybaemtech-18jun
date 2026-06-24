@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Code, Globe, Users, Shield, TrendingUp, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const solutions = [
   {
@@ -64,9 +69,44 @@ const solutions = [
 const SolutionsSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const active = solutions[activeIndex];
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    let mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1024px)", () => {
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "center center",
+        end: `+=${solutions.length * 180}vh`,
+        pin: true,
+        pinSpacing: true,
+        onUpdate: (self) => {
+          let newIndex = Math.floor(self.progress * solutions.length);
+          if (newIndex >= solutions.length) newIndex = solutions.length - 1;
+          if (newIndex < 0) newIndex = 0;
+          setActiveIndex(newIndex);
+        }
+      });
+    });
+
+    return () => mm.revert();
+  }, { scope: sectionRef });
+
+  const handleTabClick = (index: number) => {
+    const st = ScrollTrigger.getAll().find((st) => st.trigger === sectionRef.current);
+    if (st && window.innerWidth >= 1024) {
+      const segmentSize = (st.end - st.start) / solutions.length;
+      // Scroll slightly past the threshold to ensure the card activates
+      const scrollY = st.start + (index * segmentSize) + (segmentSize * 0.1);
+      window.scrollTo({ top: scrollY, behavior: "smooth" });
+    } else {
+      setActiveIndex(index);
+    }
+  };
 
   return (
-    <section id="solutions" className="py-24 lg:py-32 bg-background overflow-hidden">
+    <section id="solutions" ref={sectionRef} className="py-24 lg:py-32 bg-background overflow-hidden">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Header */}
         <motion.div
@@ -94,7 +134,7 @@ const SolutionsSection = () => {
               return (
                 <motion.button
                   key={sol.slug}
-                  onClick={() => setActiveIndex(i)}
+                  onClick={() => handleTabClick(i)}
                   className={`relative text-left w-full py-5 px-6 rounded-xl transition-colors duration-300 group ${
                     isActive
                       ? "bg-card"

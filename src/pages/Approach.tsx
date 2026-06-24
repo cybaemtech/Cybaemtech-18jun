@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import {
   Users, Briefcase, Rocket, Award, Star,
   Flag, BarChart, Lightbulb, Globe,
-  ArrowRight, Mouse,
+  ArrowRight, Mouse, Plus,
   Target, Heart, Trophy, BookOpen, User,
   ChevronLeft, ChevronRight, Calendar, Utensils, Smile, ImageIcon, Sparkles, PartyPopper, Linkedin
 } from "lucide-react";
@@ -331,22 +331,28 @@ const JourneySection = () => {
 
 /* --- PEOPLE --- */
 const PeopleSection = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   const people = [
     {
       name: "Rohan Bhosale",
       role: "Founder & CEO",
       quote: "Leading digital marketing initiatives across Fortune 500 companies.",
-      years: "18+ Years Experience",
-      team: "Global IT Strategy & Digital Marketing",
+      years: "18+",
+      yearsLabel: "Years Experience",
+      domain: "Global IT Strategy",
+      domainLabel: "Digital Marketing",
       image: "/people/rohan.png",
       linkedin: "https://www.linkedin.com/in/rohanbhosale15/"
     },
     {
-      name: "Akshay Nawale",
+      name: "Akshay Nawle",
       role: "Chief Technology Officer",
       quote: "Architecting next-generation technology solutions & leading innovation teams.",
-      years: "15+ Years Experience",
-      team: "AI Strategy & Product Leadership",
+      years: "15+",
+      yearsLabel: "Years Experience",
+      domain: "AI Strategy",
+      domainLabel: "Product Leadership",
       image: "/people/akshay.png",
       linkedin: "https://www.linkedin.com/in/akshay-navle-2929a245/"
     },
@@ -354,114 +360,121 @@ const PeopleSection = () => {
       name: "Yash Bhalekar",
       role: "Director",
       quote: "Driving financial excellence and strategic growth across global operations.",
-      years: "12+ Years Experience",
-      team: "Business Development",
+      years: "12+",
+      yearsLabel: "Years Experience",
+      domain: "Business Dev",
+      domainLabel: "Global Operations",
       image: "/people/yash.png",
       linkedin: "https://www.linkedin.com/in/yash-bhalekar-imoexo/"
     }
   ];
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % people.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [people.length]);
+
+  const activePerson = people[activeIndex];
+
   return (
-    <section className="py-24 bg-[#f8fafc] relative overflow-hidden">
-      {/* Subtle radial background glow to match the reference */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-50/60 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
-
+    <section className="py-24 bg-background relative overflow-hidden">
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-start justify-between mb-16 gap-8">
+        <div className="grid lg:grid-cols-[1.5fr_2.5fr_1.5fr] gap-12 items-center">
+          
+          {/* Left Text */}
           <div>
-            <span className="text-sm font-bold tracking-widest text-[#2563eb] uppercase mb-4 block">
-              PEOPLE OF CYBAEM
+            <span className="text-xs font-bold tracking-[0.15em] text-primary uppercase mb-4 block">
+              01 / OUR PEOPLE
             </span>
-            <h2 className="font-display text-4xl lg:text-[2.75rem] font-bold text-[#0f172a] mb-4">
-              Real People. Real Stories<span className="text-[#2563eb]">.</span>
+            <h2 className="font-display text-4xl lg:text-[2.75rem] font-bold text-foreground leading-tight mb-6">
+              Real People.<br />
+              Real <span className="text-primary">Impact.</span>
             </h2>
-            <p className="text-[#64748b] text-lg max-w-lg">
-              Meet the visionaries driving innovation, building solutions, and shaping the future at Cybaem Tech.
+            <p className="text-muted-foreground text-sm leading-relaxed mb-10 max-w-sm">
+              Meet the exceptional minds driving innovation and building solutions that matter.
             </p>
-          </div>
-          <div className="flex items-center gap-4 shrink-0 mt-2">
-            <Link to="#" className="px-6 py-2.5 rounded-full border border-[#2563eb] text-[#2563eb] text-sm font-bold hover:bg-blue-50 transition-colors flex items-center gap-2 mr-4">
-              View All Stories <ArrowRight size={16} />
+            <Link to="#" className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:opacity-80 transition-opacity">
+              View All Leaders <ArrowRight size={18} />
             </Link>
-            <div className="flex gap-3">
-              <button className="w-11 h-11 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:border-[#2563eb] hover:text-[#2563eb] transition-colors text-gray-400 shadow-sm"><ArrowRight size={18} className="rotate-180" /></button>
-              <button className="w-11 h-11 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:border-[#2563eb] hover:text-[#2563eb] transition-colors text-gray-400 shadow-sm"><ArrowRight size={18} /></button>
-            </div>
           </div>
-        </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {people.map((p, i) => (
-            <div key={i} className="bg-white rounded-[2rem] shadow-[0_15px_50px_-12px_rgba(37,99,235,0.15)] flex flex-col group hover:-translate-y-2 transition-all duration-300 border border-blue-50 overflow-hidden">
-              <div className="w-full h-72 relative overflow-hidden flex items-end justify-center bg-[url('/people/bg-pattern.png')] bg-cover bg-center bg-no-repeat">
-                <img src={p.image} alt={p.name} className="relative z-0 w-full h-full object-contain object-bottom group-hover:scale-105 transition-transform duration-500" />
-                <a href={p.linkedin} target="_blank" rel="noopener noreferrer" className="absolute top-5 right-5 w-8 h-8 bg-[#0a66c2] text-white rounded-lg flex items-center justify-center shadow-md hover:bg-[#004182] transition-colors z-10">
-                  <Linkedin size={16} />
-                </a>
-              </div>
-              <div className="px-8 pb-8 pt-8 flex flex-col grow bg-white">
-                <div className="mb-5 text-center">
-                  <h4 className="font-display font-bold text-[22px] text-[#0f172a] mb-1.5">{p.name}</h4>
-                  <p className="text-primary font-bold text-sm uppercase tracking-wider">{p.role}</p>
-                  <div className="w-8 h-[2px] bg-[#2563eb] mx-auto mt-4 rounded-full"></div>
+          {/* Center Card */}
+          <div className="relative">
+            {/* Background shape */}
+            <div className="" />
+            
+            <motion.div 
+              key={activeIndex}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-gradient-to-br from-white/80 to-white/40 backdrop-blur-md relative pt-8 px-8 border border-white/60 overflow-hidden shadow-[0_8px_32px_rgba(37,99,235,0.08)] rounded-tl-[6rem] rounded-br-[6rem] rounded-tr-none rounded-bl-none"
+            >
+              <div className="flex flex-col md:flex-row relative">
+                {/* Left: Image */}
+                <div className="w-full md:w-1/2 flex items-end justify-center">
+                  <img src={activePerson.image} alt={activePerson.name} className="w-full h-auto object-contain object-bottom relative z-10 scale-[1.35] origin-bottom drop-shadow-xl" />
                 </div>
-                <p className="text-[#64748b] text-[13px] italic mb-8 grow text-center leading-relaxed px-2">
-                  "{p.quote}"
-                </p>
-                <div className="space-y-4 pt-6 border-t border-gray-100">
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#eff6ff] flex items-center justify-center shrink-0">
-                      <Star size={18} className="text-[#2563eb]" />
-                    </div>
-                    <span className="text-sm font-bold text-[#0f172a]">{p.years}</span>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#eff6ff] flex items-center justify-center shrink-0">
-                      <Users size={18} className="text-[#2563eb]" />
-                    </div>
-                    <span className="text-sm font-bold text-[#0f172a]">{p.team}</span>
+                {/* Right: Info */}
+                <div className="w-full md:w-1/2 pt-10 pb-8 pl-4 pr-2 relative z-20 flex flex-col justify-center">
+                  <div className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/50 relative">
+                    <h3 className="text-[22px] font-bold text-foreground mb-1">{activePerson.name}</h3>
+                    <p className="text-primary text-xs font-medium mb-4">{activePerson.role}</p>
+                    <p className="text-[13px] font-medium leading-relaxed text-foreground mb-4">
+                      "{activePerson.quote}"
+                    </p>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+              
+              {/* Bottom Info Bar */}
+              <div className="bg-white rounded-2xl p-5 mx-auto w-full relative z-20 shadow-xl border border-gray-100 flex items-center justify-between">
+                <div className="flex gap-8 md:gap-12 pl-4">
+                  <div>
+                    <h4 className="text-xl font-bold text-foreground mb-0.5">{activePerson.years}</h4>
+                    <p className="text-[10px] text-muted-foreground">{activePerson.yearsLabel}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-foreground mb-0.5">{activePerson.domain}</h4>
+                    <p className="text-[10px] text-muted-foreground">{activePerson.domainLabel}</p>
+                  </div>
+                </div>
+              </div>
 
-        {/* Bottom Banner */}
-        <div className="mt-12 bg-white rounded-[2rem] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-100">
-            <div className="flex items-center gap-5 pt-4 md:pt-0 pl-0 md:pl-4 lg:pl-8">
-              <div className="w-14 h-14 bg-[#eff6ff] rounded-full flex items-center justify-center shrink-0">
-                <Users size={24} className="text-[#2563eb]" />
-              </div>
-              <div>
-                <h4 className="font-bold text-[#0f172a] text-[17px] mb-0.5">Experienced Leaders</h4>
-                <p className="text-xs text-[#64748b] font-medium">Industry experts with proven track record</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-5 pt-4 md:pt-0 pl-0 md:pl-8 lg:pl-12">
-              <div className="w-14 h-14 bg-[#eff6ff] rounded-full flex items-center justify-center shrink-0">
-                <Rocket size={24} className="text-[#2563eb]" />
-              </div>
-              <div>
-                <h4 className="font-bold text-[#0f172a] text-[17px] mb-0.5">Innovation Driven</h4>
-                <p className="text-xs text-[#64748b] font-medium">Building the future with cutting-edge solutions</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-5 pt-4 md:pt-0 pl-0 md:pl-8 lg:pl-12">
-              <div className="w-14 h-14 bg-[#eff6ff] rounded-full flex items-center justify-center shrink-0">
-                <Target size={24} className="text-[#2563eb]" />
-              </div>
-              <div>
-                <h4 className="font-bold text-[#0f172a] text-[17px] mb-0.5">Results That Matter</h4>
-                <p className="text-xs text-[#64748b] font-medium">Delivering impact across the globe</p>
-              </div>
-            </div>
+              {/* Floating + Button */}
+              {/* <button className="absolute right-12 bottom-[4.5rem] w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform z-30">
+                <Plus size={24} />
+              </button> */}
+            </motion.div>
           </div>
+
+          {/* Right List */}
+          <div className="flex flex-col pl-0 lg:pl-6">
+            {people.map((p, i) => (
+              <div 
+                key={i} 
+                className={`flex items-center gap-5 py-5 border-b border-gray-100 last:border-0 cursor-pointer group ${activeIndex === i ? 'opacity-100' : 'opacity-60 hover:opacity-100'} transition-all`}
+                onClick={() => setActiveIndex(i)}
+              >
+                <div className={`w-16 h-16 rounded-full overflow-hidden flex items-end justify-center transition-colors ${activeIndex === i ? 'bg-primary/10' : 'bg-gray-50 group-hover:bg-primary/5'}`}>
+                  <img src={p.image} alt={p.name} className="w-[85%] h-auto object-contain object-bottom relative z-10" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-bold text-foreground text-sm mb-1">{p.name}</h4>
+                  <p className="text-xs text-primary">{p.role}</p>
+                </div>
+                <div className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all ${activeIndex === i ? 'border-primary text-primary shadow-sm' : 'border-gray-200 text-gray-400 group-hover:border-primary/50 group-hover:text-primary'}`}>
+                  <ChevronRight size={16} />
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
+
     </section>
   );
 };

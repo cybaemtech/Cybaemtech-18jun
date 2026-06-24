@@ -413,13 +413,12 @@ const EngagementSection = () => {
 
   return (
     <section id="engagement-models" ref={ref} className="py-14 sm:py-20 bg-background section-border overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-        <motion.div variants={stagger} initial="hidden" animate={inView ? "visible" : "hidden"}>
+    <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+        {/* <motion.div variants={stagger} initial="hidden" animate={inView ? "visible" : "hidden"}>
 
-          {/* ─── DESKTOP layout ─── */}
+      
           <div className="hidden lg:flex items-start gap-0">
 
-            {/* Title column */}
             <motion.div variants={fadeUp} className="shrink-0 w-[230px] xl:w-[260px] pr-6 pt-2">
               <span className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-3 block">
                 Flexible Engagement Models
@@ -430,23 +429,18 @@ const EngagementSection = () => {
               </h2>
             </motion.div>
 
-            {/* Cards + illustration area */}
             <div className="flex-1 min-w-0">
-              {/* Grid: left-cards | illustration | right-cards */}
               <div className="grid grid-cols-[1fr_auto_1fr] gap-4 items-center">
 
-                {/* Left cards column */}
                 <motion.div variants={stagger} className="flex flex-col gap-4 justify-center py-6">
                   <motion.div variants={fadeUp}><EngCard model={fullyManaged} /></motion.div>
                   <motion.div variants={fadeUp}><EngCard model={coManaged} /></motion.div>
                 </motion.div>
 
-                {/* Center: animated illustration */}
                 <motion.div variants={fadeUp} className="w-[300px] xl:w-[360px] shrink-0 h-[360px] xl:h-[420px]">
                   <CubeIllustration />
                 </motion.div>
 
-                {/* Right cards column */}
                 <motion.div variants={stagger} className="flex flex-col gap-4 justify-center py-6">
                   <motion.div variants={fadeUp}><EngCard model={amc} /></motion.div>
                   <motion.div variants={fadeUp}><EngCard model={projectBased} /></motion.div>
@@ -454,7 +448,6 @@ const EngagementSection = () => {
 
               </div>
 
-              {/* On-Demand support — bottom center */}
               <motion.div variants={fadeUp} className="flex justify-center -mt-2">
                 <div className="w-[260px] xl:w-[300px]">
                   <EngCard model={onDemand} />
@@ -464,7 +457,7 @@ const EngagementSection = () => {
 
           </div>
 
-          {/* ─── MOBILE / TABLET layout ─── */}
+         
           <div className="lg:hidden">
             <motion.div variants={fadeUp} className="mb-8">
               <span className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2 block">
@@ -476,7 +469,7 @@ const EngagementSection = () => {
               </h2>
             </motion.div>
 
-            {/* Illustration on mobile */}
+           
             <motion.div variants={fadeUp} className="h-[220px] mb-6">
               <CubeIllustration />
             </motion.div>
@@ -490,8 +483,8 @@ const EngagementSection = () => {
             </div>
           </div>
 
-        </motion.div>
-      </div>
+        </motion.div> */}
+      </div> 
     </section>
   );
 };
@@ -858,9 +851,7 @@ const ITInfrastructure = () => {
         canonical={itInfrastructureServicesSeoData.canonical}
         keywords={itInfrastructureServicesSeoData.keywords}
         ogDescription={itInfrastructureServicesSeoData.ogDescription}
-        ogImageAlt={itInfrastructureServicesSeoData.ogImageAlt}
         twitterDescription={itInfrastructureServicesSeoData.twitterDescription}
-        twitterImageAlt={itInfrastructureServicesSeoData.twitterImageAlt}
         jsonLd={itInfrastructureServicesSeoData.jsonLd}
       />
       <Navbar />
