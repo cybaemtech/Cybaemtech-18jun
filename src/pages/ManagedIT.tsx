@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import SEOHead from "@/components/SEOHead";
-import { solutionsSeoData } from "@/data/seo/solutionsSeo";
+import { managedITSeoData } from "@/data/seo/managedITSeo";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import ITRiskBriefing from "@/components/ITRiskBriefing";
 import { Link } from "react-router-dom";
@@ -311,16 +311,15 @@ const ManagedIT = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title={solutionsSeoData["managed-it-cloud-security"].metaTitle}
-        description={solutionsSeoData["managed-it-cloud-security"].metaDescription}
-        canonical="/solutions/managed-it-cloud-security"
-        keywords={solutionsSeoData["managed-it-cloud-security"].keywords}
-        ogTitle={solutionsSeoData["managed-it-cloud-security"].ogTitle}
-        ogDescription={solutionsSeoData["managed-it-cloud-security"].ogDescription}
-        ogImageAlt={solutionsSeoData["managed-it-cloud-security"].ogImageAlt}
-        twitterTitle={solutionsSeoData["managed-it-cloud-security"].twitterTitle}
-        twitterDescription={solutionsSeoData["managed-it-cloud-security"].twitterDescription}
-        jsonLd={solutionsSeoData["managed-it-cloud-security"].jsonLdSchemas}
+        title={managedITSeoData.title}
+        description={managedITSeoData.description}
+        canonical={managedITSeoData.canonical}
+        keywords={managedITSeoData.keywords}
+        ogTitle={managedITSeoData.ogTitle}
+        ogDescription={managedITSeoData.ogDescription}
+        twitterTitle={managedITSeoData.twitterTitle}
+        twitterDescription={managedITSeoData.twitterDescription}
+        jsonLd={managedITSeoData.jsonLd}
       />
       <Navbar />
 

@@ -17,6 +17,7 @@ const SolutionPage = lazy(() => import("./components/solutions/SolutionPage"));
 const DigitalGrowth = lazy(() => import("./pages/DigitalGrowth"));
 const ManagedIT = lazy(() => import("./pages/ManagedIT"));
 const ITInfrastructure = lazy(() => import("./pages/ITInfrastructure"));
+const EnterpriseSoftware = lazy(() => import("./pages/EnterpriseSoftware"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const Login = lazy(() => import("./pages/Login"));
@@ -69,6 +70,7 @@ const App = () => (
             <Route path="/solutions/digital-revenue-growth" element={<DigitalGrowth />} />
             <Route path="/solutions/managed-it" element={<ManagedIT />} />
             <Route path="/solutions/it-infrastructure-services" element={<ITInfrastructure />} />
+            <Route path="/solutions/enterprise-software" element={<EnterpriseSoftware />} />
             <Route path="/solutions/:slug" element={<SolutionPage />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/blog" element={<Blog />} />

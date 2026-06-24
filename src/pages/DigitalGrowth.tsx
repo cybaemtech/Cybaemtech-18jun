@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import SEOHead from "@/components/SEOHead";
-import { solutionsSeoData } from "@/data/seo/solutionsSeo";
+import { digitalMarketingSeoData } from "@/data/seo/digitalMarketingSeo";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -174,16 +174,15 @@ const DigitalGrowth = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title={solutionsSeoData["digital-revenue-growth"].metaTitle}
-        description={solutionsSeoData["digital-revenue-growth"].metaDescription}
-        canonical="/solutions/digital-revenue-growth"
-        keywords={solutionsSeoData["digital-revenue-growth"].keywords}
-        ogTitle={solutionsSeoData["digital-revenue-growth"].ogTitle}
-        ogDescription={solutionsSeoData["digital-revenue-growth"].ogDescription}
-        ogImageAlt={solutionsSeoData["digital-revenue-growth"].ogImageAlt}
-        twitterTitle={solutionsSeoData["digital-revenue-growth"].twitterTitle}
-        twitterDescription={solutionsSeoData["digital-revenue-growth"].twitterDescription}
-        jsonLd={solutionsSeoData["digital-revenue-growth"].jsonLdSchemas}
+        title={digitalMarketingSeoData.title}
+        description={digitalMarketingSeoData.description}
+        canonical={digitalMarketingSeoData.canonical}
+        keywords={digitalMarketingSeoData.keywords}
+        ogTitle={digitalMarketingSeoData.ogTitle}
+        ogDescription={digitalMarketingSeoData.ogDescription}
+        twitterTitle={digitalMarketingSeoData.twitterTitle}
+        twitterDescription={digitalMarketingSeoData.twitterDescription}
+        jsonLd={digitalMarketingSeoData.jsonLd}
       />
       <Navbar />
 

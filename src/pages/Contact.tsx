@@ -179,10 +179,10 @@ const Contact = () => {
         description={contactSeoData.description}
         canonical={contactSeoData.canonical}
         keywords={contactSeoData.keywords}
+        ogTitle={contactSeoData.ogTitle}
         ogDescription={contactSeoData.ogDescription}
-        ogImageAlt={contactSeoData.ogImageAlt}
+        twitterTitle={contactSeoData.twitterTitle}
         twitterDescription={contactSeoData.twitterDescription}
-        twitterImageAlt={contactSeoData.twitterImageAlt}
         jsonLd={contactSeoData.jsonLd}
       />
       <Navbar />

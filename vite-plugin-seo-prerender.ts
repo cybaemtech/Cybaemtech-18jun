@@ -1,6 +1,17 @@
 import type { Plugin } from "vite";
 import fs from "fs";
 import path from "path";
+import { homeSeoData } from "./src/data/seo/homeSeo";
+import { aboutSeoData } from "./src/data/seo/aboutSeo";
+import { contactSeoData } from "./src/data/seo/contactSeo";
+import { lifeAtCybaemtechSeoData } from "./src/data/seo/lifeAtCybaemtechSeo";
+import { blogSeoData } from "./src/data/seo/blogSeo";
+import { webSystemsSeoData } from "./src/data/seo/webSystemsSeo";
+import { managedITSeoData } from "./src/data/seo/managedITSeo";
+import { itAugmentationSeoData } from "./src/data/seo/itAugmentationSeo";
+import { digitalMarketingSeoData } from "./src/data/seo/digitalMarketingSeo";
+import { enterpriseSoftwareSeoData } from "./src/data/seo/enterpriseSoftwareSeo";
+import { itInfrastructureServicesSeoData } from "./src/data/seo/itInfrastructureServicesSeo";
 
 interface RouteMeta {
   title: string;
@@ -17,7 +28,7 @@ interface RouteMeta {
 }
 
 const BASE_URL = "https://cybaemtech.com";
-const OG_IMAGE = "https://cybaemtech.com/assets/cybaem-logo-C5lgmAgK.png";
+const OG_IMAGE = "https://cybaemtech.com/images/cybaem-logo.png";
 const AUTHOR = "Cybaem Tech Pvt Ltd";
 const THEME_COLOR = "#1f5b8f";
 const ROBOTS = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
@@ -124,77 +135,11 @@ const webpage = (url: string, name: string, desc: string, id?: string) => ({
 
 const routes: Record<string, RouteMeta> = {
   "/": {
-    title: "Cybaem Tech | IT, Security & Marketing Services",
-    description: "Cybaem Tech Pvt Ltd delivers managed IT services, software development, cyber security, IT support, website development and digital marketing solutions across Pune, Mumbai, Bangalore and India.",
-    canonical: "/",
-    keywords: "IT services company Pune, managed IT services India, software development company Pune Mumbai Bangalore, IT staff augmentation, cyber security services India, remote IT support, website development company, custom website development, eCommerce development, digital marketing services, SEO company Pune, cloud computing solutions India, IT infrastructure management, manufacturing ERP, pharma compliance software",
-    ogTitle: "Cybaem Tech Pvt Ltd | IT Services & Software Company in Pune",
-    ogDescription: "Managed IT services, software development, cyber security, website development and digital marketing solutions for business growth.",
-    ogImageAlt: "Cybaem Tech Pvt Ltd logo",
-    twitterTitle: "Cybaem Tech Pvt Ltd | IT Services & Software Company in Pune",
-    twitterDescription: "Scale with managed IT, development, cyber security and digital growth solutions from Cybaem Tech.",
-    twitterImageAlt: "Cybaem Tech Pvt Ltd logo",
-    jsonLd: [
-      org(),
-      { ...profService(), priceRange: "$$" },
-      website,
-      {
-        "@context": "https://schema.org", "@type": "WebPage", "@id": `${BASE_URL}/#webpage`,
-        url: `${BASE_URL}/`,
-        name: "IT Services Company in Pune | Cybaem Tech Pvt Ltd",
-        description: "Cybaem Tech provides managed IT services, software development, cyber security, IT support, website development, eCommerce development and digital marketing services.",
-        isPartOf: { "@id": `${BASE_URL}/#website` },
-        about: { "@id": `${BASE_URL}/#organization` },
-        primaryImageOfPage: { "@type": "ImageObject", url: OG_IMAGE },
-      },
-      {
-        "@context": "https://schema.org", "@type": "Service", "@id": `${BASE_URL}/#services`,
-        name: "IT and Digital Services",
-        provider: { "@id": `${BASE_URL}/#organization` },
-        areaServed: "India",
-        hasOfferCatalog: {
-          "@type": "OfferCatalog", name: "Cybaem Tech Services",
-          itemListElement: [
-            "Managed IT Services", "Software Development Services", "IT Staff Augmentation",
-            "Cyber Security Services", "Remote IT Support", "IT Support Services",
-            "Website Development", "Custom Website Development", "eCommerce Development",
-            "Digital Marketing Services",
-          ].map((n) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: n } })),
-        },
-      },
-      faq([
-        { q: "What services does Cybaem Tech provide?", a: "Cybaem Tech provides managed IT services, software development, IT staff augmentation, cyber security, remote IT support, website development, eCommerce development and digital marketing services." },
-        { q: "Where is Cybaem Tech located?", a: "Cybaem Tech Pvt Ltd is located at Suratwala Mark Plazzo, Hinjawadi, Pune, Maharashtra 411057, India." },
-        { q: "Do you offer digital marketing and website development services?", a: "Yes, Cybaem Tech offers digital marketing, SEO, website development, custom website development and eCommerce development services." },
-        { q: "Do you provide managed IT and cyber security services?", a: "Yes, Cybaem Tech provides managed IT services, remote IT support, cyber security and infrastructure support for businesses." },
-      ], `${BASE_URL}/#faq`),
-    ],
+    ...homeSeoData,
   },
 
   "/about": {
-    title: "About Cybaem Tech Pvt Ltd | IT Services Company in Pune",
-    description: "Learn about Cybaem Tech Pvt Ltd, a Pune-based IT services company founded in 2020, delivering software development, IT infrastructure, cloud, security and digital growth solutions.",
-    canonical: "/about",
-    keywords: "about Cybaem Tech, Cybaem Tech Pvt Ltd, IT services company Pune, software development company Pune, cloud computing solutions India, IT infrastructure management company, cyber security services Pune, managed IT services company India, digital marketing company Pune",
-    ogDescription: "Know Cybaem Tech Pvt Ltd, a global technology solutions company offering IT infrastructure, software development, cloud, security and digital growth services.",
-    ogImageAlt: "Cybaem Tech Pvt Ltd - IT services company in Pune",
-    twitterDescription: "Cybaem Tech Pvt Ltd delivers software, cloud, IT infrastructure, security and digital growth solutions for modern businesses.",
-    jsonLd: [
-      org("Cybaem Tech Pvt. Ltd. is a premier global technology solutions company specializing in IT infrastructure management, software development, cloud computing, cyber security, managed IT services and digital marketing solutions."),
-      profService(`${BASE_URL}/about#localbusiness`),
-      {
-        "@context": "https://schema.org", "@type": "AboutPage", "@id": `${BASE_URL}/about#aboutpage`,
-        url: `${BASE_URL}/about`,
-        name: "About Cybaem Tech Pvt Ltd",
-        description: "Cybaem Tech Pvt Ltd is a global IT services company founded in 2020 providing software, cloud, infrastructure and digital solutions.",
-        mainEntity: { "@id": `${BASE_URL}/#organization` },
-      },
-      faq([
-        { q: "What does Cybaem Tech do?", a: "Cybaem Tech provides IT infrastructure management, software development, cloud computing, cyber security, managed IT services and digital marketing solutions." },
-        { q: "Where is Cybaem Tech located?", a: "Cybaem Tech Pvt Ltd is located in Hinjawadi, Pune, Maharashtra, India." },
-        { q: "Who founded Cybaem Tech?", a: "Cybaem Tech was founded in 2020 by Rohan Bhosale." },
-      ], `${BASE_URL}/about#faq`),
-    ],
+    ...aboutSeoData,
   },
 
   "/approach": {
@@ -242,59 +187,21 @@ const routes: Record<string, RouteMeta> = {
     ],
   },
 
-  "/contact": {
-    title: "Contact Cybaem Tech | IT Services Company in Pune",
-    description: "Contact Cybaem Tech Pvt Ltd in Pune for managed IT services, software development, cyber security, website development and digital marketing solutions.",
-    canonical: "/contact",
-    keywords: "contact Cybaem Tech, IT company contact Pune, software development company Pune contact, managed IT services Pune, cyber security company Pune contact, website development company Pune, digital marketing agency Pune, IT support company Pune",
-    ogDescription: "Connect with Cybaem Tech for software development, managed IT, cyber security, website development and digital marketing solutions.",
-    ogImageAlt: "Cybaem Tech contact page",
-    twitterDescription: "Talk to Cybaem Tech for managed IT, software, cyber security and digital growth solutions.",
-    twitterImageAlt: "Cybaem Tech contact page",
-    jsonLd: [
-      {
-        ...org("Cybaem Tech Pvt. Ltd. is a global technology solutions company specializing in managed IT services, software development, cloud computing, cyber security, website development and digital marketing solutions."),
-        contactPoint: [
-          { "@type": "ContactPoint", contactType: "sales", telephone: "+91-9028541383", email: "sales@cybaemtech.com", areaServed: "IN", availableLanguage: ["en"] },
-          { "@type": "ContactPoint", contactType: "business", telephone: "+91-2069010200", areaServed: "IN", availableLanguage: ["en"] },
-          { "@type": "ContactPoint", contactType: "customer support", telephone: "+91-8484815905", areaServed: "IN", availableLanguage: ["en"] },
-        ],
-      },
-      { ...profService(`${BASE_URL}/contact#localbusiness`), priceRange: "$$" },
-      website,
-      {
-        "@context": "https://schema.org", "@type": "ContactPage", "@id": `${BASE_URL}/contact#contactpage`,
-        url: `${BASE_URL}/contact`, name: "Contact Cybaem Tech",
-        description: "Contact Cybaem Tech Pvt Ltd for software development, managed IT services, cyber security, website development and digital marketing solutions.",
-        mainEntity: { "@id": `${BASE_URL}/#organization` },
-      },
-      {
-        "@context": "https://schema.org", "@type": "WebPage", "@id": `${BASE_URL}/contact#webpage`,
-        url: `${BASE_URL}/contact`,
-        name: "Contact Cybaem Tech | IT Services Company in Pune",
-        description: "Reach Cybaem Tech in Pune for IT services, software development, cloud, cyber security, website development and digital marketing solutions.",
-        isPartOf: { "@id": `${BASE_URL}/#website` },
-        about: { "@id": `${BASE_URL}/#organization` },
-        primaryImageOfPage: { "@type": "ImageObject", url: OG_IMAGE },
-      },
-      {
-        "@context": "https://schema.org", "@type": "BreadcrumbList", "@id": `${BASE_URL}/contact#breadcrumb`,
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: `${BASE_URL}/` },
-          { "@type": "ListItem", position: 2, name: "Contact", item: `${BASE_URL}/contact` },
-        ],
-      },
-      faq([
-        { q: "What services does Cybaem Tech provide?", a: "Cybaem Tech provides managed IT services, software development, cyber security, IT support, website development, eCommerce development and digital marketing solutions." },
-        { q: "How quickly will Cybaem Tech respond?", a: "Cybaem Tech's senior team typically responds within 24 hours to business inquiries submitted through the contact page." },
-        { q: "Do you offer a free initial consultation?", a: "Yes, Cybaem Tech offers an initial consultation to understand your requirements and recommend the right technology solution." },
-        { q: "Can you sign an NDA before we share details?", a: "Yes, Cybaem Tech can sign an NDA before project discussions to ensure confidentiality and secure collaboration." },
-        { q: "What engagement models do you support?", a: "Cybaem Tech supports flexible engagement models including project-based delivery, managed services, dedicated teams and staff augmentation." },
-        { q: "Do you provide ongoing support after project completion?", a: "Yes, Cybaem Tech provides ongoing support, maintenance and managed service options after project delivery." },
-        { q: "What industries do you specialize in?", a: "Cybaem Tech serves startups, SMEs and enterprises across multiple industries with software, cloud, IT infrastructure and digital growth solutions." },
-      ], `${BASE_URL}/contact#faq`),
-    ],
-  },
+  "/contact": { ...contactSeoData },
+  "/life-at-cybaemtech": { ...lifeAtCybaemtechSeoData },
+  "/blog": { ...blogSeoData },
+  "/solutions/web-systems": { ...webSystemsSeoData },
+  "/solutions/managed-it": { ...managedITSeoData },
+  "/solutions/it-augmentation": { ...itAugmentationSeoData },
+  "/solutions/digital-marketing": { ...digitalMarketingSeoData },
+  "/solutions/enterprise-software": { ...enterpriseSoftwareSeoData },
+  "/solutions/it-infrastructure-services": { ...itInfrastructureServicesSeoData },
+
+  "/approach": { ...lifeAtCybaemtechSeoData, canonical: "/approach" },
+  "/solutions/it-staff-augmentation": { ...itAugmentationSeoData, canonical: "/solutions/it-staff-augmentation" },
+  "/solutions/digital-revenue-growth": { ...digitalMarketingSeoData, canonical: "/solutions/digital-revenue-growth" },
+  "/solutions/managed-it-cloud-security": { ...managedITSeoData, canonical: "/solutions/managed-it-cloud-security" },
+  "/solutions/it-infrastructure": { ...itInfrastructureServicesSeoData, canonical: "/solutions/it-infrastructure" },
 
   "/solutions/enterprise-software": {
     title: "Enterprise Software Development Company in Pune | Cybaem Tech",
@@ -562,7 +469,7 @@ const routes: Record<string, RouteMeta> = {
 /* ── HTML generation helpers ── */
 
 function buildMetaTags(meta: RouteMeta): string {
-  const fullCanonical = `${BASE_URL}${meta.canonical}`;
+  const fullCanonical = meta.canonical.startsWith("http") ? meta.canonical : `${BASE_URL}${meta.canonical}`;
   const lines: string[] = [];
 
   lines.push(`    <title>${meta.title}</title>`);

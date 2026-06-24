@@ -1,11 +1,17 @@
 /approach /life-at-cybaemtech 301
+/blog /blog/index.html 200
+/resources /resources/index.html 200
 /about /about/index.html 200
 /life-at-cybaemtech /life-at-cybaemtech/index.html 200
 /contact /contact/index.html 200
 /solutions/enterprise-software /solutions/enterprise-software/index.html 200
 /solutions/web-systems /solutions/web-systems/index.html 200
 /solutions/it-staff-augmentation /solutions/it-staff-augmentation/index.html 200
+/solutions/it-augmentation /solutions/it-augmentation/index.html 200
 /solutions/managed-it /solutions/managed-it/index.html 200
+/solutions/managed-it-cloud-security /solutions/managed-it-cloud-security/index.html 200
 /solutions/digital-revenue-growth /solutions/digital-revenue-growth/index.html 200
+/solutions/digital-marketing /solutions/digital-marketing/index.html 200
+/solutions/it-infrastructure-services /solutions/it-infrastructure-services/index.html 200
 /portfolio /portfolio/index.html 200
 /* /index.html 200

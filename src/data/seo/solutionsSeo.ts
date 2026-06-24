@@ -49,7 +49,7 @@ const webpageSchema = (slug: string, name: string, desc: string): Record<string,
   description: desc,
   isPartOf: { "@id": "https://cybaemtech.com/#website" },
   about: { "@id": "https://cybaemtech.com/#organization" },
-  primaryImageOfPage: { "@type": "ImageObject", url: "https://cybaemtech.com/assets/cybaem-logo-C5lgmAgK.png" },
+  primaryImageOfPage: { "@type": "ImageObject", url: "https://cybaemtech.com/images/cybaem-logo.png" },
 });
 
 export const solutionsSeoData: Record<string, SolutionSeo> = {
@@ -230,7 +230,7 @@ export const solutionsSeoData: Record<string, SolutionSeo> = {
     twitterTitle: "Managed IT & Cloud Security Services | 24/7 Monitoring",
     twitterDescription: "Protect your infrastructure with 24/7 NOC monitoring, Zero Trust security, and cloud-native protection solutions.",
     jsonLdSchemas: [
-      { "@context": "https://schema.org", "@type": "Organization", "@id": "https://cybaemtech.com/#organization", name: "Cybaem Tech Pvt. Ltd.", url: "https://cybaemtech.com/", logo: "https://cybaemtech.com/assets/cybaem-logo-C5lgmAgK.png", email: "sales@cybaemtech.com", telephone: "+91-9028541383", description: "Cybaem Tech delivers managed IT services, cloud security, NOC monitoring, Zero Trust architecture and enterprise infrastructure solutions." },
+      { "@context": "https://schema.org", "@type": "Organization", "@id": "https://cybaemtech.com/#organization", name: "Cybaem Tech Pvt. Ltd.", url: "https://cybaemtech.com/", logo: "https://cybaemtech.com/images/cybaem-logo.png", email: "sales@cybaemtech.com", telephone: "+91-9028541383", description: "Cybaem Tech delivers managed IT services, cloud security, NOC monitoring, Zero Trust architecture and enterprise infrastructure solutions." },
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
@@ -283,7 +283,7 @@ export const solutionsSeoData: Record<string, SolutionSeo> = {
     twitterDescription: "Increase traffic, generate quality leads, improve conversions, and grow revenue with Cybaem Tech's digital growth strategies.",
     twitterImageAlt: "Digital Revenue Growth Solutions",
     jsonLdSchemas: [
-      { "@context": "https://schema.org", "@type": "Organization", "@id": "https://cybaemtech.com/#organization", name: "Cybaem Tech Pvt. Ltd.", url: "https://cybaemtech.com/", logo: "https://cybaemtech.com/assets/cybaem-logo-C5lgmAgK.png", email: "sales@cybaemtech.com", telephone: "+91-9028541383", description: "Cybaem Tech is a performance-driven digital growth partner offering SEO, paid ads, CRO, LinkedIn marketing, and marketing automation solutions." },
+      { "@context": "https://schema.org", "@type": "Organization", "@id": "https://cybaemtech.com/#organization", name: "Cybaem Tech Pvt. Ltd.", url: "https://cybaemtech.com/", logo: "https://cybaemtech.com/images/cybaem-logo.png", email: "sales@cybaemtech.com", telephone: "+91-9028541383", description: "Cybaem Tech is a performance-driven digital growth partner offering SEO, paid ads, CRO, LinkedIn marketing, and marketing automation solutions." },
       {
         "@context": "https://schema.org",
         "@type": "WebPage",

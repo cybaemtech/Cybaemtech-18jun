@@ -74,9 +74,9 @@ const BlogPost = () => {
                 excerpt: row.excerpt,
                 content: row.excerpt
                   ? row.excerpt
-                      .replace(/\{hashtag\|\\#\|([^}]+)\}/g, "#$1")
-                      .replace(/\n/g, "<br/><br/>")
-                      .trim()
+                    .replace(/\{hashtag\|\\#\|([^}]+)\}/g, "#$1")
+                    .replace(/\n/g, "<br/><br/>")
+                    .trim()
                   : "",
                 cover_image: row.cover_image,
                 author: row.author,
@@ -204,7 +204,7 @@ const BlogPost = () => {
               name: "Cybaem Tech Pvt. Ltd.",
               logo: {
                 "@type": "ImageObject",
-                url: "https://cybaemtech.com/assets/cybaem-logo-C5lgmAgK.png",
+                url: "https://cybaemtech.com/images/cybaem-logo.png",
               },
             },
             mainEntityOfPage: {

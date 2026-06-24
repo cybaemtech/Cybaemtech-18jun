@@ -12,20 +12,20 @@ import Footer from "@/components/Footer";
 import { containerVariants, itemVariants } from "@/lib/animations";
 import { Link } from "react-router-dom";
 import SEOHead from "@/components/SEOHead";
-import { approachSeoData } from "@/data/seo/approachSeo";
+import { lifeAtCybaemtechSeoData } from "@/data/seo/lifeAtCybaemtechSeo";
 
 const useSEO = () => {
   return (
     <SEOHead
-      title={approachSeoData.title}
-      description={approachSeoData.description}
-      canonical={approachSeoData.canonical}
-      keywords={approachSeoData.keywords}
-      ogDescription={approachSeoData.ogDescription}
-      ogImageAlt={approachSeoData.ogImageAlt}
-      twitterDescription={approachSeoData.twitterDescription}
-      twitterImageAlt={approachSeoData.twitterImageAlt}
-      jsonLd={approachSeoData.jsonLd}
+      title={lifeAtCybaemtechSeoData.title}
+      description={lifeAtCybaemtechSeoData.description}
+      canonical={lifeAtCybaemtechSeoData.canonical}
+      keywords={lifeAtCybaemtechSeoData.keywords}
+      ogTitle={lifeAtCybaemtechSeoData.ogTitle}
+      ogDescription={lifeAtCybaemtechSeoData.ogDescription}
+      twitterTitle={lifeAtCybaemtechSeoData.twitterTitle}
+      twitterDescription={lifeAtCybaemtechSeoData.twitterDescription}
+      jsonLd={lifeAtCybaemtechSeoData.jsonLd}
     />
   );
 };
@@ -478,22 +478,44 @@ const CelebrationsSection = () => {
         { icon: Utensils, value: "1", label: "Amazing Day" },
         { icon: Smile, value: "100%", label: "Good Vibes" },
       ],
-      image: "/lifeatcybaemtech/TeamLunch.jpeg"
+      image: "/lifeatcybaemtech/TeamLunch.jpg"
     },
     {
-      title: "Foundation Day",
-      date: "10 Aug, 2024",
+      title: "Foundation Day 2024",
+      date: "15 June, 2024",
       desc: "Celebrating our milestones and the incredible journey so far! ✨",
       stats: [
         { icon: Users, value: "100+", label: "Cybaemites" },
         { icon: Award, value: "4", label: "Years Strong" },
         { icon: Smile, value: "100%", label: "Celebration" },
       ],
-      image: "/lifeatcybaemtech/Foundationday.JPG"
+      image: "/lifeatcybaemtech/Foundationday.jpg"
+    },
+    {
+      title: "Foundation Day 2026",
+      date: "15 June, 2026",
+      desc: "Celebrating our milestones and the incredible journey so far! ✨",
+      stats: [
+        { icon: Users, value: "150+", label: "Cybaemites" },
+        { icon: Award, value: "6", label: "Years Strong" },
+        { icon: Smile, value: "100%", label: "Celebration" },
+      ],
+      image: "/lifeatcybaemtech/Foundationday2026.jpg"
+    },
+    {
+      title: "Team Outing",
+      date: "21 June, 2026",
+      desc: "Unwinding, relishing, and making memories together! 🌲",
+      stats: [
+        { icon: Users, value: "150+", label: "Cybaemites" },
+        { icon: Award, value: "1", label: "Day of Fun" },
+        { icon: Smile, value: "100%", label: "Good Times" },
+      ],
+      image: "/lifeatcybaemtech/TeamOuting.jpg"
     },
     {
       title: "Diwali Celebration",
-      date: "12 Nov, 2024",
+      date: "12 Nov, 2025",
       desc: "Lighting up the workspace with joy, colors, and festive vibes! 🪔",
       stats: [
         { icon: Users, value: "80+", label: "Cybaemites" },
@@ -511,16 +533,27 @@ const CelebrationsSection = () => {
         { icon: Heart, value: "1", label: "Special Day" },
         { icon: Smile, value: "100%", label: "Empowerment" },
       ],
-      image: "/lifeatcybaemtech/Womensdaycelebration.jpeg"
+      image: "/lifeatcybaemtech/Womensdaycelebration.jpg"
     },
     {
-      title: "Trip to Point",
-      date: "22 Jan, 2025",
-      desc: "A refreshing getaway full of fun, adventure, and team bonding! ⛰️",
+      title: "Team Lunch",
+      date: "15 May, 2026",
+      desc: "Good food, great conversations and even better togetherness! 💙",
       stats: [
-        { icon: Users, value: "50+", label: "Cybaemites" },
+        { icon: Users, value: "150+", label: "Cybaemites" },
+        { icon: Utensils, value: "1", label: "Amazing Day" },
+        { icon: Smile, value: "100%", label: "Good Vibes" },
+      ],
+      image: "/lifeatcybaemtech/TeamLunch.jpg"
+    },
+    {
+      title: "Celebration at Point",
+      date: "22 Jan, 2026",
+      desc: "Great conversations and even better togetherness! 💙",
+      stats: [
+        { icon: Users, value: "150+", label: "Cybaemites" },
         { icon: Globe, value: "1", label: "Destination" },
-        { icon: Smile, value: "100%", label: "Adventure" },
+        { icon: Smile, value: "100%", label: "Good Times" },
       ],
       image: "/lifeatcybaemtech/celebrationatpoint.jpg"
     }

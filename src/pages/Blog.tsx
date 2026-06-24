@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { useBlogData } from "@/hooks/useBlogData";
 import { cn } from "@/lib/utils";
+import { blogSeoData } from "@/data/seo/blogSeo";
 
 const Blog = () => {
   const { posts, loading, error } = useBlogData();
@@ -31,22 +32,15 @@ const Blog = () => {
   return (
     <>
       <SEOHead
-        title="IT Services Blog | Cybaem Tech - Enterprise Insights & Strategies"
-        description="Read expert insights on enterprise IT services, software development, managed IT security, web systems, and digital growth strategies from Cybaem Tech."
-        canonical="/blog"
-        keywords="IT services blog, enterprise software insights, managed IT services, web development, digital growth strategies, cybersecurity tips"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "Blog",
-          name: "Cybaem Tech IT Services Blog",
-          description: "Expert insights on IT services, enterprise software, managed IT, and digital growth.",
-          url: "https://cybaemtech.com/blog",
-          publisher: {
-            "@type": "Organization",
-            name: "Cybaem Tech Pvt Ltd",
-            url: "https://cybaemtech.com"
-          }
-        }}
+        title={blogSeoData.title}
+        description={blogSeoData.description}
+        canonical={blogSeoData.canonical}
+        keywords={blogSeoData.keywords}
+        ogTitle={blogSeoData.ogTitle}
+        ogDescription={blogSeoData.ogDescription}
+        twitterTitle={blogSeoData.twitterTitle}
+        twitterDescription={blogSeoData.twitterDescription}
+        jsonLd={blogSeoData.jsonLd}
       />
       <Navbar />
 

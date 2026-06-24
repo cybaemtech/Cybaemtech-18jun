@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import SEOHead from "@/components/SEOHead";
-import { solutionsSeoData } from "@/data/seo/solutionsSeo";
+import { webSystemsSeoData } from "@/data/seo/webSystemsSeo";
 import { ArrowUpRight, Globe, ShoppingCart, Palette, MousePointerClick, PenTool, Layers, BookOpen, ArrowRight, Star, Mail, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -435,15 +435,15 @@ const WebSystems = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title={solutionsSeoData["web-systems"].metaTitle}
-        description={solutionsSeoData["web-systems"].metaDescription}
-        canonical="/solutions/web-systems"
-        keywords={solutionsSeoData["web-systems"].keywords}
-        ogDescription={solutionsSeoData["web-systems"].ogDescription}
-        ogImageAlt={solutionsSeoData["web-systems"].ogImageAlt}
-        twitterDescription={solutionsSeoData["web-systems"].twitterDescription}
-        twitterImageAlt={solutionsSeoData["web-systems"].twitterImageAlt}
-        jsonLd={solutionsSeoData["web-systems"].jsonLdSchemas}
+        title={webSystemsSeoData.title}
+        description={webSystemsSeoData.description}
+        canonical={webSystemsSeoData.canonical}
+        keywords={webSystemsSeoData.keywords}
+        ogTitle={webSystemsSeoData.ogTitle}
+        ogDescription={webSystemsSeoData.ogDescription}
+        twitterTitle={webSystemsSeoData.twitterTitle}
+        twitterDescription={webSystemsSeoData.twitterDescription}
+        jsonLd={webSystemsSeoData.jsonLd}
       />
       <Navbar />
       <Hero />

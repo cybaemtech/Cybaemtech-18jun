@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import SEOHead from "@/components/SEOHead";
-import { solutionsSeoData } from "@/data/seo/solutionsSeo";
+import { itAugmentationSeoData } from "@/data/seo/itAugmentationSeo";
 import {
   ArrowUpRight, ArrowRight, Users, Monitor, Briefcase, Headphones, Server, FileText,
   Code, Cloud, Shield, TestTube, UserSearch, Building2, Heart, ShoppingBag, Truck,
@@ -638,15 +638,15 @@ const ITStaffAugmentation = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title={solutionsSeoData["it-staff-augmentation"].metaTitle}
-        description={solutionsSeoData["it-staff-augmentation"].metaDescription}
-        canonical="/solutions/it-staff-augmentation"
-        keywords={solutionsSeoData["it-staff-augmentation"].keywords}
-        ogDescription={solutionsSeoData["it-staff-augmentation"].ogDescription}
-        ogImageAlt={solutionsSeoData["it-staff-augmentation"].ogImageAlt}
-        twitterDescription={solutionsSeoData["it-staff-augmentation"].twitterDescription}
-        twitterImageAlt={solutionsSeoData["it-staff-augmentation"].twitterImageAlt}
-        jsonLd={solutionsSeoData["it-staff-augmentation"].jsonLdSchemas}
+        title={itAugmentationSeoData.title}
+        description={itAugmentationSeoData.description}
+        canonical={itAugmentationSeoData.canonical}
+        keywords={itAugmentationSeoData.keywords}
+        ogTitle={itAugmentationSeoData.ogTitle}
+        ogDescription={itAugmentationSeoData.ogDescription}
+        twitterTitle={itAugmentationSeoData.twitterTitle}
+        twitterDescription={itAugmentationSeoData.twitterDescription}
+        jsonLd={itAugmentationSeoData.jsonLd}
       />
       <Navbar />
       <Hero />

@@ -1,0 +1,191 @@
+export const digitalGrowthSeoData = {
+  title: "Digital Marketing, SEO & B2B Growth Services Pune | Cybaem Tech",
+  description: "Cybaem Tech offers ROI-focused digital marketing in Pune. Dominate organic search with advanced SEO & CRO, turn digital presence into B2B leads, and scale executive thought leadership with our premium LinkedIn strategies.",
+  canonical: "https://www.cybaemtech.com/digital-marketing",
+  keywords: "digital marketing services Pune, SEO services Pune, B2B digital growth, conversion rate optimization Pune, CRO services, LinkedIn executive branding, B2B lead generation agency, organic search dominance, corporate thought leadership, executive presence marketing, social media marketing Pune, PPC agency Pune, Google Ads management, performance marketing, Cybaem Tech digital marketing",
+  ogTitle: "Digital Marketing & B2B Growth Services in Pune | Cybaem Tech",
+  ogDescription: "Result-driven SEO, CRO, social media, PPC, and executive LinkedIn strategies from Cybaem Tech to turn your online presence into revenue and qualified B2B leads.",
+  twitterTitle: "Digital Marketing & B2B Growth Services in Pune | Cybaem Tech",
+  twitterDescription: "Dominate search results, optimize conversion funnels, and scale executive thought leadership to grow your revenue online.",
+  jsonLd: [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Cybaem Tech",
+      "url": "https://www.cybaemtech.com/",
+      "logo": "https://www.cybaemtech.com/images/cybaem-logo.png",
+      "sameAs": [
+        "https://www.linkedin.com/company/cybaemtech",
+        "https://x.com/Cybaem_Tech",
+        "https://www.facebook.com/cybaemtech",
+        "https://www.instagram.com/cybaemtech",
+        "https://www.youtube.com/@cybaemtech"
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+91-9028541383",
+          "contactType": "customer support",
+          "areaServed": "IN",
+          "availableLanguage": "English"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Cybaem Tech",
+      "url": "https://www.cybaemtech.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.cybaemtech.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Cybaem Tech Digital Marketing Services",
+      "image": "https://www.cybaemtech.com/images/cybaem-logo.png",
+      "url": "https://www.cybaemtech.com/digital-marketing",
+      "telephone": "+91-9028541383",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "304, Suratwala Mark Plazzo, Hinjewadi",
+        "addressLocality": "Pune",
+        "addressRegion": "Maharashtra",
+        "postalCode": "411057",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "18.5900",
+        "longitude": "73.7360"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Pune"
+        },
+        {
+          "@type": "Country",
+          "name": "India"
+        }
+      ],
+      "serviceType": "Digital Marketing & B2B Growth Engine",
+      "services": [
+        "Digital Growth & B2B Lead Infrastructure",
+        "Search Engine Optimization (SEO) & Conversions (CRO)",
+        "LinkedIn Strategy & Executive Thought Leadership",
+        "Social Media Marketing & Management",
+        "Pay-Per-Click (PPC) & Google Ads",
+        "Content Marketing & Copywriting",
+        "Branding & Online Reputation Management"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "B2B SEO & Digital Growth Solutions",
+      "provider": {
+        "@type": "Organization",
+        "name": "Cybaem Tech"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "SEO & Performance Growth Engine",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Digital Growth Infrastructure",
+              "description": "Turning basic corporate presence into automated B2B lead generation ecosystems designed for revenue optimization."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "SEO & CRO Alignment",
+              "description": "Dominating organic search landscapes while aggressively optimizing layouts for high-intent client conversions."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "LinkedIn Executive Strategy",
+              "description": "Scaling executive thought leadership to secure industry placement, network authority, and enterprise trust."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.cybaemtech.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Digital Marketing",
+          "item": "https://www.cybaemtech.com/digital-marketing"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What digital marketing services does Cybaem Tech offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cybaem Tech offers end-to-end digital marketing services including B2B Digital Growth pipelines, Search Engine Optimization (SEO) combined with Conversion Rate Optimization (CRO), LinkedIn executive thought leadership, social media management, Google Ads (PPC), content marketing, and deep marketing analytics."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Cybaem Tech turn digital presence into B2B leads?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Through our Digital Growth Framework, we restructure traditional brand positioning into performance-driven marketing funnels. By targeting exact enterprise consumer intent, we systematically build pipelines that turn casual company traffic into consistent, high-value B2B inquiries."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Cybaem Tech's approach to SEO and CRO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We believe visibility means nothing without conversion. Our strategy is built around dominating organic search result blocks while simultaneously executing split-testing and interface optimizations (CRO). This ensures you capture maximum search share and transform that traffic directly into corporate revenue."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does your LinkedIn Strategy build Executive Thought Leadership?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our LinkedIn corporate management engine designs, refines, and scales executive content profiles at institutional scale. We cultivate industry trust, authoritative reach, and distinct market voice for your executive team, generating valuable warm inbound opportunities through native organic platform influence."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I get started with Cybaem Tech’s digital growth services?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can get started by filling out the contact form on the Cybaem Tech website, calling +91 9028541383, or emailing sales@cybaemtech.com. Our performance specialists will design a growth layout mapped explicitly to your company's revenue targets."
+          }
+        }
+      ]
+    }
+  ]
+};
