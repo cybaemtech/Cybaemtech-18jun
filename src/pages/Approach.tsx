@@ -44,7 +44,7 @@ const HeroSection = () => {
       <div className="absolute top-1/2 -left-40 w-[30rem] h-[30rem] bg-indigo-500 rounded-full mix-blend-screen filter blur-[100px] opacity-10 animate-blob animation-delay-2000 pointer-events-none"></div>
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        
+
         {/* === DESKTOP LAYOUT (Hidden on mobile) === */}
         <div className="hidden lg:grid lg:grid-cols-[5fr_7fr] gap-8 lg:gap-12 items-center">
           <motion.div
@@ -105,11 +105,11 @@ const HeroSection = () => {
 
         {/* === MOBILE LAYOUT (Hidden on desktop) === */}
         <div className="lg:hidden flex flex-col pt-4 pb-2">
-          
+
           {/* Header Text */}
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }} 
-            animate={{ opacity: 1, y: 0 }} 
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="mb-8"
           >
@@ -125,13 +125,13 @@ const HeroSection = () => {
               Innovate.<br />
               <div className="relative inline-block mt-0.5">
                 <span className="italic text-[#38bdf8] font-semibold pr-4">Grow Together.</span>
-                
+
                 {/* Underline Swoosh */}
                 <svg className="absolute -bottom-1.5 left-0 w-[90%] h-[6px]" viewBox="0 0 200 10" preserveAspectRatio="none">
                   <path d="M0,5 Q100,10 200,2" stroke="#1d4ed8" strokeWidth="2.5" fill="none" strokeLinecap="round" />
                   <path d="M10,8 Q100,12 180,4" stroke="#2563eb" strokeWidth="1" fill="none" opacity="0.6" />
                 </svg>
-                
+
                 {/* Paper plane graphics */}
                 <svg className="absolute -top-6 -right-6 w-[56px] h-[56px] text-[#38bdf8]/60" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M80,20 L35,45 L45,55 Z" strokeLinejoin="round" />
@@ -143,9 +143,9 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Video / Image Container */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }} 
-            animate={{ opacity: 1, scale: 1 }} 
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mb-8 relative"
           >
@@ -163,9 +163,9 @@ const HeroSection = () => {
                 <>
                   <img src="/lifeatcybaemtech/Foundationday.JPG" alt="Foundation Day Celebration" className="absolute inset-0 w-full h-full object-cover object-center" />
                   <div className="absolute inset-0 bg-black/10"></div>
-                  
+
                   {/* Play Button */}
-                  <div 
+                  <div
                     onClick={() => setIsPlayingMobile(true)}
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-105 transition-transform z-10"
                   >
@@ -184,15 +184,15 @@ const HeroSection = () => {
                 </>
               )}
             </div>
-            
+
             {/* Soft glow behind the video container */}
             <div className="absolute -inset-2 bg-blue-500/20 blur-xl -z-10 rounded-full opacity-50"></div>
           </motion.div>
 
           {/* Text Description */}
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }} 
-            animate={{ opacity: 1, y: 0 }} 
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-8"
           >
@@ -204,9 +204,9 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Buttons */}
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }} 
-            animate={{ opacity: 1, y: 0 }} 
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col gap-3.5"
           >
@@ -234,7 +234,7 @@ const HeroSection = () => {
               </div>
             </Link>
           </motion.div>
-          
+
         </div>
       </div>
     </section>
@@ -347,7 +347,7 @@ const PeopleSection = () => {
     },
     {
       name: "Akshay Nawle",
-      role: "Chief Technology Officer",
+      role: "Chief Technology AI Product Officer",
       quote: "Architecting next-generation technology solutions & leading innovation teams.",
       years: "15+",
       yearsLabel: "Years Experience",
@@ -382,7 +382,7 @@ const PeopleSection = () => {
     <section className="py-24 bg-background relative overflow-hidden">
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid lg:grid-cols-[1.5fr_2.5fr_1.5fr] gap-12 items-center">
-          
+
           {/* Left Text */}
           <div>
             <span className="text-xs font-bold tracking-[0.15em] text-primary uppercase mb-4 block">
@@ -404,8 +404,8 @@ const PeopleSection = () => {
           <div className="relative">
             {/* Background shape */}
             <div className="" />
-            
-            <motion.div 
+
+            <motion.div
               key={activeIndex}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -428,7 +428,7 @@ const PeopleSection = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Bottom Info Bar */}
               <div className="bg-white rounded-2xl p-5 mx-auto w-full relative z-20 shadow-xl border border-gray-100 flex items-center justify-between">
                 <div className="flex gap-8 md:gap-12 pl-4">
@@ -453,8 +453,8 @@ const PeopleSection = () => {
           {/* Right List */}
           <div className="flex flex-col pl-0 lg:pl-6">
             {people.map((p, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className={`flex items-center gap-5 py-5 border-b border-gray-100 last:border-0 cursor-pointer group ${activeIndex === i ? 'opacity-100' : 'opacity-60 hover:opacity-100'} transition-all`}
                 onClick={() => setActiveIndex(i)}
               >
@@ -675,11 +675,11 @@ const CelebrationsSection = () => {
                 className={`h-2.5 rounded-full transition-all duration-300 ${current === i ? 'w-8 bg-[#2563eb]' : 'w-2.5 bg-gray-200 hover:bg-gray-300'}`}
                 aria-label={`Go to slide ${i + 1}`}
               />
-            ))}
+            ))}y
           </div>
 
           {/* Bottom Banner */}
-          <div className="mt-12 bg-[#f8fafc] rounded-2xl border border-border p-6 flex flex-col md:flex-row items-center justify-between max-w-4xl mx-auto">
+          {/* <div className="mt-12 bg-[#f8fafc] rounded-2xl border border-border p-6 flex flex-col md:flex-row items-center justify-between max-w-4xl mx-auto">
             <div className="flex items-center gap-5 mb-4 md:mb-0">
               <div className="w-14 h-14 bg-[#2563eb] rounded-full flex items-center justify-center shrink-0">
                 <Sparkles size={24} className="text-white" />
@@ -692,7 +692,7 @@ const CelebrationsSection = () => {
             <button className="px-6 py-3 bg-white border border-[#2563eb] text-[#2563eb] rounded-full font-semibold text-sm hover:bg-blue-50 transition-colors flex items-center gap-2">
               <ImageIcon size={18} /> View All Moments
             </button>
-          </div>
+          </div> */}
 
         </div>
       </div>

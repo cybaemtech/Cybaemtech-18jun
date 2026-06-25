@@ -53,9 +53,9 @@ export const approachSeoData = {
         },
         {
           "@type": "Person", "@id": "https://cybaemtech.com/life-at-cybaemtech#akshay-navale",
-          name: "Akshay Navale", jobTitle: "Chief Technology Officer",
+          name: "Akshay Navale", jobTitle: "Chief Technology AI Product Officer",
           worksFor: { "@id": "https://cybaemtech.com/#organization" },
-          description: "Chief Technology Officer at Cybaem Tech with 15+ years of experience in AI strategy, product leadership, cybersecurity and cloud infrastructure.",
+          description: "Chief Technology AI Product Officer at Cybaem Tech with 15+ years of experience in AI strategy, product leadership, cybersecurity and cloud infrastructure.",
         },
         {
           "@type": "Person", "@id": "https://cybaemtech.com/life-at-cybaemtech#yash-bhalekar",

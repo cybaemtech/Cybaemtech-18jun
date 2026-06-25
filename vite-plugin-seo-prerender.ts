@@ -174,13 +174,13 @@ const routes: Record<string, RouteMeta> = {
         "@context": "https://schema.org",
         "@graph": [
           { "@type": "Person", "@id": `${BASE_URL}/approach#rohan-bhosale`, name: "Rohan Bhosale", jobTitle: "Founder & CEO", worksFor: { "@id": `${BASE_URL}/#organization` }, description: "Founder and CEO of Cybaem Tech with 18+ years of experience in global IT strategy and digital marketing." },
-          { "@type": "Person", "@id": `${BASE_URL}/approach#akshay-navale`, name: "Akshay Navale", jobTitle: "Chief Technology Officer", worksFor: { "@id": `${BASE_URL}/#organization` }, description: "Chief Technology Officer at Cybaem Tech with 15+ years of experience in AI strategy, product leadership, cybersecurity and cloud infrastructure." },
+          { "@type": "Person", "@id": `${BASE_URL}/approach#akshay-navale`, name: "Akshay Navale", jobTitle: "Chief Technology AI Product Officer", worksFor: { "@id": `${BASE_URL}/#organization` }, description: "Chief Technology AI Product Officer at Cybaem Tech with 15+ years of experience in AI strategy, product leadership, cybersecurity and cloud infrastructure." },
           { "@type": "Person", "@id": `${BASE_URL}/approach#yash-bhalekar`, name: "Yash Bhalekar", jobTitle: "Director", worksFor: { "@id": `${BASE_URL}/#organization` }, description: "Director at Cybaem Tech with 12+ years of experience in business development, fintech solutions, investment strategy and risk management." },
         ],
       },
       faq([
         { q: "What is Cybaem Tech's approach to technology solutions?", a: "Cybaem Tech follows a customer-centric, innovation-driven approach built on strong leadership, strategic partnerships, quality execution and scalable technology solutions." },
-        { q: "Who leads Cybaem Tech?", a: "Cybaem Tech is led by Rohan Bhosale, Founder and CEO, along with Akshay Navale, Chief Technology Officer, and Yash Bhalekar, Director." },
+        { q: "Who leads Cybaem Tech?", a: "Cybaem Tech is led by Rohan Bhosale, Founder and CEO, along with Akshay Navale, Chief Technology AI Product Officer, and Yash Bhalekar, Director." },
         { q: "What values define Cybaem Tech?", a: "Cybaem Tech is guided by innovation, collaboration, continuous learning, diversity and inclusion, excellence, work-life balance and customer-centric execution." },
         { q: "Why are partnerships important to Cybaem Tech?", a: "Strategic partnerships help Cybaem Tech deliver world-class technology solutions, expand capabilities and provide specialized expertise across the technology stack." },
       ], `${BASE_URL}/approach#faq`),
