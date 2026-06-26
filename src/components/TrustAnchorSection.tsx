@@ -109,7 +109,7 @@ const TrustAnchorSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="section-border py-16 lg:py-20 bg-card/30 relative overflow-hidden">
+    <section ref={ref} className="section-border py-20 lg:py-28 bg-card/30 relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
         backgroundSize: '60px 60px'

@@ -106,7 +106,7 @@ const SolutionsSection = () => {
   };
 
   return (
-    <section id="solutions" ref={sectionRef} className="py-24 lg:py-32 bg-background overflow-hidden">
+    <section id="solutions" ref={sectionRef} className="py-20 lg:py-28 bg-background overflow-hidden">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Header */}
         <motion.div

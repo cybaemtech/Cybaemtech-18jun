@@ -5,7 +5,8 @@ import {
   Flag, BarChart, Lightbulb, Globe,
   ArrowRight, Mouse, Plus,
   Target, Heart, Trophy, BookOpen, User,
-  ChevronLeft, ChevronRight, Calendar, Utensils, Smile, ImageIcon, Sparkles, PartyPopper, Linkedin
+  ChevronLeft, ChevronRight, Calendar, Utensils, Smile, ImageIcon, Sparkles, PartyPopper, Linkedin,
+  Shield, Handshake, CheckCircle
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -414,8 +415,8 @@ const PeopleSection = () => {
             >
               <div className="flex flex-col md:flex-row relative">
                 {/* Left: Image */}
-                <div className="w-full md:w-1/2 flex items-end justify-center">
-                  <img src={activePerson.image} alt={activePerson.name} className="w-full h-auto object-contain object-bottom relative z-10 scale-[1.35] origin-bottom drop-shadow-xl" />
+                <div className="w-full md:w-1/2 flex items-center justify-center mt-4 md:mt-0 p-4">
+                  <img src={activePerson.image} alt={activePerson.name} className="w-full h-auto object-cover relative z-10 rounded-tl-[4rem] rounded-br-[4rem] rounded-tr-none rounded-bl-none shadow-[0_0_25px_rgba(0,0,0,0.15)]" />
                 </div>
                 {/* Right: Info */}
                 <div className="w-full md:w-1/2 pt-10 pb-8 pl-4 pr-2 relative z-20 flex flex-col justify-center">
@@ -451,15 +452,15 @@ const PeopleSection = () => {
           </div>
 
           {/* Right List */}
-          <div className="flex flex-col pl-0 lg:pl-6">
+          <div className="hidden lg:flex flex-col pl-0 lg:pl-6">
             {people.map((p, i) => (
               <div
                 key={i}
                 className={`flex items-center gap-5 py-5 border-b border-gray-100 last:border-0 cursor-pointer group ${activeIndex === i ? 'opacity-100' : 'opacity-60 hover:opacity-100'} transition-all`}
                 onClick={() => setActiveIndex(i)}
               >
-                <div className={`w-16 h-16 rounded-full overflow-hidden flex items-end justify-center transition-colors ${activeIndex === i ? 'bg-primary/10' : 'bg-gray-50 group-hover:bg-primary/5'}`}>
-                  <img src={p.image} alt={p.name} className="w-[85%] h-auto object-contain object-bottom relative z-10" />
+                <div className={`w-16 h-16 rounded-tl-2xl rounded-br-2xl rounded-tr-none rounded-bl-none overflow-hidden shadow-[0_0_10px_rgba(0,0,0,0.1)] flex items-center justify-center transition-colors ${activeIndex === i ? 'bg-primary/10' : 'bg-gray-50 group-hover:bg-primary/5'}`}>
+                  <img src={p.image} alt={p.name} className="w-full h-full object-cover relative z-10" />
                 </div>
                 <div className="flex-1">
                   <h4 className="font-bold text-foreground text-sm mb-1">{p.name}</h4>
@@ -703,34 +704,34 @@ const CelebrationsSection = () => {
 /* --- CULTURE VALUES --- */
 const CultureSection = () => {
   const values = [
-    { title: "Innovation", icon: Rocket, color: "text-[#3b82f6]", bg: "bg-[#eff6ff]", border: "border-[#bfdbfe]", desc: "We embrace new ideas and technologies to create impact." },
-    { title: "Collaboration", icon: Users, color: "text-[#10b981]", bg: "bg-[#ecfdf5]", border: "border-[#a7f3d0]", desc: "We work together, support each other and win as one team." },
-    { title: "Learning", icon: BookOpen, color: "text-[#8b5cf6]", bg: "bg-[#f5f3ff]", border: "border-[#ddd6fe]", desc: "Continuous learning keeps us curious and future-ready." },
-    { title: "Ownership", icon: Target, color: "text-[#f97316]", bg: "bg-[#fff7ed]", border: "border-[#fed7aa]", desc: "We take ownership, deliver with pride and exceed expectations." },
-    { title: "Work-Life Balance", icon: Heart, color: "text-[#ef4444]", bg: "bg-[#fef2f2]", border: "border-[#fecaca]", desc: "We respect our time and value a healthy life balance." },
-    { title: "Recognition", icon: Trophy, color: "text-[#eab308]", bg: "bg-[#fefce8]", border: "border-[#fef08a]", desc: "We celebrate wins and appreciate every contribution." },
+    { title: "Security First", icon: Shield, color: "text-[#60a5fa]", bg: "bg-[#eff6ff]", desc: "We prioritize security in every solution we deliver." },
+    { title: "Global Perspective", icon: Globe, color: "text-[#a855f7]", bg: "bg-[#f5f3ff]", desc: "Bringing global expertise to local challenges." },
+    { title: "Innovation", icon: Lightbulb, color: "text-[#34d399]", bg: "bg-[#ecfdf5]", desc: "Embracing cutting-edge technology for business." },
+    { title: "Reliability", icon: CheckCircle, color: "text-[#fb923c]", bg: "bg-[#fff7ed]", desc: "Consistent, reliable solutions for business continuity." },
+    { title: "Client Partnership", icon: Handshake, color: "text-[#f472b6]", bg: "bg-[#fdf2f8]", desc: "We build lasting relationships based on trust." },
+    { title: "Excellence", icon: Star, color: "text-[#2dd4bf]", bg: "bg-[#f0fdfa]", desc: "Delivering high-quality solutions that exceed expectations." },
   ];
 
   return (
     <section className="py-24">
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="mb-16">
-          <span className="text-xs font-bold tracking-widest text-[#2563eb] uppercase mb-3 block">
-            Our Culture
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="mb-10 lg:mb-16 text-center lg:text-left">
+          <span className="text-[10px] sm:text-xs font-bold tracking-widest text-[#0052cc] uppercase mb-3 block">
+            WHAT DRIVES US
           </span>
-          <h2 className="font-display text-4xl font-bold text-foreground">
-            Values That Drive Us
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground">
+            Our Core <span className="text-[#0052cc] italic">Values.</span>
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-6">
           {values.map((v, i) => (
-            <div key={i} className={`rounded-3xl p-6 border ${v.border} hover:-translate-y-1.5 transition-transform bg-white shadow-sm flex flex-col items-center text-center`}>
-              <div className={`w-16 h-16 rounded-2xl ${v.bg} flex items-center justify-center mb-6`}>
-                <v.icon size={28} className={v.color} />
+            <div key={i} className="rounded-[1.5rem] p-4 sm:p-6 border border-gray-100 hover:-translate-y-1.5 transition-transform bg-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col items-center text-center">
+              <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full ${v.bg} flex items-center justify-center mb-4 sm:mb-6 shrink-0`}>
+                <v.icon className={`w-5 h-5 sm:w-7 sm:h-7 ${v.color}`} />
               </div>
-              <h4 className="font-bold text-[15px] text-foreground mb-3">{v.title}</h4>
-              <p className="text-xs text-muted-foreground leading-relaxed font-medium">
+              <h4 className="font-bold text-[13px] sm:text-[15px] text-foreground mb-2 sm:mb-3 leading-tight">{v.title}</h4>
+              <p className="text-[10px] sm:text-[11px] text-muted-foreground leading-relaxed font-medium">
                 {v.desc}
               </p>
             </div>

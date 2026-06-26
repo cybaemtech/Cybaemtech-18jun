@@ -7,7 +7,7 @@ import { containerVariants, itemVariants } from "@/lib/animations";
 
 const CTASection = () => {
   return (
-    <section id="contact" className="relative py-24 lg:py-32 overflow-hidden">
+    <section id="contact" className="relative pt-12 pb-20 lg:pt-12 lg:pb-28 overflow-hidden">
       <div className="absolute inset-0">
         <img src={sectionNetwork} alt="" className="w-full h-full object-cover opacity-20" loading="lazy" width={1920} height={1080} />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />

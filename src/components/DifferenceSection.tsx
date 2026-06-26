@@ -11,7 +11,7 @@ const protocols = [
 
 const DifferenceSection = () => {
   return (
-    <section id="approach" className="section-border py-24 lg:py-32">
+    <section id="approach" className="section-border py-20 lg:py-28">
       <div className="container mx-auto px-6 lg:px-12">
         <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
           <div className="grid lg:grid-cols-2 gap-16 items-start">

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -23,12 +23,15 @@ import {
   ChevronRight,
   User,
   Briefcase,
-  Quote
+  Quote,
+  BadgeCheck,
+  Server
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { aboutSeoData } from "@/data/seo/aboutSeo";
+import cybaemLogoIcon from "@/assets/cybaem-logo-icon.png";
 
 /* ── Animation helpers ── */
 const fadeUp = {
@@ -70,12 +73,12 @@ const Hero = () => {
               Premium IT Service <br />
               <span className="text-primary font-medium italic" style={{ fontFamily: "cursive" }}>zero compromise</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-8 max-w-lg">
-              CYBAEM TECH PVT. LTD. is a premier global technology solutions company specialising in innovative IT infrastructure management, software development services, and cloud computing solutions.
+            <motion.p variants={fadeUp} className="hidden lg:block text-sm sm:text-base text-muted-foreground leading-relaxed mb-8 max-w-lg">
+              Delivering smart IT infrastructure, cloud, and software solutions for modern enterprises.
             </motion.p>
-            <motion.div variants={fadeUp}>
+            <motion.div variants={fadeUp} className="hidden lg:block">
               <Link to="/#solutions" className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity shadow-lg shadow-primary/25">
-                Learn More About Our Solutions <ArrowRight size={16} />
+                Explore Our Solutions<ArrowRight size={16} />
               </Link>
             </motion.div>
           </motion.div>
@@ -88,14 +91,12 @@ const Hero = () => {
             className="relative"
           >
             {/* Main Image Masked in a pill/oval shape */}
-            <div className="relative w-full">
+            <div className="relative w-full drop-shadow-[0_15px_35px_rgba(0,0,0,0.25)]">
               <img src="/images/about-team-1.png" alt="Cybaem Tech Team" className="w-full h-full object-cover" />
-              {/* Overlay gradient */}
-              {/* <div className="absolute inset-0 bg-primary/10 mix-blend-multiply" /> */}
             </div>
 
             {/* Floating Element 1: Cybaemians */}
-            <div className="absolute top-8 -left-4 sm:-left-8 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-border/50 flex items-center gap-3 animate-bounce-slow">
+            <div className="absolute top-8 -left-4 sm:-left-8 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-border/50 hidden lg:flex items-center gap-3 animate-bounce-slow">
               <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-primary">
                 <Users size={20} />
               </div>
@@ -106,12 +107,15 @@ const Hero = () => {
             </div>
 
             {/* Floating Element 2: CT Logo */}
-            <div className="absolute top-1/4 right-4 sm:-right-6 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/10 backdrop-blur-md border border-white/40 shadow-2xl flex items-center justify-center">
-              <img src="/images/cybaem-logo.png" alt="CT" className="w-16 h-16 sm:w-20 sm:h-20" />
-                        </div>
+            <div className="absolute top-1/4 right-2 sm:-right-6 flex flex-col items-center">
+              <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-white/10 backdrop-blur-md border border-white/40 shadow-2xl flex items-center justify-center">
+                <img src="/images/cybaem-logo.png" alt="CT" className="w-12 h-12 sm:w-20 sm:h-20" />
+              </div>
+            
+            </div>
 
             {/* Floating Element 3: Rating */}
-            <div className="absolute bottom-8 -right-4 sm:-right-8 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-border/50 flex items-center gap-3">
+            <div className="absolute bottom-8 -right-4 sm:-right-8 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-border/50 hidden lg:flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-500">
                 <Star size={20} className="fill-orange-500" />
               </div>
@@ -124,6 +128,18 @@ const Hero = () => {
             {/* Decorative background shapes */}
             <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-50 rounded-full blur-3xl opacity-50" />
           </motion.div>
+
+          {/* Mobile Description & Button */}
+          <div className="flex flex-col items-center mt-8 lg:hidden text-center px-2">
+            <motion.p variants={fadeUp} className="text-sm text-muted-foreground leading-relaxed mb-6">
+              Delivering smart IT infrastructure, cloud, and software solutions for modern enterprises.
+            </motion.p>
+            <motion.div variants={fadeUp} className="flex justify-center w-full">
+              <Link to="/#solutions" className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity shadow-lg shadow-primary/25">
+                Explore Our Solutions <ArrowRight size={16} />
+              </Link>
+            </motion.div>
+          </div>
 
         </div>
       </div>
@@ -301,53 +317,250 @@ const TimelineSection = () => {
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      quote: "Cybaem Tech's process is flawless. Every milestone was delivered on time, and our security standards were not just met—they were exceeded.",
-      author: "Alex Pryor", role: "CTO, Fedsecure", image: "/images/about-team-3.avif"
+      id: 0,
+      quote: "CYBAEM transformed our IT operations with 24/7 support and robust security monitoring, helping us achieve higher uptime and stronger operational resilience.",
+      author: "CTO", 
+      role: "Client", 
+      companyName: "FinTech Company",
+      image: cybaemLogoIcon,
+      rating: 4.5,
+      verified: true,
+      tags: ["Managed IT", "Cyber Security", "Infrastructure", "24/7 Support"],
+      metrics: [
+        { label: "Project Duration", value: "18 Months", icon: Calendar },
+        { label: "Environment", value: "Windows Server, Azure, Microsoft 365", icon: Server },
+        { label: "Team Size", value: "12+ Experts", icon: Users }
+      ]
     },
     {
-      quote: "Zero downtime, full compliance. Cybaem Tech's engineers delivered exactly as promised—on schedule, on budget, and with total transparency.",
-      author: "Taylor Brooks", role: "COO, NetWave", image: "/images/about-team-4.avif"
+      id: 1,
+      quote: "Their cloud team helped us migrate to Azure seamlessly, reducing infrastructure costs by 30% while improving application performance and scalability.",
+      author: "Head of IT", 
+      role: "Client", 
+      companyName: "Manufacturing Group",
+      image: cybaemLogoIcon,
+      rating: 4,
+      verified: true,
+      tags: ["Cloud Migration", "Azure", "DevOps", "Automation"],
+      metrics: [
+        { label: "Project Duration", value: "12 Months", icon: Calendar },
+        { label: "Environment", value: "Azure, Docker, Kubernetes", icon: Server },
+        { label: "Team Size", value: "15+ Experts", icon: Users }
+      ]
+    },
+    {
+      id: 2,
+      quote: "Digital campaigns delivered a 2× boost in qualified leads within just 90 days, significantly improving our online visibility and conversion rates.",
+      author: "Marketing Lead", 
+      role: "Client", 
+      companyName: "SaaS Startup",
+      image: cybaemLogoIcon,
+      rating: 4.5,
+      verified: true,
+      tags: ["Digital Marketing", "SEO", "Performance Marketing", "Analytics"],
+      metrics: [
+        { label: "Project Duration", value: "6 Months", icon: Calendar },
+        { label: "Environment", value: "Google Ads, Meta Ads, GA4", icon: Server },
+        { label: "Team Size", value: "8+ Experts", icon: Users }
+      ]
+    },
+    {
+      id: 3,
+      quote: "CYBAEM's software development team delivered a scalable enterprise application with modern architecture, accelerating our digital transformation and improving operational efficiency.",
+      author: "Engineering Manager", 
+      role: "Client", 
+      companyName: "Enterprise Software Company",
+      image: cybaemLogoIcon,
+      rating: 5,
+      verified: true,
+      tags: ["Software Development", "React", "Node.js", "Microservices"],
+      metrics: [
+        { label: "Project Duration", value: "14 Months", icon: Calendar },
+        { label: "Environment", value: "React, Node.js, AWS, PostgreSQL", icon: Server },
+        { label: "Team Size", value: "18+ Experts", icon: Users }
+      ]
     }
   ];
 
+  const [activeIndex, setActiveIndex] = useState(1);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
   return (
-    <section className="py-20 lg:py-28 bg-background">
-      <div className="container mx-auto px-6 lg:px-12 relative text-center">
+    <section className="py-20 lg:py-28 bg-gray-50/50 overflow-hidden relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative text-center">
         <SectionHeader subtitle="WHAT OUR CLIENTS SAY" title="Trusted by Leaders, Proven by" titleHighlight="Results." align="center" />
+        <p className="text-muted-foreground text-sm sm:text-base max-w-xl mx-auto -mt-8 mb-24">
+          Real stories from real partnerships that drive real impact.
+        </p>
         
-        <div className="flex items-center justify-between gap-6">
-          <button className="w-12 h-12 rounded-full bg-white shadow-md border border-gray-100 flex items-center justify-center hover:bg-gray-50 transition-colors shrink-0 text-primary">
+        <div className="relative max-w-6xl mx-auto flex items-center justify-center min-h-[420px]">
+          
+          <button onClick={handlePrev} className="absolute left-0 z-20 w-12 h-12 rounded-full bg-white shadow-md border border-gray-100 hidden md:flex items-center justify-center hover:bg-gray-50 transition-colors shrink-0 text-primary">
             <ChevronLeft size={24} />
           </button>
-          
-          <div className="grid md:grid-cols-2 gap-8 w-full">
-            {testimonials.map((t, i) => (
-              <div key={i} className="bg-white rounded-3xl p-8 border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] text-left flex flex-col">
-                <Quote size={32} className="text-primary/20 mb-6" />
-                <p className="text-sm font-medium text-foreground leading-relaxed mb-8 flex-1 italic">
-                  "{t.quote}"
-                </p>
-                <div className="mb-6">
-                  <p className="font-bold text-foreground text-sm">{t.author}</p>
-                  <p className="text-xs text-muted-foreground">{t.role}</p>
-                </div>
-                <div className="h-32 rounded-xl overflow-hidden">
-                   <img src={t.image} alt={t.author} className="w-full h-full object-cover" />
-                </div>
-              </div>
-            ))}
+
+          <div className="relative w-full h-[420px] flex justify-center items-center">
+            {testimonials.map((t, index) => {
+              const isActive = index === activeIndex;
+              const isPrev = index === (activeIndex - 1 + testimonials.length) % testimonials.length;
+              const isNext = index === (activeIndex + 1) % testimonials.length;
+
+              let position = "hidden";
+              let xOffset = 0;
+              let scale = 1;
+              let zIndex = 0;
+              let opacity = 0;
+
+              if (isActive) {
+                position = "active";
+                xOffset = 0;
+                scale = 1;
+                zIndex = 10;
+                opacity = 1;
+              } else if (isPrev) {
+                position = "prev";
+                xOffset = -60;
+                scale = 0.85;
+                zIndex = 5;
+                opacity = 0.4;
+              } else if (isNext) {
+                position = "next";
+                xOffset = 60;
+                scale = 0.85;
+                zIndex = 5;
+                opacity = 0.4;
+              }
+
+              if (position === "hidden") return null;
+
+              return (
+                <motion.div
+                  key={t.id}
+                  initial={false}
+                  animate={{
+                    x: `calc(-50% + ${xOffset}%)`,
+                    y: "-50%",
+                    scale: scale,
+                    opacity: opacity,
+                    zIndex: zIndex
+                  }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="absolute top-1/2 left-1/2 w-full md:w-[80%] lg:w-[65%] bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-gray-100 p-6 md:p-8 text-left"
+                >
+                  <div className="flex flex-col md:flex-row gap-8 relative">
+                    {/* Background Quote Mark */}
+                    <Quote size={100} className="absolute top-0 left-1/2 -translate-x-1/2 text-gray-50 z-0 pointer-events-none" fill="currentColor" strokeWidth={0} />
+                    
+                    {/* Left Column */}
+                    <div className="flex-1 relative z-10">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-semibold mb-6">
+                        <BadgeCheck size={14} /> Verified Client
+                      </div>
+                      
+                      <div className="flex items-center gap-2 mb-6">
+                        <div className="flex text-yellow-400">
+                          {[...Array(Math.floor(t.rating))].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+                          {t.rating % 1 !== 0 && <Star size={16} fill="currentColor" className="opacity-50" />}
+                        </div>
+                        <span className="text-sm font-bold text-foreground">{t.rating}/5</span>
+                      </div>
+
+                      <p className="text-base md:text-lg lg:text-xl font-medium text-foreground leading-relaxed mb-6 relative z-10">
+                        "{t.quote}"
+                      </p>
+
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+                        <div className="flex items-center gap-4">
+                           {/* Simplified placeholder for company logo / info */}
+                           <div className="flex items-center gap-2 shrink-0">
+                             <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+                               {t.companyName[0]}
+                             </div>
+                             <div className="font-bold text-base text-slate-800 tracking-tight leading-none">
+                                {t.companyName}
+                             </div>
+                           </div>
+                           <div className="border-l border-gray-200 pl-4">
+                             <p className="font-bold text-foreground text-sm">{t.author}</p>
+                             <p className="text-xs text-muted-foreground">{t.role}</p>
+                           </div>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+                        {t.tags.map(tag => (
+                          <span key={tag} className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-[10px] font-semibold">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Right Column */}
+                    <div className="w-full md:w-[220px] shrink-0 relative z-10 flex flex-col justify-between pt-4">
+                      <div className="hidden md:block relative h-[120px] w-[120px] mx-auto -mt-8 md:-mt-10 mb-6 rounded-full overflow-hidden shadow-lg shadow-primary/30 border border-gray-100 shrink-0 bg-white p-2">
+                         <img src={t.image} alt={t.author} className="w-full h-full object-contain opacity-80" />
+                      </div>
+                      
+                      <div className="space-y-5 pl-2">
+                        {t.metrics.map(m => (
+                           <div key={m.label} className="flex gap-4 items-start">
+                             <m.icon size={18} className="text-gray-400 mt-0.5 shrink-0" />
+                             <div>
+                               <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wider mb-0.5">{m.label}</p>
+                               <p className="text-sm font-bold text-foreground leading-tight">{m.value}</p>
+                             </div>
+                           </div>
+                        ))}
+                      </div>
+                    </div>
+
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
-          <button className="w-12 h-12 rounded-full bg-white shadow-md border border-gray-100 flex items-center justify-center hover:bg-gray-50 transition-colors shrink-0 text-primary">
+          <button onClick={handleNext} className="absolute right-0 z-20 w-12 h-12 rounded-full bg-white shadow-md border border-gray-100 hidden md:flex items-center justify-center hover:bg-gray-50 transition-colors shrink-0 text-primary">
             <ChevronRight size={24} />
           </button>
         </div>
 
-        <div className="flex justify-center gap-2 mt-8">
-          <div className="w-2.5 h-2.5 rounded-full bg-primary" />
-          <div className="w-2.5 h-2.5 rounded-full bg-gray-300" />
-          <div className="w-2.5 h-2.5 rounded-full bg-gray-300" />
+        {/* Mobile controls */}
+        <div className="flex md:hidden justify-center items-center gap-4 mt-8">
+           <button onClick={handlePrev} className="w-10 h-10 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center text-primary">
+             <ChevronLeft size={20} />
+           </button>
+           <button onClick={handleNext} className="w-10 h-10 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center text-primary">
+             <ChevronRight size={20} />
+           </button>
         </div>
+
+        <div className="flex justify-center gap-3 mt-8 mb-10">
+          {testimonials.map((_, i) => (
+             <button 
+               key={i} 
+               onClick={() => setActiveIndex(i)}
+               className={`w-2.5 h-2.5 rounded-full transition-all ${i === activeIndex ? 'bg-primary w-4' : 'bg-gray-300'}`} 
+             />
+          ))}
+        </div>
+
+       
       </div>
     </section>
   );
@@ -359,8 +572,7 @@ const CTASection = () => {
     <section className="py-12 lg:py-20 pb-24">
       <div className="container mx-auto px-6 lg:px-12">
         <div 
-          className="rounded-[3rem] border border-blue-100/50 p-12 lg:p-16 flex flex-col lg:flex-row items-center gap-12 relative overflow-hidden bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/images/about-cta.png)' }}
+          className="rounded-[3rem] border border-blue-100/50 p-12 lg:p-16 flex flex-col lg:flex-row items-center gap-12 relative overflow-hidden bg-cover bg-center bg-no-repeat bg-[url('/images/about-cta1.png')] lg:bg-[url('/images/about-cta.png')]"
         >
           
           {/* Decorative shapes */}

@@ -41,7 +41,7 @@ type TabKey = (typeof tabs)[number];
 /* ──────────── Hero ──────────── */
 const PortfolioHero = () => {
   return (
-    <section className="relative pt-32 pb-4 md:pt-40 md:pb-8 overflow-hidden bg-white border-b border-slate-100">
+    <section className="relative pt-32 pb-4 md:pt-44 md:pb-12 overflow-hidden bg-white border-b border-slate-100">
       {/* Decorative curved shapes on left */}
       <div className="absolute left-0 top-0 bottom-0 w-32 md:w-64 overflow-hidden pointer-events-none z-0 select-none">
         {/* Light blue soft glow */}
@@ -53,7 +53,7 @@ const PortfolioHero = () => {
       </div>
 
       {/* Right Column: Image Background (Absolute on Desktop) */}
-      <div className="absolute right-4 lg:right-8 top-[45%] -translate-y-1/2 w-full lg:w-[45%] xl:w-[48%] 2xl:w-[50%] z-0 hidden lg:block pointer-events-none select-none">
+      <div className="absolute right-4 lg:right-8 top-[48%] -translate-y-1/2 w-full lg:w-[45%] xl:w-[48%] 2xl:w-[50%] z-0 hidden lg:block pointer-events-none select-none mt-8">
         <img
           src="/images/portfolio-header.png"
           alt="Our IT Service Work Showcase"

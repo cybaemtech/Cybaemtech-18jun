@@ -15,7 +15,7 @@ const nodes = [
 
 const OrbitSection = () => {
   return (
-    <section className="relative py-16 lg:py-32 overflow-hidden bg-[#f8faff]">
+    <section className="relative pt-20 pb-12 lg:pt-28 lg:pb-12 overflow-hidden bg-[#f8faff]">
       {/* Background decoration for the right text side (wave dots pattern representation) */}
       <div className="absolute right-0 top-0 bottom-0 w-1/3 opacity-30 pointer-events-none hidden lg:block" 
            style={{
@@ -114,8 +114,7 @@ const OrbitSection = () => {
             </div>
           </div>
 
-          {/* Right Side: Content */}
-          <div className="w-full lg:w-2/5 lg:pl-10 text-center lg:text-left mt-8 lg:mt-0">
+          <div className="w-full lg:w-2/5 lg:pl-10 text-center lg:text-left mt-10 sm:mt-16 lg:mt-0">
             <motion.div 
               variants={containerVariants} 
               initial="hidden" 
