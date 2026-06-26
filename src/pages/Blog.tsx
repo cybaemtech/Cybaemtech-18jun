@@ -15,9 +15,24 @@ const Blog = () => {
   const { posts, loading, error } = useBlogData();
   const [featuredPost, ...otherPosts] = posts;
 
-  const formatDate = (dateString: string | null) => {
-    if (!dateString) return "";
-    return new Date(dateString).toLocaleDateString("en-US", {
+  const formatDate = (dateValue: string | number | null) => {
+    if (!dateValue) return "";
+
+    // Google Sheets serial date
+    if (typeof dateValue === "number") {
+      const utcDays = Math.floor(dateValue - 25569);
+      const utcValue = utcDays * 86400;
+      const date = new Date(utcValue * 1000);
+
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    }
+
+    // Normal date string
+    return new Date(dateValue).toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -62,7 +77,7 @@ const Blog = () => {
                 IT Service Insights & Blog
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Stay ahead with expert insights on enterprise IT services, software development, IT security, 
+                Stay ahead with expert insights on enterprise IT services, software development, IT security,
                 web systems, and digital growth strategies from our team of specialists.
               </p>
             </motion.div>

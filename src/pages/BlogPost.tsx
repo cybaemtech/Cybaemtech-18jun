@@ -8,7 +8,7 @@ import SEOHead from "@/components/SEOHead";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { fetchGoogleSheetsData } from "@/hooks/useBlogData";
-
+ 
 interface BlogPostData {
   id: string;
   title: string;
@@ -19,103 +19,90 @@ interface BlogPostData {
   author: string;
   category: string | null;
   tags: string[] | null;
-  published_at: string | null;
+  published_at: string | number | null;
 }
-
+ 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<BlogPostData | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
-
+ 
   useEffect(() => {
     if (!slug) {
       setNotFound(true);
       setLoading(false);
       return;
     }
-
+ 
     const fetchPost = async () => {
       setLoading(true);
+ 
       try {
-        const response = await fetch(`/blog-api.php?action=get&slug=${encodeURIComponent(slug)}`);
-        if (response.ok) {
-          const data = await response.json();
-          setPost({
-            id: data.id,
-            title: data.title,
-            slug: data.slug,
-            excerpt: data.excerpt,
-            content: data.content,
-            cover_image: data.cover_image,
-            author: data.author,
-            category: data.category,
-            tags: data.tags || [],
-            published_at: data.published_at,
-          });
-          setNotFound(false);
-        } else if (response.status === 404) {
+        const googlePosts = await fetchGoogleSheetsData();
+ 
+        const selectedPost = googlePosts.find(
+          (item) => item.slug === slug
+        );
+ 
+        if (!selectedPost) {
           setNotFound(true);
-        } else {
-          throw new Error("Failed to fetch post");
+          return;
         }
+ 
+        setPost({
+          id: selectedPost.id,
+          title: selectedPost.title,
+          slug: selectedPost.slug,
+          excerpt: selectedPost.excerpt,
+          content: selectedPost.content,
+          cover_image: selectedPost.cover_image,
+          author: selectedPost.author,
+          category: selectedPost.category,
+          tags: [],
+          published_at: selectedPost.published_at,
+        });
+ 
+        setNotFound(false);
       } catch (err) {
-        console.warn("[BlogPost] PHP fetch failed, trying Google Sheets fallback...", err);
-        try {
-          const index = parseInt(slug.replace("linkedin-post-", ""));
-          if (!isNaN(index)) {
-            const googlePosts = await fetchGoogleSheetsData();
-            const row = googlePosts[index];
-            if (row) {
-              setPost({
-                id: row.id,
-                title: row.title,
-                slug: slug,
-                excerpt: row.excerpt,
-                content: row.excerpt
-                  ? row.excerpt
-                    .replace(/\{hashtag\|\\#\|([^}]+)\}/g, "#$1")
-                    .replace(/\n/g, "<br/><br/>")
-                    .trim()
-                  : "",
-                cover_image: row.cover_image,
-                author: row.author,
-                category: row.category,
-                tags: [],
-                published_at: row.published_at,
-              });
-              setNotFound(false);
-              return;
-            }
-          }
-          setNotFound(true);
-        } catch (sheetErr) {
-          console.error("[BlogPost] Fallback error:", sheetErr);
-          setNotFound(true);
-        }
+        console.error(err);
+        setNotFound(true);
       } finally {
         setLoading(false);
       }
     };
-
     fetchPost();
   }, [slug]);
-
-  const formatDate = (dateString: string | null) => {
-    if (!dateString) return "";
-    return new Date(dateString).toLocaleDateString("en-US", {
+ 
+  const formatDate = (dateValue: string | number | null) => {
+    if (!dateValue) return "";
+ 
+    // Google Sheets serial date
+    if (typeof dateValue === "number") {
+      const utcDays = Math.floor(dateValue - 25569);
+      const utcValue = utcDays * 86400;
+      const date = new Date(utcValue * 1000);
+ 
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    }
+ 
+    // String date
+    return new Date(dateValue).toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
     });
   };
-
   const getReadingTime = (content: string) => {
     const text = content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
     const words = text ? text.split(" ").length : 0;
     return Math.max(1, Math.ceil(words / 180));
   };
-
+ 
   if (loading) {
     return (
       <>
@@ -143,7 +130,7 @@ const BlogPost = () => {
       </>
     );
   }
-
+ 
   if (notFound || !post) {
     return (
       <>
@@ -174,10 +161,10 @@ const BlogPost = () => {
       </>
     );
   }
-
+ 
   const readingTime = getReadingTime(post.content);
   const displayDate = formatDate(post.published_at);
-
+ 
   return (
     <>
       <SEOHead
@@ -224,7 +211,7 @@ const BlogPost = () => {
         ]}
       />
       <Navbar />
-
+ 
       <main className="min-h-screen bg-background">
         <article className="pt-28 pb-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-12">
@@ -242,7 +229,7 @@ const BlogPost = () => {
                 Back to Blog
               </Link>
             </motion.div>
-
+ 
             <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-stretch">
               <motion.header
                 initial={{ opacity: 0, y: 20 }}
@@ -261,17 +248,17 @@ const BlogPost = () => {
                     {readingTime} min read
                   </span>
                 </div>
-
+ 
                 <h1 className="font-display text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
                   {post.title}
                 </h1>
-
+ 
                 {post.excerpt && (
                   <p className="mt-5 text-base leading-7 text-muted-foreground">
                     {post.excerpt}
                   </p>
                 )}
-
+ 
                 <div className="mt-7 grid gap-3 border-t border-border pt-6 text-sm text-muted-foreground sm:grid-cols-2">
                   <span className="flex items-center gap-2">
                     <User size={16} className="text-primary" />
@@ -283,7 +270,7 @@ const BlogPost = () => {
                   </span>
                 </div>
               </motion.header>
-
+ 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -314,7 +301,7 @@ const BlogPost = () => {
                 </div>
               </motion.div>
             </div>
-
+ 
             <div className="mt-12 grid gap-8 lg:grid-cols-[260px_minmax(0,760px)] lg:items-start lg:justify-center">
               <motion.aside
                 initial={{ opacity: 0, y: 18 }}
@@ -338,7 +325,7 @@ const BlogPost = () => {
                   </div>
                 </div>
               </motion.aside>
-
+ 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -349,7 +336,7 @@ const BlogPost = () => {
                   className="prose prose-lg max-w-none prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-8 prose-a:text-primary prose-strong:text-foreground"
                   dangerouslySetInnerHTML={{ __html: post.content }}
                 />
-
+ 
                 {post.tags && post.tags.length > 0 && (
                   <div className="mt-10 border-t border-border pt-6">
                     <div className="flex flex-wrap items-center gap-2">
@@ -362,7 +349,7 @@ const BlogPost = () => {
                     </div>
                   </div>
                 )}
-
+ 
                 <div className="mt-10 rounded-lg border border-border bg-card p-5">
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
@@ -383,14 +370,15 @@ const BlogPost = () => {
                 </div>
               </motion.div>
             </div>
-
+ 
           </div>
         </article>
       </main>
-
+ 
       <Footer />
     </>
   );
 };
-
+ 
 export default BlogPost;
+ 

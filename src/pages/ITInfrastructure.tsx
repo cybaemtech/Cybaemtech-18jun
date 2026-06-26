@@ -7,7 +7,8 @@ import {
   ChevronRight, Building2, Heart, GraduationCap, ShoppingCart, Home,
   Factory, Landmark, Truck, Star, Cpu, HardDrive, Users, BarChart3,
   ClipboardList, Wrench, RefreshCw, Briefcase, TrendingUp, Award,
-  Zap, Clock, Activity,
+  Zap, Clock, Activity, Sparkles, Check, MousePointer2, Globe2,
+  Laptop2, BadgeCheck, CloudCog, NetworkIcon, Boxes, PenTool
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { MagneticButton } from "@/components/Navbar";
@@ -91,6 +92,111 @@ const serviceCards = [
     icon: Lightbulb, title: "IT Consulting & Strategy", slug: "consulting",
     color: "from-sky-500 to-blue-700",
     bullets: ["Digital Transformation", "IT Roadmap", "Governance & Risk"],
+  },
+];
+
+const serviceSections = [
+  {
+    id: "managed-it",
+    number: "01",
+    title: "Managed IT & Support",
+    description: "End-to-end infrastructure management with proactive support and SLA-backed responsiveness.",
+    accent: "from-[#0F4CFF] via-[#3B82F6] to-[#7DD3FC]",
+    image: "/services/Managed IT & Support.png",
+    icon: Laptop2,
+    modules: ["Managed IT Services", "IT Support L1-L3", "AMC & Helpdesk", "ITSM Operations"],
+    shortBullets: ["24x7 monitoring", "Vendor coordination", "Documentation-led governance"],
+    details: [
+      { title: "Managed IT Services", bullets: ["End-to-end infrastructure management", "24x7 monitoring and remediation", "Reporting and performance optimization"] },
+      { title: "IT Support L1-L3", bullets: ["Tiered issue resolution", "Remote and onsite assistance", "Escalation handling with SLAs"] },
+      { title: "AMC & Helpdesk", bullets: ["Preventive maintenance cycles", "Asset-aware support workflows", "Priority incident response"] },
+      { title: "ITSM Operations", bullets: ["Ticketing and change control", "Knowledge base and documentation", "Monthly service reviews"] },
+    ],
+  },
+  {
+    id: "cybersecurity",
+    number: "02",
+    title: "Cybersecurity & Data Protection",
+    description: "Layered defense for endpoints, networks, identities, and business-critical data.",
+    accent: "from-[#1D4ED8] via-[#2563EB] to-[#60A5FA]",
+    image: "/services/Cybersecurity & Data Protection.png",
+    icon: BadgeCheck,
+    modules: ["Threat Defense", "Firewall Security", "Backup & DR", "Patch Management"],
+    shortBullets: ["Blue-team protection", "Security compliance", "Resilient recovery"],
+    details: [
+      { title: "Threat Defense", bullets: ["Endpoint protection and detection", "Security audits and assessments", "Zero Trust controls"] },
+      { title: "Firewall Security", bullets: ["Firewall policy management", "VPN and IDS/IPS configuration", "Multi-vendor security stack support"] },
+      { title: "Backup & DR", bullets: ["Cloud, M365, server and endpoint backup", "Business continuity planning", "Recovery validation and testing"] },
+      { title: "Patch Management", bullets: ["OS and firmware updates", "Vulnerability remediation", "Compliance aligned cadence"] },
+    ],
+  },
+  {
+    id: "cloud",
+    number: "03",
+    title: "Cloud, Server & Productivity",
+    description: "Modernize collaboration, servers, and cloud operations with enterprise-grade control.",
+    accent: "from-[#4F46E5] via-[#0F4CFF] to-[#22D3EE]",
+    image: "/services/Cloud, Server & Productivity.png",
+    icon: CloudCog,
+    modules: ["M365 Admin", "Cloud Infra", "Server Care", "Identity & Email"],
+    shortBullets: ["Scalable platforms", "Migration support", "Productivity governance"],
+    details: [
+      { title: "M365 Admin", bullets: ["Licensing and tenant governance", "Teams, SharePoint and Exchange administration", "Email security setup"] },
+      { title: "Cloud Infra", bullets: ["Azure and hybrid architecture support", "Migration and modernization", "Cost and access optimization"] },
+      { title: "Server Care", bullets: ["Windows and Linux administration", "AD and domain operations", "Availability and hardening"] },
+      { title: "Identity & Email", bullets: ["Identity governance", "SPF, DKIM, DMARC", "Collaboration policy management"] },
+    ],
+  },
+  {
+    id: "network",
+    number: "04",
+    title: "Network & Connectivity",
+    description: "High-performance, secure networking designed for always-on business operations.",
+    accent: "from-[#0EA5E9] via-[#0F4CFF] to-[#38BDF8]",
+    image: "/services/Network & Connectivity.png",
+    icon: NetworkIcon,
+    modules: ["LAN/WAN", "Wi-Fi", "SD-WAN", "Monitoring"],
+    shortBullets: ["Low-latency connectivity", "Proactive oversight", "Enterprise network hygiene"],
+    details: [
+      { title: "LAN/WAN", bullets: ["Structured network design", "Switch and router configuration", "Branch connectivity planning"] },
+      { title: "Wi-Fi", bullets: ["Secure wireless deployments", "Coverage and performance tuning", "Guest and enterprise segmentation"] },
+      { title: "SD-WAN", bullets: ["Resilient WAN orchestration", "Traffic optimization", "Link failover strategies"] },
+      { title: "Monitoring", bullets: ["Network health visibility", "Alerting and response", "Capacity planning"] },
+    ],
+  },
+  {
+    id: "devices",
+    number: "05",
+    title: "Device, Asset & Procurement",
+    description: "Lifecycle control for hardware, inventory, warranties, and vendor coordination.",
+    accent: "from-[#F59E0B] via-[#F97316] to-[#FDBA74]",
+    image: "/services/Device, Asset & Procurement.png",
+    icon: Boxes,
+    modules: ["Procurement", "Lifecycle", "Assets", "Vendors"],
+    shortBullets: ["Fleet visibility", "Warranty management", "Procurement governance"],
+    details: [
+      { title: "Procurement", bullets: ["Hardware sourcing and approvals", "Vendor comparison and ordering", "Asset tagging and onboarding"] },
+      { title: "Lifecycle", bullets: ["Deployment to retirement handling", "Refresh planning", "Secure disposal support"] },
+      { title: "Assets", bullets: ["Inventory and license tracking", "Warranty visibility", "Compliance reporting"] },
+      { title: "Vendors", bullets: ["ISP and OEM coordination", "Escalation handling", "Renewals and replacements"] },
+    ],
+  },
+  {
+    id: "consulting",
+    number: "06",
+    title: "IT Consulting & Strategy",
+    description: "Executive-level guidance for transformation, governance, risk, and modernization.",
+    accent: "from-[#6366F1] via-[#0F4CFF] to-[#A78BFA]",
+    image: "/services/IT Consulting & Strategy.png",
+    icon: PenTool,
+    modules: ["Roadmaps", "Audits", "Governance", "Transformation"],
+    shortBullets: ["Strategic advisory", "Technology planning", "Risk-aware execution"],
+    details: [
+      { title: "Roadmaps", bullets: ["Business-aligned IT planning", "Modernization sequencing", "Budget and capability mapping"] },
+      { title: "Audits", bullets: ["Infrastructure assessments", "Security and compliance reviews", "Architecture gap analysis"] },
+      { title: "Governance", bullets: ["Policy and standards", "Risk and control alignment", "Stakeholder reporting"] },
+      { title: "Transformation", bullets: ["Change planning and delivery", "Cloud adoption guidance", "Operating model improvement"] },
+    ],
   },
 ];
 
@@ -301,64 +407,171 @@ const LogosStrip = () => (
 );
 
 /* ════════════════ WHAT WE MANAGE ════════════════ */
-const WhatWeManage = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+const FlipServiceCard = ({ service, active, onActivate }: {
+  service: typeof serviceSections[0];
+  active: boolean;
+  onActivate: (id: string | null) => void;
+}) => {
+  const [hovered, setHovered] = useState(false);
+  const flipped = active || hovered;
+  return (
+    <button
+      type="button"
+      onClick={() => onActivate(active ? null : service.id)}
+      onMouseEnter={() => {
+        setHovered(true);
+        onActivate(service.id);
+      }}
+      onMouseLeave={() => {
+        setHovered(false);
+        onActivate(null);
+      }}
+      className={`group relative block w-full text-left [perspective:1800px] h-full antialiased ${active ? "z-20" : "z-10"}`}
+    >
+      <motion.div
+        animate={{ y: active ? -6 : 0 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="relative w-full h-full min-h-[460px]"
+      >
+        {/* FRONT FACE */}
+        <motion.div
+          animate={{ rotateY: flipped ? -180 : 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          style={{ backfaceVisibility: "hidden" }}
+          className={`absolute inset-0 w-full h-full rounded-[24px] shadow-[0_20px_80px_rgba(15,23,42,0.12)] ${active ? "shadow-[0_30px_100px_rgba(15,76,255,0.22)] ring-1 ring-blue-400/40" : ""} bg-white border border-slate-200/80 overflow-hidden flex flex-col z-20`}
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(15,76,255,0.12),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(56,189,248,0.12),transparent_25%)] opacity-100" />
+          <div className="relative h-[220px] overflow-hidden shrink-0">
+            <motion.img
+              src={service.image}
+              alt={service.title}
+              className="w-full h-full object-cover"
+              animate={{ scale: flipped ? 1.12 : 1 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+            />
+            <div className="absolute left-4 top-4 flex items-center gap-2">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/95 border border-slate-200 shadow-sm">
+                <service.icon size={18} className="text-[#0F4CFF]" />
+              </span>
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-800 bg-white/95 px-3 py-1.5 rounded-full border border-slate-200 shadow-sm">Hover to Explore</span>
+            </div>
+            <div className="absolute right-4 bottom-4 rounded-full bg-white/95 border border-slate-200 px-3 py-1.5 text-[11px] font-bold text-slate-800 shadow-sm">
+              Service Group {service.number}
+            </div>
+          </div>
+          <div className="p-5 flex-1 flex flex-col justify-center">
+            <p className="text-[11px] font-bold tracking-[0.24em] uppercase text-[#0F4CFF] mb-2">Service Group {service.number}</p>
+            <h3 className="text-xl font-bold tracking-tight text-slate-950 mb-2 leading-tight">{service.title}</h3>
+            <p className="text-sm text-slate-600 leading-relaxed mb-4">{service.description}</p>
+            <div className="flex flex-wrap gap-2 mt-auto">
+              {service.shortBullets.map((item) => (
+                <span key={item} className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-xs font-medium text-slate-700 shadow-sm">
+                  <Check size={12} className="text-[#0F4CFF]" />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+        {/* BACK FACE */}
+        <motion.div
+          initial={{ rotateY: 180 }}
+          animate={{ rotateY: flipped ? 0 : 180 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          style={{ backfaceVisibility: "hidden" }}
+          className={`absolute inset-0 w-full h-full rounded-[24px] shadow-[0_20px_80px_rgba(15,23,42,0.12)] ${active ? "shadow-[0_30px_100px_rgba(15,76,255,0.22)] ring-1 ring-blue-400/40" : ""} bg-white text-slate-900 p-6 flex flex-col overflow-hidden border border-slate-200/80 z-10`}
+        >
+          <div className="flex items-center justify-between mb-4 shrink-0">
+            <div>
+              <p className="text-xs font-semibold tracking-[0.28em] uppercase text-[#0F4CFF] mb-2">Service Group {service.number}</p>
+              <h3 className="text-xl font-bold leading-tight text-slate-950">{service.title}</h3>
+            </div>
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-blue-100 bg-blue-50">
+              <service.icon size={18} className="text-[#0F4CFF]" />
+            </span>
+          </div>
 
-  const scroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 320 : -320, behavior: "smooth" });
-  };
+          <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
+            <p className="text-sm leading-relaxed text-slate-600 max-w-[28ch]">{service.description}</p>
+            <div className="my-4 h-px bg-slate-200 shrink-0" />
+            <div className="grid grid-cols-2 gap-3 pb-2">
+              {service.details.map((detail) => (
+                <div key={detail.title} className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 shadow-sm h-full">
+                  <div className="flex items-start gap-2 mb-2">
+                    <div className="mt-0.5 h-4 w-4 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
+                      <CheckCircle2 size={10} className="text-[#0F4CFF]" />
+                    </div>
+                    <span className="text-[13px] font-semibold leading-snug text-[#0F4CFF]">{detail.title}</span>
+                  </div>
+                  <ul className="space-y-1.5 pl-6">
+                    {detail.bullets.map(b => (
+                      <li key={b} className="text-[11px] text-slate-600 list-disc">{b}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="shrink-0 mt-4 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs text-slate-500 text-center font-medium">
+            Tap or hover back to return to the overview.
+          </div>
+        </motion.div>
+      </motion.div>
+    </button>
+  );
+};
+
+const WhatWeManage = () => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const serviceRows = [serviceSections.slice(0, 3), serviceSections.slice(3, 6)];
 
   return (
-    <section ref={ref} className="py-16 sm:py-24 section-border overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+    <section ref={ref} className="relative overflow-hidden py-20 sm:py-28 bg-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(15,76,255,0.08),transparent_30%),radial-gradient(circle_at_top_right,rgba(59,130,246,0.08),transparent_26%),linear-gradient(180deg,#ffffff,rgba(244,248,255,0.88))]" />
+      <div className="absolute inset-0 pointer-events-none opacity-50" style={{ backgroundImage: "radial-gradient(circle, rgba(15,76,255,0.10) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         <motion.div variants={stagger} initial="hidden" animate={inView ? "visible" : "hidden"}>
-
-          {/* Header row */}
-          <motion.div variants={fadeUp} className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-10 sm:mb-14">
-            <div>
-              <span className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2 block">Our Infrastructure Services</span>
-              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight">
-                What We Manage. <span className="text-primary italic">So You Can Focus.</span>
-              </h2>
-            </div>
-            <p className="text-sm sm:text-base text-muted-foreground max-w-sm leading-relaxed">
-              Comprehensive IT management across your infrastructure stack with measurable outcomes and enterprise-grade reliability.
+          <motion.div variants={fadeUp} className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-200 bg-white/80 text-xs font-semibold tracking-[0.25em] uppercase text-[#0F4CFF] backdrop-blur-md shadow-sm">
+              <Sparkles size={13} /> Our Infrastructure Services
+            </span>
+            <h2 className="mt-6 font-display text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-950">
+              What We Manage. <span className="text-[#0F4CFF] italic">So You Can Focus.</span>
+            </h2>
+            <p className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+              Enterprise-grade service groups crafted with spacious layouts, premium visuals, and fast-glance clarity for modern IT teams.
             </p>
           </motion.div>
 
-          {/* Cards carousel */}
-          <motion.div variants={fadeUp} className="relative">
-            <div ref={scrollRef} className="flex gap-4 overflow-x-auto scrollbar-none pb-2 sm:mx-6" style={{ scrollSnapType: "x mandatory" }}>
-              {serviceCards.map((card) => (
-                <a
-                  key={card.slug}
-                  href={`#${card.slug}`}
-                  className="group shrink-0 w-[240px] sm:w-[260px] lg:w-[calc(16.666%-14px)] rounded-2xl border border-border/50 bg-card hover:border-primary/30 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 p-5 flex flex-col"
-                  style={{ scrollSnapAlign: "start" }}
-                >
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center mb-4 shrink-0 group-hover:scale-105 transition-transform`}>
-                    <card.icon size={20} className="text-white" />
-                  </div>
-                  <h3 className="font-display text-sm font-bold text-foreground mb-3 leading-snug">{card.title}</h3>
-                  <ul className="space-y-1.5 flex-1 mb-4">
-                    {card.bullets.map((b) => (
-                      <li key={b} className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <div className="w-1 h-1 rounded-full bg-primary/60 shrink-0" />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:gap-2 transition-all">
-                    Explore <ArrowRight size={12} />
-                  </span>
-                </a>
-              ))}
-            </div>
-          </motion.div>
-
+          <div className="space-y-6 xl:space-y-7">
+            {serviceRows.map((row, rowIndex) => (
+              <motion.div
+                key={rowIndex}
+                variants={fadeUp}
+                layout
+                className="flex flex-col lg:flex-row gap-6 xl:gap-7 items-stretch"
+              >
+                {row.map((service, colIndex) => {
+                  const active = service.id === activeId;
+                  const itemIndex = rowIndex * 3 + colIndex;
+                  return (
+                    <motion.div
+                      key={service.id}
+                      layout
+                      transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                      className={`min-w-0 w-full ${active ? "lg:flex-[2_1_0%]" : "lg:flex-[1_1_0%]"} sticky top-24 lg:relative lg:top-auto`}
+                      style={{ zIndex: active ? 30 : itemIndex }}
+                    >
+                      <FlipServiceCard service={service} active={active} onActivate={setActiveId} />
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
@@ -773,34 +986,55 @@ const ServiceGroup = ({ group, dark }: { group: typeof serviceGroups[0]; dark: b
 
 /* ════════════════ CTA ════════════════ */
 const CTASection = () => (
-  <section className="py-20 sm:py-28 bg-primary text-primary-foreground relative overflow-hidden">
-    <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
-    <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 text-center max-w-3xl mx-auto">
-      <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
-        <motion.h2 variants={fadeUp} className="font-display text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight mb-5">
-          Transform Your IT Infrastructure Today
-        </motion.h2>
-        <motion.p variants={fadeUp} className="text-sm sm:text-base text-primary-foreground/70 leading-relaxed mb-10 max-w-xl mx-auto">
-          Managed IT, AMC, Microsoft 365, cybersecurity, cloud, or network support — our certified team is ready to deliver.
-        </motion.p>
-        <motion.div variants={fadeUp} className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3">
-          <MagneticButton>
-            <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold bg-primary-foreground text-primary rounded-full hover:opacity-90 transition-opacity">
-              Request Free Assessment <ArrowUpRight size={16} />
-            </Link>
-          </MagneticButton>
-          <MagneticButton>
-            <a href="tel:+918530171515" className="inline-flex items-center gap-2 px-7 py-4 text-sm font-semibold border border-primary-foreground/30 text-primary-foreground rounded-full hover:bg-primary-foreground/10 transition-colors">
-              <Phone size={15} /> Call Us Now
-            </a>
-          </MagneticButton>
-          <MagneticButton>
-            <a href="https://wa.me/918530171515" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-4 text-sm font-semibold border border-primary-foreground/30 text-primary-foreground rounded-full hover:bg-primary-foreground/10 transition-colors">
-              <MessageSquare size={15} /> WhatsApp Us
-            </a>
-          </MagneticButton>
+  <section className="py-20 sm:py-28 bg-[linear-gradient(180deg,#07122F,#0A1F4D_50%,#061126)] text-white relative overflow-hidden">
+    <div className="absolute inset-0 opacity-25" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
+    <div className="absolute -top-20 left-0 right-0 h-40 bg-[radial-gradient(circle_at_center,rgba(15,76,255,0.45),transparent_70%)] blur-3xl" />
+    <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+      <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
+          <motion.span variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/8 backdrop-blur-xl text-[10px] font-semibold tracking-[0.3em] uppercase text-white/70">
+            <Globe2 size={13} /> Enterprise Infrastructure
+          </motion.span>
+          <motion.h2 variants={fadeUp} className="mt-6 font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05]">
+            Ready to Modernize Your IT Infrastructure?
+          </motion.h2>
+          <motion.p variants={fadeUp} className="mt-5 max-w-2xl text-base sm:text-lg text-white/70 leading-relaxed">
+            Bring together support, security, cloud, network, and strategy in one premium operating model designed for scale.
+          </motion.p>
+          <motion.div variants={fadeUp} className="mt-10 flex flex-col sm:flex-row gap-3">
+            <MagneticButton>
+              <Link to="/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-sm font-semibold text-[#07122F] shadow-[0_20px_50px_rgba(15,76,255,0.28)] transition-transform hover:-translate-y-0.5">
+                Schedule Consultation <ArrowUpRight size={16} />
+              </Link>
+            </MagneticButton>
+            <MagneticButton>
+              <Link to="/contact" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/6 px-7 py-4 text-sm font-semibold text-white backdrop-blur-xl transition-colors hover:bg-white/12">
+                Contact Our Experts <MessageSquare size={16} />
+              </Link>
+            </MagneticButton>
+          </motion.div>
         </motion.div>
-      </motion.div>
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} className="relative">
+          <div className="relative rounded-[28px] border border-white/12 bg-white/8 backdrop-blur-xl p-5 shadow-[0_30px_100px_rgba(0,0,0,0.25)] overflow-hidden">
+            <img src="/it-infrastructure-cubes.png" alt="Enterprise infrastructure" className="w-full h-[360px] object-contain" />
+            <div className="absolute top-5 left-5 rounded-2xl border border-white/15 bg-white/10 backdrop-blur-xl px-4 py-3">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-white/60">Uptime</p>
+              <p className="text-lg font-semibold text-white">99.9%</p>
+            </div>
+            <div className="absolute top-6 right-5 rounded-2xl border border-white/15 bg-white/10 backdrop-blur-xl px-4 py-3">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-white/60">Response</p>
+              <p className="text-lg font-semibold text-white">15 min</p>
+            </div>
+            <div className="absolute bottom-5 left-5 right-5 grid grid-cols-3 gap-3">
+              {["Support", "Security", "Cloud"].map((metric) => (
+                <div key={metric} className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-xl px-3 py-3 text-center">
+                  <p className="text-xs font-medium tracking-[0.18em] uppercase text-white/55">{metric}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </div>
   </section>
 );
@@ -859,9 +1093,6 @@ const ITInfrastructure = () => {
         <Hero />
         <LogosStrip />
         <WhatWeManage />
-        <EngagementSection />
-        <AnchorNav />
-        <ServiceSections />
         <OutcomesSection />
         <ProcessSection />
         <IndustriesFAQ />
@@ -873,3 +1104,4 @@ const ITInfrastructure = () => {
 };
 
 export default ITInfrastructure;
+
