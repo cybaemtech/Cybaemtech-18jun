@@ -341,7 +341,7 @@ const BlogPost = () => {
                   {headings.map((heading, i) => (
                     <li key={heading.id} className={`flex items-start gap-3 ${heading.level === 3 ? 'ml-4' : ''}`}>
                       <span className="flex items-center justify-center w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-[10px] font-bold shrink-0 mt-0.5">
-                        {i + 1 < 10 ? `0${i + 1}` : i + 1}
+                        {String(i + 1).padStart(2, '0')}
                       </span>
                       <a 
                         href={`#${heading.id}`} 
