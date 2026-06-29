@@ -283,128 +283,98 @@ const Hero = () => {
   const heroRef = useRef<HTMLElement>(null);
   const inView = useInView(heroRef, { once: true });
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
-  const overlayOp = useTransform(scrollYProgress, [0, 0.5], [0.6, 0.92]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen overflow-hidden flex items-center">
-      {/* Parallax BG */}
-      <motion.div className="absolute inset-0" style={{ scale: imgScale }}>
-        <img src={itInfrastructureBg} alt="IT Infrastructure" className="w-full h-full object-cover object-center" loading="eager" />
-      </motion.div>
-      <motion.div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" style={{ opacity: overlayOp }} />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
-
-      <motion.div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10 pt-28 sm:pt-36 pb-12" style={{ y: contentY }}>
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+    <>
+    <section ref={heroRef} className="relative min-h-[90vh] flex items-center overflow-hidden pt-28 lg:pt-20 pb-20 bg-cover bg-center lg:bg-right bg-no-repeat" style={{ backgroundImage: `url('/images/it-bg.png')` }}>
+      <motion.div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10 pt-4 lg:pt-16 pb-8 lg:pb-16" style={{ y: contentY }}>
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-6 items-center">
 
           {/* Left — copy */}
-          <motion.div variants={stagger} initial="hidden" animate={inView ? "visible" : "hidden"}>
+          <motion.div variants={stagger} initial="hidden" animate={inView ? "visible" : "hidden"} className="lg:pr-10">
             <motion.div variants={fadeUp}>
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-medium tracking-[0.2em] uppercase text-white/80 border border-white/20 rounded-full mb-7 backdrop-blur-sm bg-white/5">
-                <Server size={13} className="text-primary" /> Managed IT & Infrastructure Services
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 text-[10px] sm:text-xs font-bold tracking-widest uppercase text-blue-600 border border-blue-100 rounded-full mb-6 sm:mb-8 bg-white shadow-sm">
+                <div className="w-2 h-2 rounded-full bg-[#0F4CFF]" />
+                ENTERPRISE IT INFRASTRUCTURE SERVICES
               </span>
             </motion.div>
 
-            <motion.h1 variants={fadeUp} className="font-display font-bold leading-[1.05] text-white mb-5">
-              <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl">IT Infrastructure Services</span>
-              <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl mt-1">Built for Performance.</span>
-              <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-primary italic bg-slate-100 w-fit mt-1">Backed by Experts.</span>
+            <motion.h1 variants={fadeUp} className="font-display font-bold leading-[1.1] text-slate-900 mb-5 sm:mb-6 text-4xl sm:text-5xl xl:text-[64px] tracking-tight">
+              Infrastructure<br />
+              Engineered for<br />
+              <span className="text-[#0F4CFF]">Business Continuity.</span>
             </motion.h1>
 
-            <motion.p variants={fadeUp} className="text-sm sm:text-base text-white/65 leading-relaxed max-w-lg mb-8">
-              Reliable, secure, and scalable IT infrastructure management that keeps your business running — always.
+            <motion.p variants={fadeUp} className="text-base sm:text-[17px] text-slate-600 leading-relaxed max-w-[420px] mb-8 sm:mb-10 font-medium">
+              We design, manage and secure IT environments that keep your business running — 24x7.
             </motion.p>
 
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-3 mb-10">
+            <motion.div variants={fadeUp} className="flex flex-wrap gap-3 sm:gap-4 mb-10 sm:mb-14">
               <MagneticButton>
-                <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity">
-                  Get Free Assessment <ArrowRight size={15} />
+                <Link to="/contact" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-[15px] font-semibold bg-[#0F4CFF] text-white rounded-[12px] sm:rounded-[14px] hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/25">
+                  Get Free Assessment <ArrowRight size={18} />
                 </Link>
               </MagneticButton>
               <MagneticButton>
-                <a href="#managed-it" className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold border border-white/30 text-white rounded-full hover:bg-white/10 transition-colors backdrop-blur-sm">
-                  Explore Solutions <ChevronRight size={15} />
+                <a href="#managed-it" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-[15px] font-semibold border border-slate-200 text-slate-700 rounded-[12px] sm:rounded-[14px] hover:bg-slate-50 transition-colors bg-white/50 backdrop-blur-sm">
+                  Explore Services <ArrowRight size={18} className="text-slate-400" />
                 </a>
               </MagneticButton>
             </motion.div>
 
             {/* Stats row */}
-            <motion.div variants={fadeUp} className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <motion.div variants={fadeUp} className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5">
               {[
-                { icon: Award, value: "ISO 27001", label: "Certified" },
-                { icon: Monitor, value: "24×7", label: "NOC & Support" },
-                { icon: Clock, value: "15 Min", label: "Response Time" },
-                { icon: Users, value: "200+", label: "Clients Across India" },
+                { icon: Shield, value: "ISO 27001", label: "Certified" },
+                { icon: Phone, value: "24 x 7", label: "NOC Support" },
+                { icon: Clock, value: "15+ Min", label: "Avg. Response" },
+                { icon: Users, value: "200+", label: "Happy Clients" },
               ].map((s) => (
-                <div key={s.label} className="flex items-center gap-2.5 px-3 py-3 rounded-xl bg-white/8 backdrop-blur-sm border border-white/10">
-                  <s.icon size={16} className="text-primary shrink-0" />
+                <div key={s.label} className="flex flex-col gap-2">
+                  <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100/50 text-[#0F4CFF]">
+                    <s.icon size={18} />
+                  </div>
                   <div>
-                    <p className="font-display text-sm font-bold text-white leading-none">{s.value}</p>
-                    <p className="text-[10px] text-white/45 mt-0.5 leading-tight">{s.label}</p>
+                    <p className="font-display text-[15px] font-bold text-slate-900 leading-none mb-1.5">{s.value}</p>
+                    <p className="text-[11px] text-slate-500 leading-tight font-medium">{s.label}</p>
                   </div>
                 </div>
               ))}
             </motion.div>
           </motion.div>
 
-          {/* Right — "Your IT, Optimized" card */}
-          <motion.div
-            variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"}
-            transition={{ delay: 0.4 }}
-            className="hidden lg:flex justify-end"
-          >
-            <div className="relative w-[300px] xl:w-[330px] rounded-3xl border border-white/15 bg-white/8 backdrop-blur-xl p-7 shadow-2xl">
-              <p className="text-xs font-semibold tracking-[0.18em] uppercase text-white/50 mb-5">Your IT, Optimized</p>
-
-              {/* Ring */}
-              <div className="flex items-center gap-5 mb-6">
-                <div className="relative shrink-0">
-                  <ProgressRing pct={98.7} />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="font-display text-2xl font-bold text-white leading-none">98.7%</span>
-                  </div>
-                </div>
-                <div>
-                  <p className="font-display text-sm font-bold text-white leading-snug">Infrastructure Uptime</p>
-                  <p className="text-[11px] text-white/45 mt-0.5">Last 90 Days</p>
-                </div>
-              </div>
-
-              {/* Feature list */}
-              <div className="space-y-3 border-t border-white/10 pt-5">
-                {["24×7 Monitoring", "Proactive Threat Detection", "SLA-Backed Support", "Predictable Costs"].map((f) => (
-                  <div key={f} className="flex items-center gap-2.5 text-sm text-white/75">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                    {f}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+          {/* Right — Empty container to balance grid */}
+          <div className="hidden lg:block z-20" />
 
         </div>
       </motion.div>
     </section>
+
+    {/* Logos Strip Below Header */}
+    <div className="container mx-auto px-5 sm:px-6 lg:px-12 mt-12 mb-24 relative z-30">
+       <div className="bg-white rounded-[24px] py-8 sm:py-10 px-4 sm:px-8 shadow-[0_15px_50px_rgba(0,0,0,0.08)] border border-slate-100">
+         <p className="text-center text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-[#0F4CFF] mb-6 sm:mb-8">
+           TRUSTED BY 200+ BUSINESSES ACROSS INDIA
+         </p>
+         <div className="relative overflow-hidden w-full">
+           {/* Fading edges for marquee */}
+           <div className="absolute inset-y-0 left-0 w-12 sm:w-24 bg-gradient-to-r from-white to-transparent z-10" />
+           <div className="absolute inset-y-0 right-0 w-12 sm:w-24 bg-gradient-to-l from-white to-transparent z-10" />
+           
+           <div className="flex animate-marquee gap-10 sm:gap-16 items-center w-max">
+             {[...partners, ...partners].map((p, i) => (
+               <img key={i} src={p.src} alt={p.alt} className="h-7 sm:h-8 lg:h-9 w-auto object-contain" />
+             ))}
+           </div>
+         </div>
+       </div>
+    </div>
+    </>
   );
 };
 
-/* ════════════════ LOGOS STRIP ════════════════ */
-const LogosStrip = () => (
-  <div className="bg-card border-y border-border/30 py-6 overflow-hidden">
-    <p className="text-center text-[10px] font-semibold tracking-[0.25em] uppercase text-muted-foreground mb-4">
-      Trusted by 200+ Businesses Across India
-    </p>
-    <div className="relative">
-      <div className="flex animate-marquee gap-12 items-center w-max">
-        {[...partners, ...partners].map((p, i) => (
-          <img key={i} src={p.src} alt={p.alt} className="h-8 sm:h-9 w-auto object-contain opacity-55 hover:opacity-85 transition-opacity grayscale" />
-        ))}
-      </div>
-    </div>
-  </div>
-);
+const LogosStrip = () => null;
 
 /* ════════════════ WHAT WE MANAGE ════════════════ */
 const FlipServiceCard = ({ service, active, onActivate }: {

@@ -347,7 +347,7 @@ const PeopleSection = () => {
       linkedin: "https://www.linkedin.com/in/rohanbhosale15/"
     },
     {
-      name: "Akshay Nawle",
+      name: "Akshay Navle",
       role: "Chief Technology AI Product Officer",
       quote: "Architecting next-generation technology solutions & leading innovation teams.",
       years: "15+",

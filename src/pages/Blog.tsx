@@ -15,13 +15,58 @@ const Blog = () => {
   const { posts, loading, error } = useBlogData();
   const [featuredPost, ...otherPosts] = posts;
 
-  const formatDate = (dateString: string | null) => {
-    if (!dateString) return "";
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+  const formatDate = (dateValue: string | number | null) => {
+    if (!dateValue) return "";
+ 
+    // Handle Google Sheets Date(year, month, day) format
+    if (typeof dateValue === "string" && dateValue.startsWith("Date(")) {
+      const match = dateValue.match(/Date\((\d+),(\d+),(\d+)/);
+      if (match) {
+        const year = parseInt(match[1]);
+        const month = parseInt(match[2]);
+        const day = parseInt(match[3]);
+        const date = new Date(year, month, day);
+        return date.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      }
+    }
+ 
+    let numValue = typeof dateValue === "number" ? dateValue : Number(dateValue);
+    if (!isNaN(numValue) && numValue > 0) {
+      if (numValue < 100000) {
+        // Excel serial date
+        const utcDays = Math.floor(numValue - 25569);
+        const utcValue = Math.max(0, utcDays * 86400);
+        const date = new Date(utcValue * 1000);
+        return date.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      }
+      
+      // Timestamp
+      if (numValue < 10000000000) numValue *= 1000; // convert seconds to ms
+      return new Date(numValue).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    }
+ 
+    const parsedDate = new Date(dateValue);
+    if (!isNaN(parsedDate.getTime())) {
+      return parsedDate.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    }
+ 
+    return String(dateValue);
   };
 
   const getReadingTime = (text: string | null, index: number) => {
